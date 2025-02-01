@@ -1,6 +1,20 @@
-.example-content {
-  display: block;
-  align-items: center;
+ion-tab-bar {
+  --ion-tab-bar-background: #000;
+  --ion-tab-bar-color-selected: #efb74c;
+  --ion-tab-bar-color: #cdcdcd;
+  --ion-tab-bar-border-color: #efb74c;
+  height: 5vh;
+}
+
+ion-header{
+  display: flex;
+  height: 5vh;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+}
+
+ion-img {
+  width: 90px;
+  height: 90px;
+  margin: 0 10px;
 }
