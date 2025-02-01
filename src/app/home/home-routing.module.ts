@@ -10,29 +10,6 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
-    children: [
-      {
-        path: 'order',
-        component: OrderComponent
-      },
-      {
-        path: 'cart',
-        component: CartComponent
-      },
-      {
-        path: 'account',
-        component: AccountComponent
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: '',
-        redirectTo: '/account',
-        pathMatch: 'full',
-      }
-    ]
   },
 ];
 

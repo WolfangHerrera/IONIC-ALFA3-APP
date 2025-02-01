@@ -1,24 +1,27 @@
-
 <div id="container">
-  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-    <ion-item>
-      <ion-label position="floating">Correo electrónico</ion-label>
-      <ion-input type="email" formControlName="email" required></ion-input>
-    </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Iniciar Sesión</ion-card-title>
+    </ion-card-header>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" formControlName="password" required></ion-input>
-    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
 
-    <div class="ion-text-center">
-      <ion-button expand="full" type="submit" [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
-    </div>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
 
-    <ion-row class="ion-margin-top">
-      <ion-col>
-        <ion-button fill="clear" (click)="onForgotPassword()">¿Olvidaste tu contraseña?</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+      <ion-button expand="full" routerLink="/home">Iniciar Sesión</ion-button>
+
+      <ion-item lines="none">
+        <ion-label class="ion-text-center">
+          ¿No tienes una cuenta? <a routerLink="/register">Regístrate</a>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </div>

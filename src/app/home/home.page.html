@@ -1,23 +1,41 @@
-<ion-content [fullscreen]="true">
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home">
-          <ion-icon name="home"></ion-icon>
-          HOME
-        </ion-tab-button>
-        <ion-tab-button tab="order">
-          <ion-icon name="reorder-three"></ion-icon>
-          ORDER
-        </ion-tab-button>
-        <ion-tab-button tab="cart">
-          <ion-icon name="cart"></ion-icon>
-          CART
-        </ion-tab-button>
-        <ion-tab-button tab="account">
-          <ion-icon name="person"></ion-icon>
-          ACCOUNT
-        </ion-tab-button>
-      </ion-tab-bar>
-      <ion-router-outlet></ion-router-outlet>
-    </ion-tabs>
-</ion-content>
+<ion-tabs>
+  <ion-tab tab="account">
+    <div id="account">
+      <div class="example-content"><app-account></app-account></div>
+    </div>
+  </ion-tab>
+  <ion-tab tab="home">
+    <div id="home">
+        <div class="example-content"><app-home-home></app-home-home></div>
+    </div>
+  </ion-tab>
+  <ion-tab tab="order">
+    <div id="order">
+      <div class="example-content"><app-order></app-order></div>
+    </div>
+  </ion-tab>
+  <ion-tab tab="cart">
+    <div id="cart">
+      <div class="example-content"><app-cart></app-cart></div>
+    </div>
+  </ion-tab>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="account">
+      <ion-icon name="person"></ion-icon>
+      ACCOUNT
+    </ion-tab-button>
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      HOME
+    </ion-tab-button>
+    <ion-tab-button tab="order">
+      <ion-icon name="reorder-three"></ion-icon>
+      ORDER
+    </ion-tab-button>
+    <ion-tab-button tab="cart">
+      <ion-icon name="cart"></ion-icon>
+      CART
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
