@@ -1,5 +1,15 @@
 <div class="content">
-    <ion-content [fullscreen]="true">
+    <ion-content class="ion-hide-md-up" [fullscreen]="true" scrollY="true">
+      <h1 class="ion-text-center">PRODUCTS</h1>
+      <ion-grid class="ion-hide-md-up ion-grid-md-down">
+        <ion-row>
+          <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of productos" style="margin-bottom: 30px; padding: 0 30px;"> 
+            <ng-container *ngTemplateOutlet="cardProd; context: { producto: producto }"></ng-container>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+    <ion-content class="ion-hide-md-down" [fullscreen]="true" scrollY="false">
       <h1 class="ion-text-center">PRODUCTS</h1>
       <ion-segment class="ion-hide-md-down" [(ngModel)]="selectedSegment" color="warning">
         <ion-segment-button value="first" content-id="first">
@@ -14,22 +24,7 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of multitomas" style="margin-bottom: 30px; padding: 0 30px;"> 
-              <ion-card>
-                <div style="background-color: white; text-align: center;">
-                <img alt="prod-img" src="{{producto.imagen}}"/>
-                </div>
-                <ion-card-header>
-                <ion-card-title class="ion-text-center">{{ producto.nombre }}</ion-card-title>
-                <ion-card-subtitle class="ion-text-center">{{ producto.precio }}</ion-card-subtitle>
-                </ion-card-header>
-                <ion-card-content class="ion-text-center">
-                {{ producto.descripcion }}
-                </ion-card-content>
-                <div class="" style="display: flex; justify-content: center; align-items: center;">
-                <ion-button fill="clear">MORE INFO</ion-button>
-                <ion-button fill="clear">ADD CART</ion-button>
-              </div>
-              </ion-card>
+                <ng-container *ngTemplateOutlet="cardProd; context: { producto: producto }"></ng-container>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -38,22 +33,7 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of reguladores" style="margin-bottom: 30px; padding: 0 30px;"> 
-              <ion-card>
-                <div style="background-color: white; text-align: center;">
-                <img alt="prod-img" src="{{producto.imagen}}"/>
-                </div>
-                <ion-card-header>
-                <ion-card-title class="ion-text-center">{{ producto.nombre }}</ion-card-title>
-                <ion-card-subtitle class="ion-text-center">{{ producto.precio }}</ion-card-subtitle>
-                </ion-card-header>
-                <ion-card-content class="ion-text-center">
-                {{ producto.descripcion }}
-                </ion-card-content>
-                <div class="" style="display: flex; justify-content: center; align-items: center;">
-                  <ion-button fill="clear">MORE INFO</ion-button>
-                  <ion-button fill="clear">ADD CART</ion-button>
-              </div>
-              </ion-card>
+                <ng-container *ngTemplateOutlet="cardProd; context: { producto: producto }"></ng-container>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -62,3 +42,21 @@
     </ion-content>
 </div>
 
+<ng-template #cardProd let-producto="producto">
+  <ion-card>
+    <div style="background-color: white; text-align: center;">
+    <img alt="prod-img" src="{{producto.imagen}}"/>
+    </div>
+    <ion-card-header>
+    <ion-card-title class="ion-text-center">{{ producto.nombre }}</ion-card-title>
+    <ion-card-subtitle class="ion-text-center">{{ producto.precio }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">
+    {{ producto.descripcion }}
+    </ion-card-content>
+    <div class="" style="display: flex; justify-content: center; align-items: center;">
+      <ion-button fill="clear">MORE INFO</ion-button>
+      <ion-button fill="clear">ADD CART</ion-button>
+    </div>
+  </ion-card>
+</ng-template>
