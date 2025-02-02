@@ -1,47 +1,46 @@
-<div class="content">
-    <ion-content class="ion-hide-md-up" [fullscreen]="true" scrollY="true">
+<ion-app class="ion-app">
+  <ion-content class="ion-hide-md-up ion-content-ios" scrollY="true">
       <h1 class="ion-text-center">PRODUCTS</h1>
       <ion-grid class="ion-hide-md-up ion-grid-md-down">
         <ion-row>
-          <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of products" style="margin-bottom: 30px; padding: 0 30px;"> 
+          <ion-col size-sm="12" size="12" *ngFor="let product of products"> 
             <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-content>
-    <ion-content class="ion-hide-md-down" [fullscreen]="true" scrollY="false">
-      <h1 class="ion-text-center">PRODUCTS</h1>
-      <ion-segment class="ion-hide-md-down" [(ngModel)]="selectedSegment" color="warning">
-        <ion-segment-button value="first" content-id="first">
-          <ion-label>MULTITOMAS</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="second" content-id="second">
-          <ion-label>REGULADORES</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-      <ion-segment-view class="ion-hide-md-down">
-        <ion-segment-content id="first" *ngIf="selectedSegment === 'first'">
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of powerStrip" style="margin-bottom: 30px; padding: 0 30px;"> 
-                <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-segment-content>
-        <ion-segment-content id="second" *ngIf="selectedSegment === 'second'">
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of voltageRegulator" style="margin-bottom: 30px; padding: 0 30px;"> 
-                <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-segment-content>
-      </ion-segment-view>
-    </ion-content>
-</div>
-
+  </ion-content>
+  <ion-content class="ion-hide-md-down" [fullscreen]="true" scrollY="false">
+    <h1 class="ion-text-center">PRODUCTS</h1>
+    <ion-segment class="ion-hide-md-down" [(ngModel)]="selectedSegment" color="warning">
+      <ion-segment-button value="first" content-id="first">
+        <ion-label>MULTITOMAS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="second" content-id="second">
+        <ion-label>REGULADORES</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-segment-view class="ion-hide-md-down">
+      <ion-segment-content id="first" *ngIf="selectedSegment === 'first'">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of powerStrip"> 
+              <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-segment-content>
+      <ion-segment-content id="second" *ngIf="selectedSegment === 'second'">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of voltageRegulator"> 
+              <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-segment-content>
+    </ion-segment-view>
+  </ion-content>
+</ion-app>
 <ng-template #cardProd let-product="product">
   <ion-card>
     <div style="background-color: white; text-align: center;">
