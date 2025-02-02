@@ -11,6 +11,7 @@ ion-header{
   height: 5vh;
   justify-content: center;
   align-items: center;
+  margin-top: env(safe-area-inset-top);
 }
 
 ion-img {

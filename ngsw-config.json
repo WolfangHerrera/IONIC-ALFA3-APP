@@ -1,0 +1,42 @@
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/index.html",
+          "/main.js",
+          "/polyfills.js",
+          "/styles.css",
+          "/favicon.ico"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "urls": [
+          "/assets/**"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "urls": [
+        "/api/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "1h",
+        "strategy": "performance"
+      }
+    }
+  ]
+}

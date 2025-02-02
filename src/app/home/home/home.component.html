@@ -48,7 +48,7 @@
     <img alt="prod-img" src="{{product.img_url}}"/>
     </div>
     <ion-card-header>
-    <ion-card-title class="ion-text-center">{{ product.item_name }}</ion-card-title>
+    <ion-card-title class="ion-text-center ion-text-wrap">{{ product.item_name }}</ion-card-title>
     <ion-card-subtitle class="ion-text-center">$ {{ product.price }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="ion-text-center">
@@ -56,7 +56,7 @@
     </ion-card-content>
     <div class="" style="display: flex; justify-content: center; align-items: center;">
       <ion-button fill="clear">MORE INFO</ion-button>
-      <ion-button fill="clear">ADD CART</ion-button>
+      <ion-button (click)="onAddCart(product.item_id)" fill="clear">ADD CART</ion-button>
     </div>
   </ion-card>
 </ng-template>

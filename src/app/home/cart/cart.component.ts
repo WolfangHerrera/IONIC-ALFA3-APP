@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { ProductService } from 'src/app/services/products/request.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,8 +10,11 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class CartComponent implements OnInit {
   countItem = 0;
+  listProducts : any[]= [];
 
-  constructor(private actionSheetCtrl: ActionSheetController) {}
+  constructor(private actionSheetCtrl: ActionSheetController, private productService: ProductService) {
+    this.listProducts = this.productService.getListCart()
+  }
 
   ngOnInit() {}
 
