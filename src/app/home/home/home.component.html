@@ -1,24 +1,64 @@
 <div class="content">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>ORDER #12102944763</ion-card-title>
-      <ion-card-subtitle>Sat 1 Feb 4:27 p.m</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list lines="none">
-        <ion-item *ngFor="let item of [1]">
-          <ion-thumbnail slot="start">
-            <img class="img-product" alt="" src="https://http2.mlstatic.com/D_Q_NP_841778-MCO81135000013_122024-AC.webp"/>
-          </ion-thumbnail>
-          <ion-badge slot="start" color="warning">11</ion-badge>
-          <ion-label class="ion-hide-md-down" class="">REGULADOR DE VOLTAJE 1000W 4 SALIDAS</ion-label> 
-          <ion-button class="ion-hide-md-down" color="success"  size="large" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
-          <ion-button class="ion-hide-md-down" color="danger" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
-          <ion-button class="ion-hide-md-down" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
-          <ion-button (click)="presentActionSheet()" class="ion-hide-md-up" id="open-action-sheet" color="success" expand="full" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
-        </ion-item>
-
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+    <ion-content [fullscreen]="true">
+      <h1 class="ion-text-center">PRODUCTS</h1>
+      <ion-segment class="ion-hide-md-down" [(ngModel)]="selectedSegment" color="warning">
+        <ion-segment-button value="first" content-id="first">
+          <ion-label>MULTITOMAS</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="second" content-id="second">
+          <ion-label>REGULADORES</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <ion-segment-view class="ion-hide-md-down">
+        <ion-segment-content id="first" *ngIf="selectedSegment === 'first'">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of multitomas" style="margin-bottom: 30px; padding: 0 30px;"> 
+              <ion-card>
+                <div style="background-color: white; text-align: center;">
+                <img alt="prod-img" src="{{producto.imagen}}"/>
+                </div>
+                <ion-card-header>
+                <ion-card-title class="ion-text-center">{{ producto.nombre }}</ion-card-title>
+                <ion-card-subtitle class="ion-text-center">{{ producto.precio }}</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content class="ion-text-center">
+                {{ producto.descripcion }}
+                </ion-card-content>
+                <div class="" style="display: flex; justify-content: center; align-items: center;">
+                <ion-button fill="clear">MORE INFO</ion-button>
+                <ion-button fill="clear">ADD CART</ion-button>
+              </div>
+              </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-segment-content>
+        <ion-segment-content id="second" *ngIf="selectedSegment === 'second'">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of reguladores" style="margin-bottom: 30px; padding: 0 30px;"> 
+              <ion-card>
+                <div style="background-color: white; text-align: center;">
+                <img alt="prod-img" src="{{producto.imagen}}"/>
+                </div>
+                <ion-card-header>
+                <ion-card-title class="ion-text-center">{{ producto.nombre }}</ion-card-title>
+                <ion-card-subtitle class="ion-text-center">{{ producto.precio }}</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content class="ion-text-center">
+                {{ producto.descripcion }}
+                </ion-card-content>
+                <div class="" style="display: flex; justify-content: center; align-items: center;">
+                  <ion-button fill="clear">MORE INFO</ion-button>
+                  <ion-button fill="clear">ADD CART</ion-button>
+              </div>
+              </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-segment-content>
+      </ion-segment-view>
+    </ion-content>
 </div>
+

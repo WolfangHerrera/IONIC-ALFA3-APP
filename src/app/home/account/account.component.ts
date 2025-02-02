@@ -42,7 +42,6 @@ export class AccountComponent  implements OnInit {
         if (response) {
           this.flagIsLogged = true;
           this.responseLogin = response;
-          console.log(this.flagIsLogged);
         }
       },
       (error) => {
@@ -51,8 +50,11 @@ export class AccountComponent  implements OnInit {
     );
   }
 
-  onForgotPassword() {
-    console.log('Recuperación de contraseña');
+  onLogout() {
+    this.loginForm.reset();
+    this.flagIsLogged = false;
+    this.responseLogin = null;
+
   }
 
 }
