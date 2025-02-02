@@ -10,8 +10,8 @@ export class RequestService {
   private apiUrl = 'http://192.168.1.48:8081';
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/loginUser`);
+  getItemProducts(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getItems`);
   }
 
   loginUser(dataRequest: {

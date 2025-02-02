@@ -3,8 +3,8 @@
       <h1 class="ion-text-center">PRODUCTS</h1>
       <ion-grid class="ion-hide-md-up ion-grid-md-down">
         <ion-row>
-          <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of productos" style="margin-bottom: 30px; padding: 0 30px;"> 
-            <ng-container *ngTemplateOutlet="cardProd; context: { producto: producto }"></ng-container>
+          <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of products" style="margin-bottom: 30px; padding: 0 30px;"> 
+            <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -23,8 +23,8 @@
         <ion-segment-content id="first" *ngIf="selectedSegment === 'first'">
           <ion-grid>
             <ion-row>
-              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of multitomas" style="margin-bottom: 30px; padding: 0 30px;"> 
-                <ng-container *ngTemplateOutlet="cardProd; context: { producto: producto }"></ng-container>
+              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of powerStrip" style="margin-bottom: 30px; padding: 0 30px;"> 
+                <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -32,8 +32,8 @@
         <ion-segment-content id="second" *ngIf="selectedSegment === 'second'">
           <ion-grid>
             <ion-row>
-              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let producto of reguladores" style="margin-bottom: 30px; padding: 0 30px;"> 
-                <ng-container *ngTemplateOutlet="cardProd; context: { producto: producto }"></ng-container>
+              <ion-col size="12" size-md="3" size-lg="3" *ngFor="let product of voltageRegulator" style="margin-bottom: 30px; padding: 0 30px;"> 
+                <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -42,17 +42,17 @@
     </ion-content>
 </div>
 
-<ng-template #cardProd let-producto="producto">
+<ng-template #cardProd let-product="product">
   <ion-card>
     <div style="background-color: white; text-align: center;">
-    <img alt="prod-img" src="{{producto.imagen}}"/>
+    <img alt="prod-img" src="{{product.img_url}}"/>
     </div>
     <ion-card-header>
-    <ion-card-title class="ion-text-center">{{ producto.nombre }}</ion-card-title>
-    <ion-card-subtitle class="ion-text-center">{{ producto.precio }}</ion-card-subtitle>
+    <ion-card-title class="ion-text-center">{{ product.item_name }}</ion-card-title>
+    <ion-card-subtitle class="ion-text-center">$ {{ product.price }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="ion-text-center">
-    {{ producto.descripcion }}
+    {{ product.item_description }}
     </ion-card-content>
     <div class="" style="display: flex; justify-content: center; align-items: center;">
       <ion-button fill="clear">MORE INFO</ion-button>

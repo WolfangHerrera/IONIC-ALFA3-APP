@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, Platform } from '@ionic/angular';
+import { RequestService } from 'src/app/services/request/request.service';
 
 
 @Component({
@@ -10,107 +11,29 @@ import { ActionSheetController, Platform } from '@ionic/angular';
 })
 export class HomeComponent  {
   selectedSegment: string = 'first';
-  multitomas = [
-    {
-      id: 1,
-      nombre: 'MULTITOMA REGLETA',
-      descripcion: '4 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 300000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_841778-MCO81135000013_122024-AC.webp'
+  powerStrip = [];
+  voltageRegulator = [];
+  products = []
 
-    },
-    {
-      id: 2,
-      nombre: 'MULTITOMA REGLETA',
-      descripcion: '6 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 360000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_739834-MCO81135001993_122024-AC.webp'
+  ignoreItem(item: { item_id: string }): boolean {
+    const ignoredIds = ['EE4S1M', 'E4S1M'];
+    return ignoredIds.includes(item.item_id);
+  }
 
-    },
-    {
-      id: 3,
-      nombre: 'MULTITOMA CUADRADA',
-      descripcion: '6 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 300000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_749521-MCO80869248220_122024-AC.webp'
+  constructor(private requestService: RequestService){
+    this.getDataItemProduct()
+  }
 
-    },
-    {
-      id: 4,
-      nombre: 'MULTITOMA RACK',
-      descripcion: '8 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 360000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_773002-MCO81037777142_122024-AC.webp'
-    },
-  ];
 
-  reguladores = [
-    {
-      id: 1,
-      nombre: 'REGULADOR VOLTAJE 1000W',
-      descripcion: '4 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 560000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_895639-MCO80335572174_112024-AC.webp'
-
-    },
-    {
-      id: 2,
-      nombre: 'REGULADOR VOLTAJE 2000W',
-      descripcion: '4 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 1260000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_986068-MCO80432640610_112024-AC.webp'
-
-    },
-  ];
-
-  productos = [
-    {
-      id: 1,
-      nombre: 'MULTITOMA REGLETA',
-      descripcion: '4 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 300000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_841778-MCO81135000013_122024-AC.webp'
-
-    },
-    {
-      id: 2,
-      nombre: 'MULTITOMA REGLETA',
-      descripcion: '6 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 360000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_739834-MCO81135001993_122024-AC.webp'
-
-    },
-    {
-      id: 3,
-      nombre: 'MULTITOMA CUADRADA',
-      descripcion: '6 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 300000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_749521-MCO80869248220_122024-AC.webp'
-
-    },
-    {
-      id: 4,
-      nombre: 'MULTITOMA RACK',
-      descripcion: '8 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 360000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_773002-MCO81037777142_122024-AC.webp'
-    },
-    {
-      id: 1,
-      nombre: 'REGULADOR VOLTAJE 1000W',
-      descripcion: '4 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 560000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_895639-MCO80335572174_112024-AC.webp'
-
-    },
-    {
-      id: 2,
-      nombre: 'REGULADOR VOLTAJE 2000W',
-      descripcion: '4 SALIDAS | FUSIBLE | 1 METRO CABLE',
-      precio: 1260000,
-      imagen: 'https://http2.mlstatic.com/D_Q_NP_986068-MCO80432640610_112024-AC.webp'
-
-    },
-  ]
-
+  getDataItemProduct() {
+    this.requestService.getItemProducts().subscribe(
+      (response) => {
+        if (response) {
+          this.products = response;
+            this.voltageRegulator = this.products.filter((item: { item_id: string }) => this.ignoreItem(item));
+            this.powerStrip = this.products.filter((item: { item_id: string }) => !this.ignoreItem(item));
+        }
+      },
+    );
+  }
 }
