@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { RequestService } from 'src/app/services/request/request.service';
 
 @Component({
   selector: 'app-account',
@@ -9,25 +9,46 @@ import { NavController } from '@ionic/angular';
   standalone: false,
 })
 export class AccountComponent  implements OnInit {
-  
+  flagIsLogged: boolean = false;
+  responseLogin: any;
+  dataRequestLogin !: {
+    USERNAME: string,
+    PASSWORD: string
+  };
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private navCtrl: NavController) { }
+  constructor(private fb: FormBuilder, private requestService: RequestService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Formulario enviado:', this.loginForm.value);
-      this.navCtrl.navigateForward('/home');
-    } else {
-      console.log('Formulario inválido');
+      this.dataRequestLogin = {
+        USERNAME: this.loginForm.get('username')?.value,
+        PASSWORD: this.loginForm.get('password')?.value
+      };
+      this.sentDataLoginUser();
     }
+  }
+
+  sentDataLoginUser() {
+    this.requestService.loginUser(this.dataRequestLogin).subscribe(
+      (response) => {
+        if (response) {
+          this.flagIsLogged = true;
+          this.responseLogin = response;
+          console.log(this.flagIsLogged);
+        }
+      },
+      (error) => {
+        console.error('Error al obtener los datos', error);
+      }
+    );
   }
 
   onForgotPassword() {

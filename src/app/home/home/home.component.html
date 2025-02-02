@@ -1,3 +1,24 @@
-<p>
-  home works!
-</p>
+<div class="content">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>ORDER #12102944763</ion-card-title>
+      <ion-card-subtitle>Sat 1 Feb 4:27 p.m</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item *ngFor="let item of [1]">
+          <ion-thumbnail slot="start">
+            <img class="img-product" alt="" src="https://http2.mlstatic.com/D_Q_NP_841778-MCO81135000013_122024-AC.webp"/>
+          </ion-thumbnail>
+          <ion-badge slot="start" color="warning">11</ion-badge>
+          <ion-label class="ion-hide-md-down" class="">REGULADOR DE VOLTAJE 1000W 4 SALIDAS</ion-label> 
+          <ion-button class="ion-hide-md-down" color="success"  size="large" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
+          <ion-button class="ion-hide-md-down" color="danger" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
+          <ion-button class="ion-hide-md-down" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
+          <ion-button (click)="presentActionSheet()" class="ion-hide-md-up" id="open-action-sheet" color="success" expand="full" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</div>

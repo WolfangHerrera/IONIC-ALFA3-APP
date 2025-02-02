@@ -2,6 +2,13 @@
     padding: 5px;
     --background: #000;
     --color: #efb74c;
+    width: 50%;
+  }
+
+  @media (max-width: 576px) { 
+    ion-card {
+      width: 80%;
+    }
   }
 
   ion-button {
@@ -16,16 +23,6 @@
   
   ion-card-subtitle {
     --color: #fff;
-  }
-
-  .responsive-card {
-    width: 50%;
-  }
-  
-  @media (max-width: 576px) { 
-    .responsive-card {
-      width: 80%;
-    }
   }
 
   .content {
