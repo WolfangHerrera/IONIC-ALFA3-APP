@@ -14,7 +14,29 @@ export class ProductService {
 
   addItemToCart(item_id: string) {
     const item = this.getItemProducts(item_id);
-    this.listCart.push(item);
+    if (item) {
+      const cartItem = this.listCart.find(cartItem => cartItem.item_id === item_id);
+      if (cartItem) {
+      cartItem.count += 1;
+      } else {
+      this.listCart.push({ ...item, count: 1 });
+      }
+    }
+  }
+
+  updateItemCount(item_id: string, increment?: boolean) {
+    const cartItem = this.listCart.find(cartItem => cartItem.item_id === item_id);
+    if (cartItem) {
+      if (increment) {
+        cartItem.count += 1;
+      } 
+      else {
+        cartItem.count -= 1;
+        if (cartItem.count === 0) {
+          this.listCart = this.listCart.filter(cartItem => cartItem.item_id !== item_id);
+        }
+      }
+    }
   }
 
   setDataProducts(data: any) {

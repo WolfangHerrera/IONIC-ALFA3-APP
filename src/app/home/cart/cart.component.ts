@@ -9,12 +9,12 @@ import { ProductService } from 'src/app/services/products/request.service';
   standalone: false,
 })
 export class CartComponent implements OnInit {
-  countItem = 0;
   listProducts : any[]= [];
 
   constructor(private actionSheetCtrl: ActionSheetController, private productService: ProductService) {
     this.listProducts = this.productService.getListCart()
   }
+
 
   ngOnInit() {}
 
@@ -48,11 +48,8 @@ export class CartComponent implements OnInit {
     await actionSheet.present();
   }
 
-  onAddItem() {
-    this.countItem++;
-  }
-
-  onRemoveItem() {
-    this.countItem--;
+  onUpdateItem(item_id: string, increment: boolean) {
+    this.productService.updateItemCount(item_id, increment);
+    this.listProducts = this.productService.getListCart()
   }
 }
