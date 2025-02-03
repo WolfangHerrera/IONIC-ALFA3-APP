@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
 
 @Component({
@@ -11,12 +11,34 @@ import { ProductService } from 'src/app/services/products/request.service';
 export class CartComponent implements OnInit {
   listProducts : any[]= [];
 
-  constructor(private actionSheetCtrl: ActionSheetController, private productService: ProductService) {
+  constructor(private actionSheetCtrl: ActionSheetController, private productService: ProductService, private alertController: AlertController) {
     this.listProducts = this.productService.getListCart()
   }
 
-
   ngOnInit() {}
+
+  async showAlert(item_id: string) {
+    const alert = await this.alertController.create({
+      header: 'DELETE PRODUCT?',
+      message: 'IT WILL BE REMOVED FROM YOUR CART.',
+      buttons: [
+        {
+          text: 'ACCEPT',
+          handler: () => {
+            this.onDeleteItem(item_id);
+          },
+        },
+        {
+          text: 'CANCEL',
+          handler: () => {
+            this.onUpdateItem(item_id, true);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
@@ -49,7 +71,15 @@ export class CartComponent implements OnInit {
   }
 
   onUpdateItem(item_id: string, increment: boolean) {
-    this.productService.updateItemCount(item_id, increment);
+    const flagLastItem = this.productService.updateItemCountFlagDelete(item_id, increment);
+    if (flagLastItem) {
+      this.showAlert(item_id);
+    }
+    this.listProducts = this.productService.getListCart()
+  }
+
+  onDeleteItem(item_id: string) {
+    this.productService.deleteItemFromListCart(item_id);
     this.listProducts = this.productService.getListCart()
   }
 }

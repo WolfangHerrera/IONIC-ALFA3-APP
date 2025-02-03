@@ -24,7 +24,7 @@ export class ProductService {
     }
   }
 
-  updateItemCount(item_id: string, increment?: boolean) {
+  updateItemCountFlagDelete(item_id: string, increment?: boolean) {
     const cartItem = this.listCart.find(cartItem => cartItem.item_id === item_id);
     if (cartItem) {
       if (increment) {
@@ -33,10 +33,15 @@ export class ProductService {
       else {
         cartItem.count -= 1;
         if (cartItem.count === 0) {
-          this.listCart = this.listCart.filter(cartItem => cartItem.item_id !== item_id);
+          return true;
         }
       }
     }
+    return false;
+  }
+
+  deleteItemFromListCart(item_id: string) {
+    this.listCart = this.listCart.filter(cartItem => cartItem.item_id !== item_id);
   }
 
   setDataProducts(data: any) {
