@@ -8,9 +8,13 @@ export class ProductService {
   dataProducts: any[] = []
   constructor() { }
 
+  getItemProducts(item_id: string) {
+    return this.dataProducts.filter(product => product.item_id === item_id)[0];
+  }
+
   addItemToCart(item_id: string) {
-    const item = this.dataProducts.filter(product => product.item_id === item_id);
-    this.listCart.push(item[0]);
+    const item = this.getItemProducts(item_id);
+    this.listCart.push(item);
   }
 
   setDataProducts(data: any) {

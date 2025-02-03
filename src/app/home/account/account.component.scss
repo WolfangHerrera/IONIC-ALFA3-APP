@@ -1,8 +1,6 @@
   .login-card{
-    padding: 5px;
     --background: #000;
     --color: #efb74c;
-    width: 50%;
   }
 
   .info-card{    
@@ -11,12 +9,6 @@
     --color: #efb74c;
     width: 80%;
     height: 80%;
-  }
-
-  @media (max-width: 576px) {
-    .login-card {
-      width: 80%;
-    }
   }
 
   ion-button {
@@ -33,10 +25,18 @@
     --color: #fff;
   }
 
-  .content {
-    padding-top: 5vh;
+
+  ion-app{
+    margin-top: 5vh;
+  }
+
+  ion-row{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+  }
+
+  ion-content{
+    margin: 0;
+    padding: 0;
   }

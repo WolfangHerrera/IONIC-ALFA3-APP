@@ -54,7 +54,7 @@
     {{ product.item_description }}
     </ion-card-content>
     <div class="" style="display: flex; justify-content: center; align-items: center;">
-      <ion-button fill="clear">MORE INFO</ion-button>
+      <ion-button (click)="presentAlert(product.item_id)" fill="clear">MORE INFO</ion-button>
       <ion-button (click)="onAddCart(product.item_id)" fill="clear">ADD CART</ion-button>
     </div>
   </ion-card>

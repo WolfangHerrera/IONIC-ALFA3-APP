@@ -1,24 +1,32 @@
-<div class="content">
-  <ion-card class="info-card">
-    <ion-card-header>
-      <ion-card-title>ORDER #12102944763</ion-card-title>
-      <ion-card-subtitle>Sat 1 Feb 4:27 p.m</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list lines="none">
-        <ion-item *ngFor="let item of listProducts">
-          <ion-badge slot="start" color="warning">{{countItem}}</ion-badge>
-          <ion-thumbnail slot="start">
-            <img alt="" src="{{item.img_url}}"/>
-          </ion-thumbnail>
-          <ion-label class="ion-hide-md-down">{{item.item_name}}</ion-label>
-          <ion-button (click)="onAddItem()" class="ion-hide-md-down" color="success"  size="large" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
-          <ion-button (click)="onRemoveItem()" class="ion-hide-md-down" color="danger" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
-          <ion-button class="ion-hide-md-down" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
-          <ion-button (click)="presentActionSheet()" class="ion-hide-md-up" id="open-action-sheet" color="warning" expand="full" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon></ion-button>
-        </ion-item>
-
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-</div>
+<ion-app>
+  <ion-content scrollY="true">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <h1 class="ion-text-start">YOUR CART</h1>
+          <h3>ITEMS</h3>
+          <ion-card>
+            <ion-card-content>
+              <ion-list lines="none">
+                <ion-item *ngFor="let item of listProducts">
+                  <ion-thumbnail slot="start">
+                    <img alt="" src="{{item.img_url}}"/>
+                  </ion-thumbnail>
+                  <ion-label class="ion-hide-md-down">{{item.item_name}}</ion-label>
+                  <ion-button (click)="onAddItem()" class="ion-hide-md-down" color="success"  size="large" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
+                  <ion-badge color="warning">{{countItem}}</ion-badge>
+                  <ion-button (click)="onRemoveItem()" class="ion-hide-md-down" color="danger" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
+                  <ion-button class="ion-hide-md-down" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
+                  <ion-button (click)="presentActionSheet()" class="ion-hide-md-up" id="open-action-sheet" color="warning" expand="full" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon></ion-button>
+                </ion-item>
+                <ion-item *ngIf="listProducts.length === 0">
+                  <ion-label class="ion-text-center">NO ITEMS IN CART</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-app>
