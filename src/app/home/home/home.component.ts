@@ -25,7 +25,6 @@ constructor(private requestService: RequestService, private productService: Prod
     this.getDataItemProduct()
   }
 
-
   getDataItemProduct() {
     this.requestService.getItemProducts().subscribe(
       (response) => {
@@ -46,7 +45,7 @@ constructor(private requestService: RequestService, private productService: Prod
       duration: 2500,
       positionAnchor: 'footer',
       swipeGesture:"vertical",
-      position: 'bottom',
+      position: 'top',
     });
 
     await toast.present();

@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col size="12" size-md="10">
           <h1 class="ion-text-start">YOUR CART</h1>
-          <h3>ITEMS</h3>
+          <h2 class="ion-text-start">ITEMS</h2>
           <ion-card>
             <ion-card-content>
               <ion-list lines="none">
@@ -16,15 +16,23 @@
                   <ion-button (click)="onUpdateItem(item.item_id, true)" color="success"  size="large" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
                   <ion-badge color="warning">{{item.count}}</ion-badge>
                   <ion-button (click)="onUpdateItem(item.item_id, false)" color="danger" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
-                  <ion-button class="ion-hide-md-down" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
+                  <ion-button (click)="onDeleteItem(item.item_id)" class="ion-hide-md-down" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
                 </ion-item>
                 <ion-item  *ngIf="listProducts.length === 0">
                   <ion-icon name="cart"></ion-icon> 
                   <ion-label class="ion-text-center">NO ITEMS IN CART</ion-label>
                 </ion-item>
-              </ion-list>
+              </ion-list>              
             </ion-card-content>
           </ion-card>
+          <div *ngIf="listProducts.length !== 0">
+            <h5 class="ion-text-end">SUB-TOTAL</h5>
+            <h6 class="ion-text-end">item</h6>
+            <h3 class="ion-text-end">{{checkoutValue}}</h3>
+            <div class="ion-checkout">
+              <ion-button fill="clear">CHECKOUT</ion-button>
+            </div>
+        </div>
         </ion-col>
       </ion-row>
     </ion-grid>
