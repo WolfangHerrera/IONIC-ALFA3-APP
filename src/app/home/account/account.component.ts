@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestService } from 'src/app/services/request/request.service';
 
@@ -9,6 +9,7 @@ import { RequestService } from 'src/app/services/request/request.service';
   standalone: false,
 })
 export class AccountComponent  implements OnInit {
+  @Input() tabChanged: boolean = false;
   flagIsLogged: boolean = false;
   responseLogin: any;
   dataRequestLogin !: {

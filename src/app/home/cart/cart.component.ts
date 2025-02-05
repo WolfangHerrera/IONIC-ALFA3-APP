@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
 
 @Component({
@@ -9,15 +9,22 @@ import { ProductService } from 'src/app/services/products/request.service';
   standalone: false,
 })
 export class CartComponent implements OnInit {
+  @Input() tabChanged: boolean = false;
   listProducts : any[]= [];
-  checkoutValue!: string;
+  totalPrice: string = '0';
 
-  constructor(private actionSheetCtrl: ActionSheetController, private productService: ProductService, private alertController: AlertController) {
-    this.listProducts = this.productService.getListCart()
-    this.getTotalPrice()
+  constructor(private actionSheetCtrl: ActionSheetController, private navCtrl: NavController, private productService: ProductService, private alertController: AlertController) {
   }
 
-  ngOnInit() {}
+  async ngOnChanges() {
+    if (this.tabChanged) {
+      await this.ngOnInit()
+    }
+  }
+
+  async ngOnInit() {
+    await this.getDataProductService();
+  }
 
   async showAlert(item_id: string) {
     const alert = await this.alertController.create({
@@ -74,23 +81,21 @@ export class CartComponent implements OnInit {
     await actionSheet.present();
   }
 
-  async getTotalPrice(listProducts: any[] = this.listProducts)  : Promise<string> {
-    const value = listProducts.reduce((total, item) => total + item.price * (item.count || 1),0);
-    this.checkoutValue = value;
-    return value.toString();
+  async getDataProductService(){
+    this.listProducts = await this.productService.getListCart();
+    this.totalPrice = await this.productService.getTotalPrice();
   }
 
   async onUpdateItem(item_id: string, increment: boolean) {
-    const flagLastItem = this.productService.updateItemCountFlagDelete(item_id, increment);
+    const flagLastItem = await this.productService.updateItemCountFlagDelete(item_id, increment);
     if (flagLastItem) {
       this.showAlert(item_id);
     }
-    this.listProducts = this.productService.getListCart()
-    await this.getTotalPrice()
+    await this.getDataProductService();
   }
 
-  onDeleteItem(item_id: string) {
-    this.productService.deleteItemFromListCart(item_id);
-    this.listProducts = this.productService.getListCart()
+  async onDeleteItem(item_id: string) {
+    await this.productService.deleteItemFromListCart(item_id);
+    await this.getDataProductService();
   }
 }

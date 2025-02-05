@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-order',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class OrderComponent  implements OnInit {
-
+  @Input() tabChanged: boolean = false;
   constructor() { }
 
   ngOnInit() {}

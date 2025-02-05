@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -11,6 +11,7 @@ import { RequestService } from 'src/app/services/request/request.service';
   standalone: false,
 })
 export class HomeComponent  {
+  @Input() tabChanged: boolean = false;
   selectedSegment: string = 'first';
   powerStrip = [];
   voltageRegulator = [];
@@ -63,7 +64,7 @@ constructor(private requestService: RequestService, private productService: Prod
   }
 
   async onAddCart(item_id : string){
-    this.productService.addItemToCart(item_id);
+    await this.productService.addItemToCart(item_id);
     await this.presentToast()
   }
 }
