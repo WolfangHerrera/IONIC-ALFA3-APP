@@ -20,6 +20,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/service-worker.js",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -32,9 +33,7 @@
               }
             ],
             "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -56,6 +55,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
               "outputHashing": "all"
             },
             "development": {

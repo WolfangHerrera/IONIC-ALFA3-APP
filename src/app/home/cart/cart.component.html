@@ -28,7 +28,7 @@
           <div *ngIf="listProducts.length !== 0">
             <h5 class="ion-text-end">SUB-TOTAL</h5>
             <h6 class="ion-text-end">item</h6>
-            <h3 class="ion-text-end">{{checkoutValue}}</h3>
+            <h3 class="ion-text-end">{{getTotalPrice(listProducts)}}</h3>
             <div class="ion-checkout">
               <ion-button fill="clear">CHECKOUT</ion-button>
             </div>

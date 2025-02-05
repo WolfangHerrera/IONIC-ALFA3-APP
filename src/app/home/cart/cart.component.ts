@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/products/request.service';
 })
 export class CartComponent implements OnInit {
   listProducts : any[]= [];
-  checkoutValue = 0;
+  checkoutValue!: string;
 
   constructor(private actionSheetCtrl: ActionSheetController, private productService: ProductService, private alertController: AlertController) {
     this.listProducts = this.productService.getListCart()
@@ -42,6 +42,8 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
+
+
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'DO YOU WANT TO EDIT?',
@@ -72,8 +74,10 @@ export class CartComponent implements OnInit {
     await actionSheet.present();
   }
 
-  async getTotalPrice() {
-    this.checkoutValue = this.listProducts.reduce((total, item) => total + item.price * (item.count || 1), 0);
+  async getTotalPrice(listProducts: any[] = this.listProducts)  : Promise<string> {
+    const value = listProducts.reduce((total, item) => total + item.price * (item.count || 1),0);
+    this.checkoutValue = value;
+    return value.toString();
   }
 
   async onUpdateItem(item_id: string, increment: boolean) {

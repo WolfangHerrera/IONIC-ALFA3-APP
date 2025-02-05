@@ -30,11 +30,11 @@
     {
       "name": "api",
       "urls": [
-        "/api/**"
+        "http://192.168.1.48:8081/"
       ],
       "cacheConfig": {
         "maxSize": 100,
-        "maxAge": "1h",
+        "maxAge": "30d",
         "strategy": "performance"
       }
     }
