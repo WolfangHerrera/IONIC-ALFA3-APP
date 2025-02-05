@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/",
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -21,6 +22,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/service-worker.js",
+              "src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -57,7 +59,7 @@
               ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
-              "outputHashing": "all"
+            "outputHashing": "all"
             },
             "development": {
               "buildOptimizer": false,

@@ -31,6 +31,11 @@ export class ProductService {
     }
   }
 
+  getTotalItemCount() {
+    return this.listCart.reduce((total, item) => total + (item.count || 1), 0);
+    
+  }
+
   async setTotalPrice() {
     const value = this.listCart.reduce(
       (total, item) => total + item.price * (item.count || 1),

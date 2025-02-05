@@ -32,6 +32,22 @@
     display: flex;
     justify-content: end;
     align-items: center;
+
+  }
+
+  .ion-checkout-items{
+    display: block;
+    padding: 0;
+    margin: 0;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .ion-total-price{
+    display: block;
+    justify-content: end;
+    margin-left: 5vw;
+    align-items: center;
   }
 
   .ion-checkout-button{

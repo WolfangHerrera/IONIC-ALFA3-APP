@@ -25,14 +25,16 @@
               </ion-list>              
             </ion-card-content>
           </ion-card>
-          <div *ngIf="listProducts.length !== 0">
-            <h5 class="ion-text-end">SUB-TOTAL</h5>
-            <h6 class="ion-text-end">item</h6>
-            <h3 class="ion-text-end">{{totalPrice}}</h3>
-            <div class="ion-checkout">
-              <ion-button fill="clear">CHECKOUT</ion-button>
+          <div *ngIf="listProducts.length !== 0" class="ion-checkout">
+            <div class="ion-checkout-items">
+              <h5 class="ion-text-end ion-no-padding ion-no-margin">SUB-TOTAL</h5>
+              <h6 class="ion-text-end ion-no-padding ion-no-margin">{{itemsCount}} item<span *ngIf="itemsCount > 1">s</span></h6>
             </div>
-        </div>
+            <div class="ion-total-price">
+              <h2 class="ion-text-end">$ {{totalPrice}}</h2>
+            </div>
+          </div>
+          <ion-button fill="clear">CHECKOUT</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   @Input() tabChanged: boolean = false;
   listProducts : any[]= [];
   totalPrice: string = '0';
+  itemsCount: number = 0;
 
   constructor(private actionSheetCtrl: ActionSheetController, private navCtrl: NavController, private productService: ProductService, private alertController: AlertController) {
   }
@@ -84,6 +85,7 @@ export class CartComponent implements OnInit {
   async getDataProductService(){
     this.listProducts = await this.productService.getListCart();
     this.totalPrice = await this.productService.getTotalPrice();
+    this.itemsCount = await this.productService.getTotalItemCount();
   }
 
   async onUpdateItem(item_id: string, increment: boolean) {
