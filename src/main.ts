@@ -11,6 +11,4 @@ if ('serviceWorker' in navigator) {
     .then(registration => {
       console.log('Service Worker registered! Scope: ' + registration.scope);
     })
-    .catch(error => {
-    });
 }

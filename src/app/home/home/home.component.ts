@@ -39,8 +39,19 @@ constructor(private requestService: RequestService, private productService: Prod
     );
   }
 
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      this.getDataItemProduct();
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+
   async presentToast() {
-    const toast = await this.toastController.create({
+    let toast = await this.toastController.getTop();
+    if (toast) {
+      await toast.dismiss();
+    }
+    toast = await this.toastController.create({
       message: 'ITEM ADDED TO CART!',
       icon: 'cart-outline',
       duration: 2500,

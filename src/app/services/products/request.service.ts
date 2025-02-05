@@ -7,7 +7,9 @@ export class ProductService {
   listCart: any[] = [];
   dataProducts: any[] = [];
   totalPriceCart = '0';
-  constructor() {}
+  constructor() {
+  }
+
 
   getItemProducts(item_id: string) {
     return this.dataProducts.filter(

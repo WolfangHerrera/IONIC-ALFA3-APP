@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   totalPrice: string = '0';
   itemsCount: number = 0;
 
-  constructor(private actionSheetCtrl: ActionSheetController, private navCtrl: NavController, private productService: ProductService, private alertController: AlertController) {
+  constructor(private productService: ProductService, private alertController: AlertController) {
   }
 
   async ngOnChanges() {
@@ -25,6 +25,13 @@ export class CartComponent implements OnInit {
 
   async ngOnInit() {
     await this.getDataProductService();
+  }
+
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      this.getDataProductService();
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
   }
 
   async showAlert(item_id: string) {
@@ -48,38 +55,6 @@ export class CartComponent implements OnInit {
     });
 
     await alert.present();
-  }
-
-
-
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'DO YOU WANT TO EDIT?',
-      buttons: [
-        {
-          text: 'EDIT',
-          data: {
-            action: 'share',
-          },
-        },
-        {
-          text: 'CANCEL',
-          role: 'destructive',
-          data: {
-            action: 'delete',
-          },
-        },
-        {
-          text: 'CANCEL',
-          role: 'cancel',
-          data: {
-            action: 'cancel',
-          },
-        },
-      ],
-    });
-
-    await actionSheet.present();
   }
 
   async getDataProductService(){

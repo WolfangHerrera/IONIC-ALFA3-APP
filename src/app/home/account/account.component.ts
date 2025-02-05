@@ -27,6 +27,12 @@ export class AccountComponent  implements OnInit {
     });
   }
 
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.dataRequestLogin = {
