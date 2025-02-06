@@ -34,10 +34,11 @@ export class CartComponent implements OnInit {
     }, 2000);
   }
 
-  async showAlert(item_id: string) {
+  async alertDeleteItem(item_id: string, flagLastItem: boolean = false) {
     const alert = await this.alertController.create({
       header: 'DELETE PRODUCT?',
       message: 'IT WILL BE REMOVED FROM YOUR CART.',
+      backdropDismiss: false,
       buttons: [
         {
           text: 'ACCEPT',
@@ -48,7 +49,9 @@ export class CartComponent implements OnInit {
         {
           text: 'CANCEL',
           handler: () => {
-            this.onUpdateItem(item_id, true);
+            if (flagLastItem) {
+              this.onUpdateItem(item_id, true);
+            }
           },
         },
       ],
@@ -57,16 +60,21 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
+  calculateTotalPrice(price: string) {
+    return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
+  }
+
   async getDataProductService(){
     this.listProducts = await this.productService.getListCart();
     this.totalPrice = await this.productService.getTotalPrice();
+    this.totalPrice = this.calculateTotalPrice(this.totalPrice);
     this.itemsCount = await this.productService.getTotalItemCount();
   }
 
   async onUpdateItem(item_id: string, increment: boolean) {
     const flagLastItem = await this.productService.updateItemCountFlagDelete(item_id, increment);
     if (flagLastItem) {
-      this.showAlert(item_id);
+      this.alertDeleteItem(item_id, true);
     }
     await this.getDataProductService();
   }

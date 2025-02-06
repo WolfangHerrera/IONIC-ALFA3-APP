@@ -30,7 +30,7 @@ export class HomePage {
   async ngOnInit() {
     this.statusService.getOfflineStatus().subscribe((isOffline) => {
       this.isOffline = isOffline
-    if (!isOffline) {
+    if (isOffline) {
       this.presentToast();
     }
     });
