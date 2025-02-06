@@ -26,11 +26,6 @@
     --color: #fff;
   }
 
-
-  ion-app{
-    margin-top: 5vh;
-  }
-
   ion-grid{
     width: 100vw;
   }
@@ -49,6 +44,7 @@
   }
 
   ion-content{
+    margin-top: 5vh;
     margin: 0;
     padding: 0;
   }

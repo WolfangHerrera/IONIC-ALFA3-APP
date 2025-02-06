@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { RequestService } from 'src/app/services/request/request.service';
 
 @Component({
@@ -18,13 +19,30 @@ export class AccountComponent  implements OnInit {
   };
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private requestService: RequestService) { }
+  constructor(private fb: FormBuilder, private requestService: RequestService, private toastController: ToastController) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(1)]]
     });
+  }
+  
+  async activateToast(text?: string, icon?: string) {
+    let toast = await this.toastController.getTop();
+    if (toast) {
+      await toast.dismiss();
+    }
+    toast = await this.toastController.create({
+      message: 'HOLA',
+      icon: 'cart-outline',
+      duration: 2500,
+      positionAnchor: 'footer',
+      swipeGesture:"vertical",
+      position: 'bottom',
+    });
+
+    await toast.present();
   }
 
   handleRefresh(event: CustomEvent) {
@@ -33,7 +51,7 @@ export class AccountComponent  implements OnInit {
     }, 2000);
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
       this.dataRequestLogin = {
         USERNAME: this.loginForm.get('username')?.value,
@@ -43,14 +61,19 @@ export class AccountComponent  implements OnInit {
     }
   }
 
-  sentDataLoginUser() {
-    this.requestService.loginUser(this.dataRequestLogin).subscribe(
-      (response) => {
+  async sentDataLoginUser() {
+    await this.requestService.loginUser(this.dataRequestLogin).subscribe(
+      async (response) => {
         if (response) {
           this.flagIsLogged = true;
           this.responseLogin = response;
         }
       },
+      async (responseError) => {
+        if (responseError.error.MESSAGE === 'INVALID PASSWORD') {
+          await this.activateToast('INVALID PASSWORD', 'warning');
+        }
+      }
     );
   }
 
