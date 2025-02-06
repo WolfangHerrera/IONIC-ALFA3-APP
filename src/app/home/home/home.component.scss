@@ -1,15 +1,16 @@
+ion-app{
+  height: 100%;
+  margin-bottom: 5vh;
+  margin-top: 2vh;
+}
 
-  ion-app{
-    margin-top: 5vh;
-  }
-
-  ion-card {
-    --background: #000;
-    width: 100%;
-    border-radius: 15px;
-    border: 1px solid #efb74c;
-    overflow: hidden;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-  }
+ion-card {
+  --background: #000;
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid #efb74c;
+  overflow: hidden;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}

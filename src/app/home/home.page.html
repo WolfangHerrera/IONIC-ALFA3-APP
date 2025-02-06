@@ -1,11 +1,11 @@
-<ion-content scrollY="false">
+<ion-content scrollY="true" [ngClass]="{'fade-in': !isLoading}">
   <ion-header *ngIf="!isLoading" class="ion-no-border">
     <ion-img
     src="assets/logo.png"
     alt="ALFA3 ELECTRICS-LOGO">
     </ion-img>
   </ion-header>
-  <ion-tabs (ionTabsDidChange)="onTabChange($event)"> 
+  <ion-tabs [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
     <ion-tab tab="Loading">
       <div id="Loading">
         <app-loading></app-loading>
