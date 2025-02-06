@@ -2,11 +2,6 @@
     margin-top: 5vh;
   }
 
-  ion-row{
-    display: flex;
-    justify-content: center;
-  }
-
   ion-card{
     width: 100%;
     padding: 0;
@@ -23,9 +18,8 @@
     margin: 0;
   }
 
-  ion-content{
-    margin: 0;
-    padding: 0;
+  .ion-button{
+    width: 120px;
   }
 
   .ion-checkout{

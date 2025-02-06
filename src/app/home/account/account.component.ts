@@ -34,12 +34,12 @@ export class AccountComponent  implements OnInit {
       await toast.dismiss();
     }
     toast = await this.toastController.create({
-      message: 'HOLA',
-      icon: 'cart-outline',
+      message: text,
+      icon: icon,
       duration: 2500,
       positionAnchor: 'footer',
       swipeGesture:"vertical",
-      position: 'bottom',
+      position: 'top',
     });
 
     await toast.present();
@@ -70,8 +70,11 @@ export class AccountComponent  implements OnInit {
         }
       },
       async (responseError) => {
+        if (responseError.error.MESSAGE === 'USER NOT EXIST') {
+            await this.activateToast('SORRY, WE COULDN NOT FIND AN ACCOUNT WITH THAT USERNAME! :)', 'person-circle-outline');
+        }
         if (responseError.error.MESSAGE === 'INVALID PASSWORD') {
-          await this.activateToast('INVALID PASSWORD', 'warning');
+            await this.activateToast('SORRY, THAT PASSWORD IS NOT RIGHT! :)', 'person-circle-outline');
         }
       }
     );

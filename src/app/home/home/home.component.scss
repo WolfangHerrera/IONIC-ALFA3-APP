@@ -3,19 +3,13 @@
     margin-top: 5vh;
   }
 
-  ion-col{
-    margin-bottom: 30px;
-    padding: 0 30px;
-    border: 1px solid transparent;
-  }
-
   ion-card {
-    padding: 0;
-    margin: 0;
     --background: #000;
-    --color: #efb74c;
     width: 100%;
     border-radius: 15px;
     border: 1px solid #efb74c;
-    overflow: hidden; 
+    overflow: hidden;
+    height: auto;
+    display: flex;
+    flex-direction: column;
   }

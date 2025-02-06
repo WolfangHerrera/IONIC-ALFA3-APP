@@ -60,14 +60,14 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
-  calculateTotalPrice(price: string) {
+  setDotOnPrice(price: string) {
     return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
   }
 
   async getDataProductService(){
     this.listProducts = await this.productService.getListCart();
     this.totalPrice = await this.productService.getTotalPrice();
-    this.totalPrice = this.calculateTotalPrice(this.totalPrice);
+    this.totalPrice = this.setDotOnPrice(this.totalPrice);
     this.itemsCount = await this.productService.getTotalItemCount();
   }
 

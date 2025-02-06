@@ -22,7 +22,7 @@ export class HomeComponent  {
     return ignoredIds.includes(item.item_id);
   }
 
-constructor(private requestService: RequestService, private productService: ProductService, private toastController: ToastController, private alertController: AlertController) {
+  constructor(private requestService: RequestService, private productService: ProductService, private toastController: ToastController, private alertController: AlertController) {
     this.getDataItemProduct()
   }
 
@@ -37,6 +37,10 @@ constructor(private requestService: RequestService, private productService: Prod
         }
       },
     );
+  }
+
+  setDotOnPrice(price: string) {
+    return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
   }
 
   handleRefresh(event: CustomEvent) {
