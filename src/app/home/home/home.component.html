@@ -55,11 +55,8 @@
     <ion-card-subtitle class="ion-text-center">$ {{ product.price }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="ion-text-center">
-    {{ product.item_description }}
+    <ion-button color="warning" (click)="presentAlert(product.item_id)" fill="clear">MORE INFO</ion-button>
+    <ion-button color="warning" (click)="onAddCart(product.item_id)" fill="clear">ADD CART</ion-button>
     </ion-card-content>
-    <div class="" style="display: flex; justify-content: center; align-items: center;">
-      <ion-button (click)="presentAlert(product.item_id)" fill="clear">MORE INFO</ion-button>
-      <ion-button (click)="onAddCart(product.item_id)" fill="clear">ADD CART</ion-button>
-    </div>
   </ion-card>
 </ng-template>

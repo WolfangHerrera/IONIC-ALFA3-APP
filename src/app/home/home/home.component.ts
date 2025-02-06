@@ -46,13 +46,13 @@ constructor(private requestService: RequestService, private productService: Prod
     }, 2000);
   }
 
-  async presentToast() {
+  async activateToast(text?: string) {
     let toast = await this.toastController.getTop();
     if (toast) {
       await toast.dismiss();
     }
     toast = await this.toastController.create({
-      message: 'ITEM ADDED TO CART!',
+      message: `${text} ADDED TO CART!`,
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
@@ -76,6 +76,7 @@ constructor(private requestService: RequestService, private productService: Prod
 
   async onAddCart(item_id : string){
     await this.productService.addItemToCart(item_id);
-    await this.presentToast()
+    const textToast = await this.productService.getItemProducts(item_id);
+    await this.activateToast(textToast.item_name)
   }
 }

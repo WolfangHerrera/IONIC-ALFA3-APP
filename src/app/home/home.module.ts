@@ -9,6 +9,7 @@ import { OrderComponent } from "./order/order.component";
 import { CartComponent } from "./cart/cart.component";
 import { AccountComponent } from "./account/account.component";
 import { HomeComponent } from "./home/home.component";
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -18,15 +19,14 @@ import { HomeComponent } from "./home/home.component";
     IonicModule,
     HomePageRoutingModule,
     ReactiveFormsModule
-
 ],
   declarations: [
     HomePage,
     OrderComponent,
     CartComponent,
     AccountComponent,
-    HomeComponent
+    HomeComponent,
+    LoadingComponent
   ]
-  
 })
 export class HomePageModule {}

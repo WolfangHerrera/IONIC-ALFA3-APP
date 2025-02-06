@@ -9,20 +9,20 @@
           <h1 class="ion-text-start">YOUR CART</h1>
           <h2 class="ion-text-start">ITEMS</h2>
           <ion-card>
-            <ion-card-content>
-              <ion-list lines="none">
+            <ion-card-content class="ion-no-margin ion-no-padding">
+              <ion-list>
                 <ion-item *ngFor="let item of listProducts">
                   <ion-thumbnail slot="start">
                     <img alt="" style="border-radius: 10px;" src="{{item.img_url}}"/>
                   </ion-thumbnail>
-                  <div class="ion-no-margin ion-no-padding">
+                  <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
+                  <div class="ion-no-margin">
                     <h2>{{item.item_name}}</h2>
                     <p>$ {{calculateTotalPrice(item.price)}}</p>
                   </div>
-                  <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
-                  <ion-button slot="end" (click)="onUpdateItem(item.item_id, true)" color="success"  size="large" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
-                  <ion-button slot="end" (click)="onUpdateItem(item.item_id, false)" color="danger" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
-                  <ion-button slot="end" (click)="alertDeleteItem(item.item_id)" color="warning" size="large" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
+                    <ion-button slot="end" (click)="onUpdateItem(item.item_id, true)" color="success" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
+                    <ion-button slot="end" (click)="onUpdateItem(item.item_id, false)" color="danger" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
+                    <ion-button slot="end" (click)="alertDeleteItem(item.item_id)" color="warning" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
                 </ion-item>
                 <ion-item  *ngIf="listProducts.length === 0">
                   <ion-icon name="cart"></ion-icon> 
@@ -38,7 +38,7 @@
             </div>
             <div class="ion-total-price">
               <h2 class="ion-text-end">$ {{totalPrice}}</h2>
-              <ion-button color="warning" class="ion-text-end" expand="block" fill="clear">CHECKOUT</ion-button>
+              <ion-button color="warning" class="ion-text-end ion-no-margin ion-no-padding" expand="block" fill="clear">CHECKOUT</ion-button>
             </div>
           </div>
         </ion-col>

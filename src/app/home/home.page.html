@@ -1,11 +1,16 @@
-<ion-header class="ion-no-border">
+<ion-header *ngIf="!isLoading" class="ion-no-border">
   <ion-img
   src="assets/logo.png"
-  alt="ALFA3 ELECTRICS - LOGO">
+  alt="ALFA3 ELECTRICS-LOGO">
   </ion-img>
 </ion-header>
-<ion-tabs (ionTabsDidChange)="onTabChange($event)">
-  <ion-tab tab="Home">
+<ion-tabs (ionTabsDidChange)="onTabChange($event)"> 
+  <ion-tab  tab="Loading">
+    <div id="Loading">
+      <app-loading></app-loading>
+    </div>
+  </ion-tab>
+  <ion-tab tab="Home" selected="true">
     <div id="Home">
       <app-home-home [tabChanged]="tabHome"></app-home-home>
     </div>
@@ -20,8 +25,8 @@
       <app-cart [tabChanged]="tabCart"></app-cart>
     </div>
   </ion-tab>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="Home">
+  <ion-tab-bar *ngIf="!isLoading" slot="bottom">
+    <ion-tab-button tab="Home" selected="true">
       <ion-icon name="home"></ion-icon>
       HOME
     </ion-tab-button>
