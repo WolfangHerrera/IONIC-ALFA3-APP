@@ -51,9 +51,6 @@ export class AccountComponent  implements OnInit {
           this.responseLogin = response;
         }
       },
-      (error) => {
-        console.error('Error al obtener los datos', error);
-      }
     );
   }
 
