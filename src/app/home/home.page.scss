@@ -9,16 +9,20 @@ ion-tab-bar {
 ion-header{
   background-color: #000;
   display: flex;
-  height: 5vh;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #efb74c;
+  height: 5vh;
 }
 
 ion-img {
   width: 90px;
   height: 90px;
   margin: 0 10px;
+}
+
+ion-tab{
+  height: 95vh;
 }
 
 .fade-in {

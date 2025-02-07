@@ -1,27 +1,19 @@
-  .login-card{
-    --background: #000;
-    --color: #efb74c;
-    width: 80%;
-    height: 80%;
-  }
-
-  .info-card{
-    --background: #000;
-    --color: #efb74c;
-    width: 80%;
-    height: 80%;
-  }
-
   ion-app{
     height: 100%;
-    margin-bottom: 5vh;
-    margin-top: 2vh;
+    padding: 5vh 0;
   }
 
   ion-button {
     margin-top: 15px;
     --color: #000;
     --background: #efb74c;
+  }
+
+  ion-card{
+    --background: #000;
+    --color: #efb74c;
+    width: 90%;
+    height: 100%;
   }
   
   ion-card-title {
@@ -32,25 +24,18 @@
     --color: #fff;
   }
 
-  ion-grid{
-    width: 100vw;
-  }
-
   ion-row{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    margin: 0;
+    padding: 0;
   }
 
   ion-col{
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  ion-content{
-    margin-top: 5vh;
     margin: 0;
     padding: 0;
   }
