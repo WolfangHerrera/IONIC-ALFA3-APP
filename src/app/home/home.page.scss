@@ -6,8 +6,12 @@ ion-tab-bar {
   height: 5vh;
 }
 
+ion-toolbar{
+  height: auto;
+  background-color: #000;
+}
+
 ion-footer{
-  height: 5vh;
   margin-bottom: 0;
   @media all and (display-mode: standalone) {
     margin-bottom: 18px;
@@ -31,6 +35,7 @@ ion-img {
 
 ion-content{
   --background: #000;
+  background-color: #000;
   height: 100vh;
 }
 

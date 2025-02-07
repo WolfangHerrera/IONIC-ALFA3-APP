@@ -1,12 +1,18 @@
 ion-app{
-  height: 90vh; 
+  height: 100%; 
   padding: 0;
-  margin-bottom: 5vh;
-  padding: 5vh 0;
+  margin: 5vh 0 10vh 0;
+  background-color: #000;
+  --background: #000;
 }
 
 ion-content{
   --background: #000;
+  background-color: #000;
+}
+
+ion-col{
+  margin-bottom: 5vh;
 }
 
 ion-card {
