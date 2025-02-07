@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
 
 @Component({
@@ -14,10 +14,11 @@ export class CartComponent implements OnInit {
   listProducts : any[]= [];
   totalPrice: string = '0';
   itemsCount: number = 0;
+  flagClearCart: boolean = false;
   myGroup!: FormGroup;
   flagCustomerDetails: boolean = false;
 
-  constructor(private productService: ProductService, private alertController: AlertController) {
+  constructor(private productService: ProductService, private alertController: AlertController, private toastController: ToastController) {
     this.myGroup = new FormGroup({
       fullName: new FormControl(''),
       phoneNumber: new FormControl(''),
@@ -75,15 +76,65 @@ export class CartComponent implements OnInit {
     return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
   }
 
+  async alertCheckoutCart() {
+    const alert = await this.alertController.create({
+      header: 'PROCEED WITH YOUR ORDER?',
+      message: 'TAP CONFIRM ORDER TO FINALIZE YOUR PURCHASE.',
+      backdropDismiss: false,
+      buttons: [
+      {
+        text: 'CONFIRM ORDER',
+        handler: async () => {
+          await this.onConfirmOrder();
+        },
+      },
+      {
+        text: 'CANCEL ORDER',
+      },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async activateToastCheckoutCart() {
+    let toast = await this.toastController.getTop();
+    if (toast) {
+      await toast.dismiss();
+    }
+    toast = await this.toastController.create({
+      message: 'ORDER PLACED SUCCESSFULLY!',
+      icon: 'cart-outline',
+      duration: 2500,
+      positionAnchor: 'footer',
+      swipeGesture:"vertical",
+      position: 'top',
+    });
+
+    await toast.present();
+  }
+
   onCheckOutCart(){
-    console.log('CHECK OUT CART');
-    console.log(this.listProducts);
-    console.log(this.totalPrice);
     this.flagCustomerDetails = true;
+  }
+
+  onCheckOutOrder(){
+    this.alertCheckoutCart();
+  }
+
+  async onConfirmOrder(){
+    this.flagCustomerDetails = false;
+    this.flagClearCart = true;
+    this.listProducts = [];
+    await this.productService.setListCart(this.listProducts);
+    await this.activateToastCheckoutCart();
   }
 
   async getDataProductService(){
     this.listProducts = await this.productService.getListCart();
+    if (this.listProducts.length === 0 && this.flagClearCart) {
+      this.flagClearCart = false;
+    }
     this.totalPrice = await this.productService.getTotalPrice();
     this.totalPrice = this.setDotOnPrice(this.totalPrice);
     this.itemsCount = await this.productService.getTotalItemCount();

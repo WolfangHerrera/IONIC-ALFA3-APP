@@ -3,7 +3,7 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-grid>
+    <ion-grid [ngClass]="{'fade-in': flagClearCart}">
       <h1 class="ion-text-start">YOUR CART</h1>
       <h3 class="ion-text-start">ITEMS</h3>
       <ion-row class="ion-justify-content-center ion-align-items-center">
@@ -98,6 +98,7 @@
       </ion-row>
     </ion-grid>
     <ion-grid *ngIf="flagCustomerDetails">
+      <form [formGroup]="myGroup">
       <h1 class="ion-text-start">CUSTOMER DETAIL</h1>
       <h3 class="ion-text-start">SHIPPING ADDRESS</h3>
       <ion-row>
@@ -208,7 +209,7 @@
           size="12"
           class="ion-no-padding ion-no-margin ion-margin-top ion-justify-content-center"
         >
-          <ion-button
+          <ion-button (click)="onCheckOutOrder()"
             color="warning"
             class="ion-button ion-text-center ion-no-margin ion-no-padding"
             expand="block"
@@ -218,6 +219,7 @@
           </ion-button>
         </ion-col>
       </ion-row>
+    </form>
     </ion-grid>
   </ion-content>
 </ion-app>

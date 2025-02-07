@@ -79,6 +79,10 @@ export class ProductService {
     return this.listCart;
   }
 
+  async setListCart(list: any) {
+    this.listCart = list;
+  }
+
   async getTotalPrice() {
     return this.totalPriceCart;
   }
