@@ -6,6 +6,14 @@ ion-tab-bar {
   height: 5vh;
 }
 
+ion-footer{
+  height: 5vh;
+  margin-bottom: 0;
+  @media all and (display-mode: standalone) {
+    margin-bottom: 18px;
+  }
+}
+
 ion-header{
   background-color: #000;
   display: flex;
@@ -23,10 +31,7 @@ ion-img {
 
 ion-content{
   --background: #000;
-}
-
-ion-tab{
-  height: 95vh;
+  height: 100vh;
 }
 
 .fade-in {

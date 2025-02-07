@@ -1,9 +1,9 @@
 <ion-content class="ion-no-margin ion-no-padding" scrollY="false" [ngClass]="{'fade-in': !isLoading}">
   <ion-header *ngIf="!isLoading" class="ion-no-border">
-    <ion-img
-    src="assets/logo.png"
-    alt="ALFA3 ELECTRICS-LOGO">
-    </ion-img>
+      <ion-img
+      src="assets/logo.png"
+      alt="ALFA3 ELECTRICS-LOGO">
+      </ion-img>
   </ion-header>
   <ion-tabs [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
     <ion-tab tab="Loading">
@@ -12,7 +12,7 @@
       </div>
     </ion-tab>
     <ion-tab tab="Home" selected="true">
-      <div id="Home">
+      <div id="Home" >
         <app-home-home [tabChanged]="tabHome"></app-home-home>
       </div>
     </ion-tab>
@@ -26,19 +26,21 @@
         <app-cart [tabChanged]="tabCart"></app-cart>
       </div>
     </ion-tab>
-    <ion-tab-bar *ngIf="!isLoading" slot="bottom">
-      <ion-tab-button tab="Home" selected="true">
+    <ion-footer>
+      <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
+        <ion-tab-button tab="Home" selected="true">
         <ion-icon name="home"></ion-icon>
         HOME
-      </ion-tab-button>
-      <ion-tab-button tab="Cart">
+        </ion-tab-button>
+        <ion-tab-button tab="Cart">
         <ion-icon name="cart"></ion-icon>
         CART
-      </ion-tab-button>
-      <ion-tab-button tab="Account">
+        </ion-tab-button>
+        <ion-tab-button tab="Account">
         <ion-icon name="person"></ion-icon>
         ACCOUNT
-      </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+        </ion-tab-button>
+        </ion-tab-bar>
+    </ion-footer>
+  </ion-tabs>
 </ion-content>

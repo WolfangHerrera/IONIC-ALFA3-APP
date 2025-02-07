@@ -132,9 +132,8 @@ export class CartComponent implements OnInit {
 
   async getDataProductService(){
     this.listProducts = await this.productService.getListCart();
-    if (this.listProducts.length === 0 && this.flagClearCart) {
-      this.flagClearCart = false;
-    }
+    this.flagClearCart = false;
+    this.flagCustomerDetails = false;
     this.totalPrice = await this.productService.getTotalPrice();
     this.totalPrice = this.setDotOnPrice(this.totalPrice);
     this.itemsCount = await this.productService.getTotalItemCount();
