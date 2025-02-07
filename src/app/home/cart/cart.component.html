@@ -38,7 +38,7 @@
             </div>
             <div class="ion-total-price">
               <h2 class="ion-text-end">$ {{totalPrice}}</h2>
-              <ion-button color="warning" class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block" fill="outline">CHECKOUT</ion-button>
+              <ion-button (click)="onCheckOutCart()" color="warning" class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block" fill="outline">CHECKOUT</ion-button>
             </div>
           </div>
         </ion-col>

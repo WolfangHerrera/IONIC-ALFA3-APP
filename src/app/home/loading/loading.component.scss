@@ -1,6 +1,10 @@
 ion-row{
-    background-color: black;
-    height: 100vh;
+  background-color: black;
+  padding: 5vh 0;
+  height: 100vh;
+  @media (max-width: 576px) {
+    height: 95vh;
+  }
 }
 
 .fade-in {

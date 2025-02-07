@@ -27,7 +27,7 @@ export class HomePage {
     setTimeout(() => {
       this.isLoading = false;
       this.tabs.select('Home');
-    }, 1500);
+    }, 1000);
   }
 
   async ngOnInit() {

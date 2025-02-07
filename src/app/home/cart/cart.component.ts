@@ -64,6 +64,13 @@ export class CartComponent implements OnInit {
     return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
   }
 
+  onCheckOutCart(){
+    console.log('CHECK OUT CART');
+    console.log(this.listProducts);
+    console.log(this.totalPrice);
+    
+  }
+
   async getDataProductService(){
     this.listProducts = await this.productService.getListCart();
     this.totalPrice = await this.productService.getTotalPrice();
