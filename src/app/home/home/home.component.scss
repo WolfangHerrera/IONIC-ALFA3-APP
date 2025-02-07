@@ -3,6 +3,10 @@ ion-app{
   padding: 5vh 0;
 }
 
+ion-content{
+  --background: #000;
+}
+
 ion-card {
   --background: #000;
   width: 100%;

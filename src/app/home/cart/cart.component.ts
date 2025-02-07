@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
 
@@ -13,8 +14,18 @@ export class CartComponent implements OnInit {
   listProducts : any[]= [];
   totalPrice: string = '0';
   itemsCount: number = 0;
+  myGroup!: FormGroup;
+  flagCustomerDetails: boolean = false;
 
   constructor(private productService: ProductService, private alertController: AlertController) {
+    this.myGroup = new FormGroup({
+      fullName: new FormControl(''),
+      phoneNumber: new FormControl(''),
+      streetAddress: new FormControl(''),
+      city: new FormControl(''),
+      documentType: new FormControl(''),
+      documentNumber: new FormControl(''),
+    });
   }
 
   async ngOnChanges() {
@@ -68,7 +79,7 @@ export class CartComponent implements OnInit {
     console.log('CHECK OUT CART');
     console.log(this.listProducts);
     console.log(this.totalPrice);
-    
+    this.flagCustomerDetails = true;
   }
 
   async getDataProductService(){

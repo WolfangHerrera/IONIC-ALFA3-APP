@@ -1,6 +1,10 @@
   ion-app{
-    height: 100%;
+    height: 90vh;
     padding: 5vh 0;
+  }
+
+  ion-content{
+    --background: #000;
   }
 
   ion-card{
@@ -14,6 +18,21 @@
     padding: 0;
   }
 
+  ion-label{
+    padding: 0;
+    margin: 0;
+  }
+
+  ion-select{
+    padding: 0;
+    margin: 0;
+  }
+
+  ion-input{
+    padding: 0;
+    margin: 0;
+  }
+  
   ion-card-content{
     padding: 0;
     margin: 0;

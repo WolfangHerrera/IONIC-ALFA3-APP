@@ -1,6 +1,10 @@
   ion-app{
-    height: 100vh;
+    height: 90vh;
     padding: 5vh 0;
+  }
+
+  ion-content{
+    --background: #000;
   }
 
   ion-button {

@@ -1,11 +1,11 @@
 <ion-app>
-  <ion-content scrollY="false" class="ion-padding ion-content-ios">
+  <ion-content scrollY="true" class="ion-padding ion-content-ios">
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-grid>
       <h1 class="ion-text-start">YOUR CART</h1>
-      <h2 class="ion-text-start">ITEMS</h2>
+      <h3 class="ion-text-start">ITEMS</h3>
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col size="12" class="ion-no-padding">
           <ion-card>
@@ -13,34 +13,209 @@
               <ion-list>
                 <ion-item *ngFor="let item of listProducts">
                   <ion-thumbnail slot="start">
-                    <img alt="" style="border-radius: 10px;" src="{{item.img_url}}"/>
+                    <img
+                      alt=""
+                      style="border-radius: 10px"
+                      src="{{ item.img_url }}"
+                    />
                   </ion-thumbnail>
-                  <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
+                  <ion-badge slot="start" color="warning">{{
+                    item.count
+                  }}</ion-badge>
                   <div class="ion-no-margin">
-                    <h2>{{item.item_name}}</h2>
-                    <p>$ {{setDotOnPrice(item.price)}} COP</p>
+                    <h2>{{ item.item_name }}</h2>
+                    <p>$ {{ setDotOnPrice(item.price) }} COP</p>
                   </div>
-                    <ion-button slot="end" (click)="onUpdateItem(item.item_id, true)" color="success" shape="round" fill="clear"><ion-icon id="add" slot="icon-only" ios="add-circle-outline" md="add-circle-outline"></ion-icon></ion-button>
-                    <ion-button slot="end" (click)="onUpdateItem(item.item_id, false)" color="danger" shape="round" fill="clear"><ion-icon slot="icon-only" ios="remove-circle-outline" md="remove-circle-outline"></ion-icon></ion-button>
-                    <ion-button slot="end" (click)="alertDeleteItem(item.item_id)" color="warning" shape="round" fill="clear"><ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-outline"></ion-icon></ion-button>
+                  <ion-button
+                    slot="end"
+                    (click)="onUpdateItem(item.item_id, true)"
+                    color="success"
+                    shape="round"
+                    fill="clear"
+                    ><ion-icon
+                      id="add"
+                      slot="icon-only"
+                      ios="add-circle-outline"
+                      md="add-circle-outline"
+                    ></ion-icon
+                  ></ion-button>
+                  <ion-button
+                    slot="end"
+                    (click)="onUpdateItem(item.item_id, false)"
+                    color="danger"
+                    shape="round"
+                    fill="clear"
+                    ><ion-icon
+                      slot="icon-only"
+                      ios="remove-circle-outline"
+                      md="remove-circle-outline"
+                    ></ion-icon
+                  ></ion-button>
+                  <ion-button
+                    slot="end"
+                    (click)="alertDeleteItem(item.item_id)"
+                    color="warning"
+                    shape="round"
+                    fill="clear"
+                    ><ion-icon
+                      slot="icon-only"
+                      ios="close-circle-outline"
+                      md="close-circle-outline"
+                    ></ion-icon
+                  ></ion-button>
                 </ion-item>
-                <ion-item  *ngIf="listProducts.length === 0">
-                  <ion-icon name="cart"></ion-icon> 
-                  <ion-label class="ion-text-center">NO ITEMS IN CART</ion-label>
+                <ion-item *ngIf="listProducts.length === 0">
+                  <ion-icon name="cart"></ion-icon>
+                  <ion-label class="ion-text-center"
+                    >NO ITEMS IN CART</ion-label
+                  >
                 </ion-item>
-              </ion-list>              
+              </ion-list>
             </ion-card-content>
           </ion-card>
           <div *ngIf="listProducts.length !== 0" class="ion-checkout">
             <div class="ion-checkout-items">
-              <h5 class="ion-text-end ion-no-padding ion-no-margin">SUB-TOTAL</h5>
-              <h6 class="ion-text-end ion-no-padding ion-no-margin">{{itemsCount}} item<span *ngIf="itemsCount > 1">s</span></h6>
+              <h5 class="ion-text-end ion-no-padding ion-no-margin">
+                SUB-TOTAL
+              </h5>
+              <h6 class="ion-text-end ion-no-padding ion-no-margin">
+                {{ itemsCount }} item<span *ngIf="itemsCount > 1">s</span>
+              </h6>
             </div>
             <div class="ion-total-price">
-              <h2 class="ion-text-end">$ {{totalPrice}}</h2>
-              <ion-button (click)="onCheckOutCart()" color="warning" class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block" fill="outline">CHECKOUT</ion-button>
+              <h2 class="ion-text-end">$ {{ totalPrice }}</h2>
+              <ion-button
+                (click)="onCheckOutCart()"
+                color="warning"
+                class="ion-button ion-text-end ion-no-margin ion-no-padding"
+                expand="block"
+                fill="outline"
+                >CHECKOUT</ion-button
+              >
             </div>
           </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="flagCustomerDetails">
+      <h1 class="ion-text-start">CUSTOMER DETAIL</h1>
+      <h3 class="ion-text-start">SHIPPING ADDRESS</h3>
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-card>
+            <ion-card-content class="ion-no-margin ion-no-padding">
+              <ion-list>
+                <ion-item>
+                  <ion-input
+                    label="FULL NAME"
+                    label-placement="floating"
+                    type="text"
+                    formControlName="fullName"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input
+                    label="PHONE NUMBER"
+                    label-placement="floating"
+                    type="text"
+                    formControlName="phoneNumber"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input
+                    label="STREET ADDRESS"
+                    label-placement="floating"
+                    type="text"
+                    formControlName="streetAddress"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input
+                    label="CITY"
+                    label-placement="floating"
+                    type="text"
+                    formControlName="city"
+                  ></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <h3 class="ion-text-start">CUSTOMER INFO</h3>
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-list>
+            <ion-item>
+              <ion-input
+                label="FULL NAME"
+                label-placement="floating"
+                class="ion-no-margin ion-no-padding"
+                type="text"
+                formControlName="fullName"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="PHONE NUMBER"
+                label-placement="floating"
+                type="text"
+                formControlName="phoneNumber"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="DOCUMENT NUMBER"
+                label-placement="floating"
+                type="text"
+                formControlName="documentNumber"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-select label="DOCUMENT TYPE" label-placement="floating">
+                <ion-select-option value="apple"
+                  >NATIONAL DOCUMENT</ion-select-option
+                >
+                <ion-select-option value="banana">NIT</ion-select-option>
+                <ion-select-option value="orange">PASSPORT</ion-select-option>
+                <ion-select-option value="orange"
+                  >FOREIGN DOCUMENT</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <h3 class="ion-text-start">PAYMENT DETAIL</h3>
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-list>
+            <ion-item>
+              <ion-select label="PAYMENT METHOD" label-placement="floating">
+                <ion-select-option value="apple">CASH</ion-select-option>
+                <ion-select-option value="banana"
+                  >ACCOUNT TRANSFER</ion-select-option
+                >
+                <ion-select-option value="orange">CARD</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col
+          style="display: flex"
+          size="12"
+          class="ion-no-padding ion-no-margin ion-margin-top ion-justify-content-center"
+        >
+          <ion-button
+            color="warning"
+            class="ion-button ion-text-center ion-no-margin ion-no-padding"
+            expand="block"
+            fill="outline"
+          >
+            ORDER NOW
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
