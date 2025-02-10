@@ -116,6 +116,15 @@
               </ion-item>
               <ion-item>
                 <ion-input
+                  label="BUSINNESS NAME | STREET ADDRESS"
+                  label-placement="floating"
+                  type="text"
+                  formControlName="streetAddressCustomer"
+                  required minlength="3"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
                   label="PHONE NUMBER"
                   label-placement="floating"
                   type="tel" 
@@ -130,7 +139,9 @@
                 <ion-input
                   label="DOCUMENT NUMBER"
                   label-placement="floating"
-                  type="text"
+                  type="number"
+                  inputmode="numeric" 
+                  pattern="[0-9]*" 
                   formControlName="documentNumberCustomer"
                   required minlength="6" maxlength="10"
                   (ionInput)="validateNumberForm($event)"
@@ -187,7 +198,7 @@
                     label-placement="floating"
                     type="tel" 
                     inputmode="numeric" 
-                    pattern="[0-9]*" 
+                    pattern="[0-9]*"
                     formControlName="phoneNumberShipping"
                     minlength="7" maxlength="10"
                     (ionInput)="validateNumberForm($event)"
@@ -195,11 +206,11 @@
                 </ion-item>
                 <ion-item>
                   <ion-input
-                    label="STREET ADDRESS | BUSINNESS NAME"
+                    label="BUSINNESS NAME | STREET ADDRESS"
                     label-placement="floating"
                     type="text"
                     formControlName="streetAddressShipping"
-                    required minlength="3"
+                    minlength="3"
                   ></ion-input>
                 </ion-item>
                 <ion-item>
