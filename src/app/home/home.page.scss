@@ -13,9 +13,6 @@ ion-toolbar{
 
 ion-footer{
   margin-bottom: 0;
-  @media all and (display-mode: standalone) {
-    margin-bottom: 18px;
-  }
 }
 
 ion-header{

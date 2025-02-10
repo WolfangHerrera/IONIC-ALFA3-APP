@@ -11,27 +11,24 @@ import { ProductService } from 'src/app/services/products/request.service';
 })
 export class CartComponent implements OnInit {
   @Input() tabChanged: boolean = false;
-  listProducts : any[]= [];
+  listProducts: any[] = [];
   totalPrice: string = '0';
   itemsCount: number = 0;
   flagClearCart: boolean = false;
-  myGroup!: FormGroup;
+  formCheckOut!: FormGroup;
   flagCustomerDetails: boolean = false;
 
-  constructor(private productService: ProductService, private alertController: AlertController, private toastController: ToastController) {
-    this.myGroup = new FormGroup({
-      fullName: new FormControl(''),
-      phoneNumber: new FormControl(''),
-      streetAddress: new FormControl(''),
-      city: new FormControl(''),
-      documentType: new FormControl(''),
-      documentNumber: new FormControl(''),
-    });
+  constructor(
+    private productService: ProductService,
+    private alertController: AlertController,
+    private toastController: ToastController
+  ) {
+    this.generateFormGroup();
   }
 
   async ngOnChanges() {
     if (this.tabChanged) {
-      await this.ngOnInit()
+      await this.ngOnInit();
     }
   }
 
@@ -39,11 +36,84 @@ export class CartComponent implements OnInit {
     await this.getDataProductService();
   }
 
+  generateFormGroup() {
+    this.formCheckOut = new FormGroup({
+      fullNameCustomer: new FormControl(''),
+      phoneNumberCustomer: new FormControl(''),
+      documentTypeCustomer: new FormControl(''),
+      documentNumberCustomer: new FormControl(''),
+      paymentMethodCustomer: new FormControl(''),
+      fullNameShipping: new FormControl(''),
+      phoneNumberShipping: new FormControl(''),
+      streetAddressShipping: new FormControl(''),
+      cityShipping: new FormControl(''),
+    });
+  }
+
+  validateNumberForm(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, '');
+  }
+
   handleRefresh(event: CustomEvent) {
     setTimeout(() => {
       this.getDataProductService();
       (event.target as HTMLIonRefresherElement).complete();
     }, 2000);
+  }
+
+  setDotOnPrice(price: string) {
+    return parseFloat(price).toLocaleString('en-US', {
+      maximumFractionDigits: 2,
+    });
+  }
+
+  onCheckOutCart() {
+    this.flagCustomerDetails = true;
+  }
+
+  onCheckOutOrder() {
+    this.alertCheckoutCart();
+  }
+
+  async onClearCart() {
+    this.listProducts = [];
+    await this.productService.setListCart(this.listProducts);
+    this.getDataProductService();
+  }
+
+  async onConfirmOrder() {
+    this.flagCustomerDetails = false;
+    this.flagClearCart = true;
+    console.log(this.formCheckOut.value);
+    console.log(this.listProducts);
+    await this.onClearCart();
+    await this.activateToastCheckoutCart();
+  }
+
+  async getDataProductService() {
+    this.listProducts = await this.productService.getListCart();
+    this.flagClearCart = false;
+    this.flagCustomerDetails = false;
+    this.totalPrice = await this.productService.getTotalPrice();
+    this.totalPrice = this.setDotOnPrice(this.totalPrice);
+    this.itemsCount = await this.productService.getTotalItemCount();
+  }
+
+  async onUpdateItem(item_id: string, increment: boolean) {
+    const flagLastItem = await this.productService.updateItemCountFlagDelete(
+      item_id,
+      increment
+    );
+    if (flagLastItem) {
+      this.alertDeleteItem(item_id, true);
+    }
+    await this.getDataProductService();
+  }
+
+  async onDeleteItem(item_id: string) {
+    await this.productService.deleteItemFromListCart(item_id);
+    await this.getDataProductService();
   }
 
   async alertDeleteItem(item_id: string, flagLastItem: boolean = false) {
@@ -72,31 +142,6 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
-  setDotOnPrice(price: string) {
-    return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
-  }
-
-  async alertCheckoutCart() {
-    const alert = await this.alertController.create({
-      header: 'PROCEED WITH YOUR ORDER?',
-      message: 'TAP CONFIRM ORDER TO FINALIZE YOUR PURCHASE.',
-      backdropDismiss: false,
-      buttons: [
-      {
-        text: 'CONFIRM ORDER',
-        handler: async () => {
-          await this.onConfirmOrder();
-        },
-      },
-      {
-        text: 'CANCEL ORDER',
-      },
-      ],
-    });
-
-    await alert.present();
-  }
-
   async activateToastCheckoutCart() {
     let toast = await this.toastController.getTop();
     if (toast) {
@@ -107,48 +152,31 @@ export class CartComponent implements OnInit {
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
-      swipeGesture:"vertical",
+      swipeGesture: 'vertical',
       position: 'top',
     });
 
     await toast.present();
   }
 
-  onCheckOutCart(){
-    this.flagCustomerDetails = true;
-  }
+  async alertCheckoutCart() {
+    const alert = await this.alertController.create({
+      header: 'PROCEED WITH YOUR ORDER?',
+      message: 'TAP CONFIRM ORDER TO FINALIZE YOUR PURCHASE.',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'CONFIRM ORDER',
+          handler: async () => {
+            await this.onConfirmOrder();
+          },
+        },
+        {
+          text: 'CANCEL ORDER',
+        },
+      ],
+    });
 
-  onCheckOutOrder(){
-    this.alertCheckoutCart();
-  }
-
-  async onConfirmOrder(){
-    this.flagCustomerDetails = false;
-    this.flagClearCart = true;
-    this.listProducts = [];
-    await this.productService.setListCart(this.listProducts);
-    await this.activateToastCheckoutCart();
-  }
-
-  async getDataProductService(){
-    this.listProducts = await this.productService.getListCart();
-    this.flagClearCart = false;
-    this.flagCustomerDetails = false;
-    this.totalPrice = await this.productService.getTotalPrice();
-    this.totalPrice = this.setDotOnPrice(this.totalPrice);
-    this.itemsCount = await this.productService.getTotalItemCount();
-  }
-
-  async onUpdateItem(item_id: string, increment: boolean) {
-    const flagLastItem = await this.productService.updateItemCountFlagDelete(item_id, increment);
-    if (flagLastItem) {
-      this.alertDeleteItem(item_id, true);
-    }
-    await this.getDataProductService();
-  }
-
-  async onDeleteItem(item_id: string) {
-    await this.productService.deleteItemFromListCart(item_id);
-    await this.getDataProductService();
+    await alert.present();
   }
 }
