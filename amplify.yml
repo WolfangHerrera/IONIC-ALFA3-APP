@@ -9,7 +9,6 @@ applications:
             - nvm use 20.16
             - npm install -g @ionic/cli
             - npm install
-            - ionic build --prod
     frontend:
       phases:
         build:
