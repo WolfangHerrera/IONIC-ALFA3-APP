@@ -22,8 +22,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
-              "src/manifest.webmanifest",
-              "src/service-worker.js",
+              "src/assets/manifest.webmanifest",
+              "src/assets/service-worker.js",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -41,8 +41,9 @@
           "configurations": {
             "production": {
               "assets": [
-                "src/manifest.webmanifest",
-                "src/service-worker.js",
+                "src/assets",
+                "src/assets/manifest.webmanifest",
+                "src/assets/service-worker.js",
                 {
                   "glob": "**/*",
                   "input": "src/assets",
