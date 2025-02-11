@@ -21,8 +21,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets/manifest.webmanifest",
-              "src/assets/service-worker.js",
+              "src/manifest.webmanifest",
+              "src/service-worker.js",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -40,8 +40,8 @@
           "configurations": {
             "production": {
               "assets": [
-                "src/assets/manifest.webmanifest",
-                "src/assets/service-worker.js"
+                "src/manifest.webmanifest",
+                "src/service-worker.js"
               ],
               "budgets": [
                 {
