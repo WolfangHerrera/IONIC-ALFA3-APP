@@ -11,7 +11,8 @@
           "/main.js",
           "/polyfills.js",
           "/styles.css",
-          "/favicon.ico"
+          "/favicon.ico",
+          "/assets/manifest.webmanifest"
         ]
       }
     },
