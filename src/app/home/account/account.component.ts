@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { AlertController, ToastController } from '@ionic/angular';
 import { RequestService } from 'src/app/services/request/request.service';
 
 @Component({
@@ -9,25 +14,34 @@ import { RequestService } from 'src/app/services/request/request.service';
   styleUrls: ['./account.component.scss'],
   standalone: false,
 })
-export class AccountComponent  implements OnInit {
+export class AccountComponent implements OnInit {
   @Input() tabChanged: boolean = false;
+  flagRegister: boolean = false;
   flagIsLogged: boolean = false;
   responseLogin: any;
-  dataRequestLogin !: {
-    USERNAME: string,
-    PASSWORD: string
+  dataRequestLogin!: {
+    USERNAME: string;
+    PASSWORD: string;
   };
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private requestService: RequestService, private toastController: ToastController) { }
+  constructor(
+    private requestService: RequestService,
+    private toastController: ToastController,
+    private alertController: AlertController
+  ) {
+    this.generateFormGroup();
+  }
 
-  ngOnInit() {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(1)]]
+  ngOnInit() {}
+
+  generateFormGroup() {
+    this.loginForm = new FormGroup({
+      usernameCustomer: new FormControl(''),
+      passwordCustomer: new FormControl(''),
     });
   }
-  
+
   async activateToast(text?: string, icon?: string) {
     let toast = await this.toastController.getTop();
     if (toast) {
@@ -38,7 +52,7 @@ export class AccountComponent  implements OnInit {
       icon: icon,
       duration: 2500,
       positionAnchor: 'footer',
-      swipeGesture:"vertical",
+      swipeGesture: 'vertical',
       position: 'top',
     });
 
@@ -51,11 +65,11 @@ export class AccountComponent  implements OnInit {
     }, 2000);
   }
 
-  async onSubmit() {
+  async onSubmitLogin() {
     if (this.loginForm.valid) {
       this.dataRequestLogin = {
-        USERNAME: this.loginForm.get('username')?.value,
-        PASSWORD: this.loginForm.get('password')?.value
+        USERNAME: this.loginForm.get('usernameCustomer')?.value,
+        PASSWORD: this.loginForm.get('passwordCustomer')?.value,
       };
       this.sentDataLoginUser();
     }
@@ -71,20 +85,48 @@ export class AccountComponent  implements OnInit {
       },
       async (responseError) => {
         if (responseError.error.MESSAGE === 'USER NOT EXIST') {
-            await this.activateToast('SORRY, WE COULDN NOT FIND AN ACCOUNT WITH THAT USERNAME! :)', 'person-circle-outline');
+          await this.activateToast(
+            'SORRY, WE COULDN NOT FIND AN ACCOUNT WITH THAT USERNAME! :)',
+            'person-circle-outline'
+          );
+          setTimeout(async () => {
+          await this.alertCreateAccount();
+          }, 1500);
         }
         if (responseError.error.MESSAGE === 'INVALID PASSWORD') {
-            await this.activateToast('SORRY, THAT PASSWORD IS NOT RIGHT! :)', 'person-circle-outline');
+          await this.activateToast(
+            'SORRY, THAT PASSWORD IS NOT RIGHT! :)',
+            'person-circle-outline'
+          );
         }
       }
     );
+  }
+
+  async alertCreateAccount() {
+    const alert = await this.alertController.create({
+      header: 'DO YOU WANT TO CREATE AN ACCOUNT?',
+      message: 'TAP ACCEPT TO CREATE YOUR ACCOUNT.',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'ACCEPT',
+          handler: () => {
+            this.flagRegister = true;
+          },
+        },
+        {
+          text: 'CANCEL',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   onLogout() {
     this.loginForm.reset();
     this.flagIsLogged = false;
     this.responseLogin = null;
-
   }
-
 }
