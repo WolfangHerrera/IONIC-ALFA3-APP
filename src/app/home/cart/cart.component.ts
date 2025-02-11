@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
       fullNameCustomer: new FormControl(''),
       phoneNumberCustomer: new FormControl(''),
       streetAddressCustomer: new FormControl(''),
+      cityCustomer: new FormControl(''),
       documentTypeCustomer: new FormControl(''),
       documentNumberCustomer: new FormControl(''),
       paymentMethodCustomer: new FormControl(''),
@@ -82,8 +83,11 @@ export class CartComponent implements OnInit {
   async onConfirmOrder() {
     this.flagCustomerDetails = false;
     this.flagClearCart = true;
-    console.log(this.formCheckOut.value);
-    console.log(this.listProducts);
+    const orderDetails = {
+      customerDetails: this.formCheckOut.value,
+      productsCart: this.listProducts,
+      totalPrice: this.totalPrice
+    };
     await this.onClearCart();
     await this.activateToastCheckoutCart();
   }

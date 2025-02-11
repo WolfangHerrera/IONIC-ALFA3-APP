@@ -125,6 +125,15 @@
               </ion-item>
               <ion-item>
                 <ion-input
+                label="CITY"
+                label-placement="floating"
+                type="text"
+                formControlName="cityCustomer"
+                required minlength="3"
+              ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
                   label="PHONE NUMBER"
                   label-placement="floating"
                   type="tel" 
@@ -132,18 +141,6 @@
                   pattern="[0-9]*" 
                   formControlName="phoneNumberCustomer"
                   required minlength="7" maxlength="10"
-                  (ionInput)="validateNumberForm($event)"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input
-                  label="DOCUMENT NUMBER"
-                  label-placement="floating"
-                  type="number"
-                  inputmode="numeric" 
-                  pattern="[0-9]*" 
-                  formControlName="documentNumberCustomer"
-                  required minlength="6" maxlength="10"
                   (ionInput)="validateNumberForm($event)"
                 ></ion-input>
               </ion-item>
@@ -157,6 +154,18 @@
                     >FOREIGN DOCUMENT</ion-select-option
                   >
                 </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  label="DOCUMENT NUMBER"
+                  label-placement="floating"
+                  type="number"
+                  inputmode="numeric" 
+                  pattern="[0-9]*" 
+                  formControlName="documentNumberCustomer"
+                  required minlength="6" maxlength="10"
+                  (ionInput)="validateNumberForm($event)"
+                ></ion-input>
               </ion-item>
             </ion-list>
           </ion-col>

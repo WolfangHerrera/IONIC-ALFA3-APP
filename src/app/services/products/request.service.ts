@@ -7,9 +7,26 @@ export class ProductService {
   listCart: any[] = [];
   dataProducts: any[] = [];
   totalPriceCart = '0';
+
   constructor() {
+    this.loadCartFromLocalStorage();
   }
 
+  private saveCartToLocalStorage() {
+    localStorage.setItem('listCart', JSON.stringify(this.listCart));
+    localStorage.setItem('totalPriceCart', this.totalPriceCart);
+  }
+
+  private loadCartFromLocalStorage() {
+    const listCart = localStorage.getItem('listCart');
+    const totalPriceCart = localStorage.getItem('totalPriceCart');
+    if (listCart) {
+      this.listCart = JSON.parse(listCart);
+    }
+    if (totalPriceCart) {
+      this.totalPriceCart = totalPriceCart;
+    }
+  }
 
   getItemProducts(item_id: string) {
     return this.dataProducts.filter(
@@ -30,12 +47,12 @@ export class ProductService {
         this.listCart.push({ ...item, count: 1 });
         await this.setTotalPrice();
       }
+      this.saveCartToLocalStorage();
     }
   }
 
   getTotalItemCount() {
     return this.listCart.reduce((total, item) => total + (item.count || 1), 0);
-    
   }
 
   async setTotalPrice() {
@@ -44,6 +61,7 @@ export class ProductService {
       0
     );
     this.totalPriceCart = value.toString();
+    this.saveCartToLocalStorage();
   }
 
   async updateItemCountFlagDelete(item_id: string, increment?: boolean) {
@@ -60,6 +78,7 @@ export class ProductService {
         }
       }
       await this.setTotalPrice();
+      this.saveCartToLocalStorage();
     }
     return false;
   }
@@ -69,6 +88,7 @@ export class ProductService {
       (cartItem) => cartItem.item_id !== item_id
     );
     await this.setTotalPrice();
+    this.saveCartToLocalStorage();
   }
 
   setDataProducts(data: any) {
@@ -81,6 +101,7 @@ export class ProductService {
 
   async setListCart(list: any) {
     this.listCart = list;
+    this.saveCartToLocalStorage();
   }
 
   async getTotalPrice() {
