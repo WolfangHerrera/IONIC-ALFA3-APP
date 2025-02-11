@@ -1,24 +1,17 @@
 version: 1
-applications:
-  - appRoot: .
-    backend:
-      phases:
-        build:
-          commands:
-            - nvm install 20.16
-            - nvm use 20.16
-            - npm install -g @ionic/cli  # Instala el CLI de Ionic globalmente
-            - npm install  # Instala las dependencias del proyecto
-            - ionic build --prod  # Realiza el build de producción con Ionic
-    frontend:
-      phases:
-        build:
-          commands:
-            - npm run build  # O usa ionic build --prod si no tienes el script 'build' configurado
-        artifacts:
-          baseDirectory: 'www'  # Esta es la carpeta por defecto donde Ionic coloca los archivos de producción
-          files:
-            - '**/*'  # Incluye todos los archivos dentro del directorio de salida
-        cache:
-          paths:
-            - node_modules/**/*  # Cache de dependencias para acelerar builds futuros
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - 'npm ci --cache .npm --prefer-offline'  # Instalar las dependencias desde el archivo package-lock.json
+        - 'npx ionic --version'  # Asegura que Ionic CLI esté disponible sin instalación global
+    build:
+      commands:
+        - 'npx ionic build --prod'  # Ejecuta el build con Ionic CLI en modo producción
+  artifacts:
+    baseDirectory: www  # El directorio de salida generado por Ionic (www)
+    files:
+      - '**/*'  # Incluir todos los archivos dentro del directorio 'www'
+  cache:
+    paths:
+      - '.npm/**/*'  # Cache de las dependencias para acelerar el proceso en futuros builds
