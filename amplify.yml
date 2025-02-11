@@ -3,6 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
+        - 'nvm install 20.16'  # Instalar la versión correcta de Node.js
+        - 'nvm use 20.16' 
         - 'npm ci --cache .npm --prefer-offline'  # Instalar las dependencias desde el archivo package-lock.json
         - 'npx ionic --version'  # Asegura que Ionic CLI esté disponible sin instalación global
     build:
