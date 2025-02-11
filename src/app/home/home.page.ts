@@ -37,8 +37,10 @@ export class HomePage {
   }
 
   disableLoading() {
-    this.isLoading = false;
-    this.tabs.select('Home');
+    setTimeout(() => {
+      this.isLoading = false;
+      this.tabs.select('Home');
+    }, 1000);
   }
 
   getDataItemProduct() {
