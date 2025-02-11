@@ -23,6 +23,7 @@
             "assets": [
               "src/assets",
               "src/service-worker.js",
+              "src/manifest.json",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -42,6 +43,7 @@
               "assets": [
                 "src/assets",
                 "src/service-worker.js",
+                "src/manifest.json",
                 {
                   "glob": "**/*",
                   "input": "src/assets",

@@ -12,7 +12,7 @@
           "/polyfills.js",
           "/styles.css",
           "/favicon.ico",
-          "/assets/manifest.webmanifest"
+          "/manifest.json"
         ]
       }
     },
