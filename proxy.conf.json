@@ -1,6 +1,6 @@
 {
     "/apiHost": {
-      "target": "http://192.168.1.67:8081",
+      "target": "https://alfa3-flask-fd769661555f.herokuapp.com",
       "secure": false
     }
   }

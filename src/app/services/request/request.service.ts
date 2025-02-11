@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RequestService {
-  private apiUrl = 'http://192.168.1.67:8081';
+  private apiUrl = 'https://alfa3-flask-fd769661555f.herokuapp.com';
   constructor(private http: HttpClient) { }
 
   getItemProducts(): Observable<any> {
