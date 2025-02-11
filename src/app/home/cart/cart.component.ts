@@ -73,10 +73,6 @@ export class CartComponent implements OnInit {
     this.flagCustomerDetails = true;
   }
 
-  onCheckOutOrder() {
-    this.alertCheckoutCart();
-  }
-
   async onClearCart() {
     this.listProducts = [];
     await this.productService.setListCart(this.listProducts);

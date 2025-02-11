@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { StatusService } from '../services/status/status.service';
 import { Subscription } from 'rxjs';
 import { IonTabs, ToastController } from '@ionic/angular';
+import { ProductService } from '../services/products/request.service';
+import { RequestService } from '../services/request/request.service';
 
 @Component({
   selector: 'app-home',
@@ -18,17 +20,12 @@ export class HomePage {
   tabHome: boolean = false;
   tabAccount: boolean = false;
 
-  constructor(private readonly statusService: StatusService, private toastController: ToastController) {
+  constructor(private readonly statusService: StatusService, private requestService: RequestService, private productService: ProductService, private toastController: ToastController) {
+    this.getDataItemProduct();
   }
 
   @ViewChild(IonTabs) tabs!: IonTabs;
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-      this.tabs.select('Home');
-    }, 1000);
-  }
 
   async ngOnInit() {
     this.statusService.getOfflineStatus().subscribe((isOffline) => {
@@ -37,6 +34,22 @@ export class HomePage {
       this.presentToast();
     }
     });
+  }
+
+  disableLoading() {
+    this.isLoading = false;
+    this.tabs.select('Home');
+  }
+
+  getDataItemProduct() {
+    this.requestService.getItemProducts().subscribe(
+      (response) => {
+        if (response) {
+          this.productService.setDataProducts(response);
+          this.disableLoading();
+        }
+      },
+    );
   }
 
   setActivePage(page: string): void {
