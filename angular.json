@@ -21,16 +21,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "service-worker.js",
-                "input": "src",
-                "output": "./"
-              },
-              {
-                "glob": "manifest.webmanifest",
-                "input": "src",
-                "output": "./"
-              },
+              "src/manifest.webmanifest",
+              "src/service-worker.js",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -47,6 +39,10 @@
           },
           "configurations": {
             "production": {
+              "assets": [
+                "src/manifest.webmanifest",
+                "src/service-worker.js"
+              ],
               "budgets": [
                 {
                   "type": "initial",
