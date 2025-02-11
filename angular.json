@@ -21,6 +21,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               "src/manifest.webmanifest",
               "src/service-worker.js",
               {
@@ -41,7 +42,17 @@
             "production": {
               "assets": [
                 "src/manifest.webmanifest",
-                "src/service-worker.js"
+                "src/service-worker.js",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets",
+                  "output": "assets"
+                },
+                {
+                  "glob": "**/*.svg",
+                  "input": "node_modules/ionicons/dist/ionicons/svg",
+                  "output": "./svg"
+                }
               ],
               "budgets": [
                 {
