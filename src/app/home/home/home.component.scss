@@ -11,10 +11,6 @@ ion-content{
   background-color: #000;
 }
 
-ion-col{
-  margin-bottom: 5vh;
-}
-
 ion-card {
   --background: #000;
   width: 100%;
@@ -24,4 +20,8 @@ ion-card {
   height: auto;
   display: flex;
   flex-direction: column;
+}
+
+.ion-col-products{
+  margin-bottom: 45px;
 }

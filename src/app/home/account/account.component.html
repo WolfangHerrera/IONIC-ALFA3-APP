@@ -5,23 +5,24 @@
     </ion-refresher>
     <ion-grid>
       <ion-row>
-        <ion-col>
-          <ion-card *ngIf="flagIsLogged">
+        <ion-col size-md="6" *ngIf="flagIsLogged" class="ion-no-padding">
+          <ion-card>
             <ion-card-header>
               <ion-card-title style="text-align: center;">{{ responseLogin.username }}</ion-card-title>
               <ion-card-subtitle style="text-align: center;">{{ responseLogin.role }}</ion-card-subtitle>
             </ion-card-header>
             <div style="display: flex; justify-content: center;">
               <ion-avatar>
-                <img alt="Silhouette of a person's head" src="https://www.wolfangdevs.com/assets/ProfilePicture.png" />
+                <img alt="Silhouette of a person's head" src="assets/icons/wd-logo.png" />
               </ion-avatar>
             </div>
             <ion-card-content>
               <ion-button expand="full" (click)="onLogout()">LOG OUT</ion-button>
             </ion-card-content>
           </ion-card>
-
-          <ion-card *ngIf="!flagIsLogged">
+          </ion-col>
+          <ion-col size-md="6" *ngIf="!flagIsLogged" class="ion-no-padding">
+          <ion-card>
             <ion-card-header>
               <ion-card-title>ALFA3 ELECTRICS</ion-card-title>
               <ion-card-subtitle>HEY! WELCOME TO OUR SHOP</ion-card-subtitle>
