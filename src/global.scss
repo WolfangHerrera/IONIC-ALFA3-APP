@@ -37,11 +37,22 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 body {
-    --background: #121212;
+    --background: #000;
     --color: #ffffff;
-    --ion-background-color: #121212;
+    --ion-background-color: #000;
     --ion-text-color: #ffffff;
     background-color: var(--ion-background-color);
     color: var(--ion-text-color);
   }
   
+
+:root {
+  --ion-background-color: #000;  // Color de fondo oscuro
+  --ion-text-color: #ffffff;        // Color de texto claro
+}
+body.dark {
+  --ion-background-color: #000;
+  --ion-text-color: #ffffff;
+  --ion-item-background: #000;
+  --ion-toolbar-background: #000;
+}
