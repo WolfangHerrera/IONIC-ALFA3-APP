@@ -41,18 +41,31 @@ body {
     --color: #ffffff;
     --ion-background-color: #000;
     --ion-text-color: #ffffff;
+    --ion-item-background: #000;
+    --ion-alert-background: #000;
+    --ion-toolbar-background: #000;
+    --ion-select-background: #000;
+    --ion-select-option-color: #ffffff;
     background-color: var(--ion-background-color);
     color: var(--ion-text-color);
   }
   
 
 :root {
-  --ion-background-color: #000;  // Color de fondo oscuro
-  --ion-text-color: #ffffff;        // Color de texto claro
+  --ion-background-color: #000;
+  --ion-text-color: #ffffff;
+  --ion-item-background: #000;
+  --ion-alert-background: #000;
+  --ion-toolbar-background: #000;
+  --ion-select-background: #000;
+  --ion-select-option-color: #ffffff;
 }
 body.dark {
   --ion-background-color: #000;
   --ion-text-color: #ffffff;
   --ion-item-background: #000;
+  --ion-alert-background: #000;
   --ion-toolbar-background: #000;
+  --ion-select-background: #000;
+  --ion-select-option-color: #ffffff;
 }
