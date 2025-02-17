@@ -15,16 +15,6 @@
           "/manifest.json"
         ]
       }
-    },
-    {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "lazy",
-      "resources": {
-        "urls": [
-          "/assets/**"
-        ]
-      }
     }
   ]
 }
