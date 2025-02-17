@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
+import { RequestService } from 'src/app/services/request/request.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,6 +21,7 @@ export class CartComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private requestService: RequestService,
     private alertController: AlertController,
     private toastController: ToastController
   ) {
@@ -81,15 +83,21 @@ export class CartComponent implements OnInit {
   }
 
   async onConfirmOrder() {
-    this.flagCustomerDetails = false;
-    this.flagClearCart = true;
     const orderDetails = {
-      customerDetails: this.formCheckOut.value,
-      productsCart: this.listProducts,
-      totalPrice: this.totalPrice
+      CUSTOMER_DETAILS: this.formCheckOut.value,
+      PRODUCTS_CART: this.listProducts,
+      TOTAL_PRICE: this.totalPrice,
     };
-    await this.onClearCart();
-    await this.activateToastCheckoutCart();
+    await this.requestService
+      .createOrder(orderDetails)
+      .subscribe(async (response) => {
+        if (response) {
+          this.flagCustomerDetails = false;
+          this.flagClearCart = true;
+          await this.onClearCart();
+          await this.activateToastCheckoutCart();
+        }
+      });
   }
 
   async getDataProductService() {
