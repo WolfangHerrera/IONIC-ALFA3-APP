@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border">
+  <ion-img
+  src="assets/icons/logo.png"
+  alt="ALFA3 ELECTRICS-LOGO">
+  </ion-img>
+</ion-header>
+
+<ion-content class="ion-no-margin ion-no-padding" scrollY="false">
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="12" size-md="6" class="ion-padding">
+        <h1 class="ion-text-start">YOUR ORDER</h1>
+        <ion-item>
+          <ion-label class="ion-text-start">ORDER #ALFA3-20250219-8305</ion-label>
+          <ion-badge color="success">DELIVERY</ion-badge>
+        </ion-item>
+        <ion-card>
+          <ion-card-content class="ion-no-margin ion-no-padding">
+            <ion-list>
+              <ion-item *ngFor="let item of [1,2,3,4,5,6]">
+                <ion-thumbnail slot="start">
+                  <img
+                    alt="ALFA3's Product"
+                    style="border-radius: 10px"
+                    src="https://http2.mlstatic.com/D_Q_NP_749521-MCO80869248220_122024-AC.webp"
+                  />
+                </ion-thumbnail>
+                <ion-badge slot="start" color="warning">10</ion-badge>
+                <div class="ion-no-margin">
+                  <h3>MULTITOMA CUADRADA 6 SALIDAS</h3>
+                  <p>$ 24.000 COP</p>
+                </div>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+        <div class="ion-checkout">
+          <div class="ion-checkout-items">
+            <h5 class="ion-text-end ion-no-padding ion-no-margin">
+              TOTAL
+            </h5>
+          </div>
+          <div class="ion-total-price">
+            <h2 class="ion-text-end">$ 100.000 COP</h2>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
