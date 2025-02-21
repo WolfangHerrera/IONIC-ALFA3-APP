@@ -23,4 +23,8 @@ export class RequestService {
   createOrder(dataRequest: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/createOrder`, dataRequest);
   }
+
+  getOrderById(queryParam: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getOrder/${queryParam}`);
+  }
 }

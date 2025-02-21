@@ -105,7 +105,6 @@ export class CartComponent implements OnInit {
     this.flagClearCart = false;
     this.flagCustomerDetails = false;
     this.totalPrice = await this.productService.getTotalPrice();
-    this.totalPrice = this.setDotOnPrice(this.totalPrice);
     this.itemsCount = await this.productService.getTotalItemCount();
   }
 

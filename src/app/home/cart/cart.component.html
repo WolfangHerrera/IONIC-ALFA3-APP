@@ -83,7 +83,7 @@
               </h6>
             </div>
             <div class="ion-total-price">
-              <h2 class="ion-text-end">$ {{ totalPrice }}</h2>
+              <h2 class="ion-text-end">$ {{ setDotOnPrice(totalPrice) }}</h2>
               <ion-button
                 (click)="onCheckOutCart()"
                 color="warning"

@@ -5,9 +5,13 @@ import { OrderPage } from './order.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':order_id',
     component: OrderPage
-  }
+  },
+  {
+    path: '**',
+    redirectTo: '/home'
+  },
 ];
 
 @NgModule({

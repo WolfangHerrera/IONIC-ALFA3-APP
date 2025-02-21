@@ -31,7 +31,6 @@ export class HomeComponent  {
       (response) => {
         if (response) {
           this.products = response;
-          console.log(this.products);
           this.productService.setDataProducts(this.products);
           this.voltageRegulator = this.products.filter((item: { item_id: string }) => this.ignoreItem(item));
           this.powerStrip = this.products.filter((item: { item_id: string }) => !this.ignoreItem(item));
