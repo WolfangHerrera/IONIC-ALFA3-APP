@@ -12,6 +12,7 @@ export class OrderPage {
   order_id: string;
   dataOrder: any;
   productCart: any;
+  isLoading: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private requestService: RequestService) {
     this.order_id = this.route.snapshot.paramMap.get('order_id')!;
@@ -30,6 +31,7 @@ export class OrderPage {
         if (response) {
           this.dataOrder = response;
           this.productCart = response.products_cart;
+          this.isLoading = true;
         }
       },
       async (responseError) => {

@@ -9,8 +9,18 @@
   <ion-refresher slot="fixed">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-grid>
-    <ion-row class="ion-justify-content-center ion-align-items-center">
+  <ion-grid class="ion-no-margin ion-no-padding">
+    <ion-row *ngIf="!isLoading" class="ion-row">
+      <ion-col class="ion-no-margin ion-padding ion-justify-content-center ion-align-items-center" size="12">
+        <div class="ion-text-center">
+          <div class="ion-justify-content-center ion-img">
+            <ion-img class="fade-in" src="assets/icons/logo.png" alt="ALFA3 ELECTRICS - LOGO" style="height: 8vh;"></ion-img>
+          </div>
+          <ion-spinner color="warning" name="crescent"></ion-spinner>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="isLoading" class="ion-justify-content-center ion-align-items-center">
       <ion-col size="12" size-md="6" class="ion-padding">
         <h1 class="ion-text-start">YOUR ORDER</h1>
         <ion-item>
