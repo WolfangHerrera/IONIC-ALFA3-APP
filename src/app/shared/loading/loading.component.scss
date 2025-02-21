@@ -1,0 +1,25 @@
+ion-row{
+    background-color: black;
+    padding: 5vh 0;
+    height: 100vh;
+    @media (max-width: 576px) {
+      height: 95vh;
+    }
+  }
+  
+  ion-content{
+    --background: #000;
+  }
+  
+  .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }

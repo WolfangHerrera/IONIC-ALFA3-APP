@@ -1,63 +1,35 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-img
   src="assets/icons/logo.png"
   alt="ALFA3 ELECTRICS-LOGO">
   </ion-img>
-</ion-header>
+</ion-header> -->
 
-<ion-content class="ion-no-margin ion-no-padding" scrollY="false">
-  <ion-refresher slot="fixed">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-grid class="ion-no-margin ion-no-padding">
-    <ion-row *ngIf="!isLoading" class="ion-row">
-      <ion-col class="ion-no-margin ion-padding ion-justify-content-center ion-align-items-center" size="12">
-        <div class="ion-text-center">
-          <div class="ion-justify-content-center ion-img">
-            <ion-img class="fade-in" src="assets/icons/logo.png" alt="ALFA3 ELECTRICS - LOGO" style="height: 8vh;"></ion-img>
-          </div>
-          <ion-spinner color="warning" name="crescent"></ion-spinner>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="isLoading" class="ion-justify-content-center ion-align-items-center">
-      <ion-col size="12" size-md="6" class="ion-padding">
-        <h1 class="ion-text-start">YOUR ORDER</h1>
-        <ion-item>
-          <ion-label class="ion-text-start">ORDER # {{ order_id }}</ion-label>
-          <ion-badge color="success">{{ dataOrder?.status }}</ion-badge>
-        </ion-item>
-        <ion-card>
-          <ion-card-content class="ion-no-margin ion-no-padding">
-            <ion-list>
-              <ion-item *ngFor="let item of productCart">
-                <ion-thumbnail slot="start">
-                  <img
-                    alt="ALFA3's Product"
-                    style="border-radius: 10px"
-                      src="{{ item.img_url }}"
-                  />
-                </ion-thumbnail>
-                <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
-                <div class="ion-no-margin">
-                  <h3>{{ item.item_name }}</h3>
-                  <p>$ {{ setDotOnPrice(item.price) }} COP</p>
-                </div>
-              </ion-item>
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
-        <div class="ion-checkout">
-          <div class="ion-checkout-items">
-            <h5 class="ion-text-end ion-no-padding ion-no-margin">
-              TOTAL
-            </h5>
-          </div>
-          <div class="ion-total-price">
-            <h2 class="ion-text-end">$ {{ setDotOnPrice(dataOrder?.total_price) }} COP</h2>
-          </div>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content class="ion-no-margin ion-no-padding" scrollY="false" [ngClass]="{'fade-in': !isLoading}">
+  <ion-header *ngIf="!isLoading" class="ion-no-border">
+      <ion-img
+      src="assets/icons/logo.png"
+      alt="ALFA3 ELECTRICS-LOGO">
+      </ion-img>
+  </ion-header>
+  <ion-tabs [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
+    <ion-tab tab="Loading">
+      <div id="Loading">
+        <app-loading></app-loading>
+      </div>
+    </ion-tab>
+    <ion-tab tab="Order" selected="true">
+      <div id="Order" >
+        <app-core-order [dataOrder]="dataOrder" [tabChanged]="tabOrder"></app-core-order>
+      </div>
+    </ion-tab>
+    <ion-footer>
+      <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
+        <ion-tab-button tab="Order" selected="true">
+        <ion-icon name="order"></ion-icon>
+          ORDER
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-footer>
+  </ion-tabs>
 </ion-content>

@@ -9,7 +9,7 @@ import { OrderComponent } from "./order/order.component";
 import { CartComponent } from "./cart/cart.component";
 import { AccountComponent } from "./account/account.component";
 import { HomeComponent } from "./home/home.component";
-import { LoadingComponent } from './loading/loading.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { LoadingComponent } from './loading/loading.component';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
 ],
   declarations: [
     HomePage,
@@ -26,7 +27,7 @@ import { LoadingComponent } from './loading/loading.component';
     CartComponent,
     AccountComponent,
     HomeComponent,
-    LoadingComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}

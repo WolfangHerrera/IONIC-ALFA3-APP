@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatusService } from '../services/status/status.service';
 import { Subscription } from 'rxjs';
 import { IonTabs, ToastController } from '@ionic/angular';
@@ -11,11 +11,11 @@ import { RequestService } from '../services/request/request.service';
   styleUrls: ['home.page.scss'],
   standalone: false,
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  @ViewChild(IonTabs) tabs!: IonTabs;
   isOffline: boolean = navigator.onLine;
   isLoading: boolean = true;
-  toast!: ToastController
-
+  toast!: ToastController;
   tabCart: boolean = false;
   tabHome: boolean = false;
   tabAccount: boolean = false;
@@ -23,9 +23,6 @@ export class HomePage {
   constructor(private readonly statusService: StatusService, private requestService: RequestService, private productService: ProductService, private toastController: ToastController) {
     this.getDataItemProduct();
   }
-
-  @ViewChild(IonTabs) tabs!: IonTabs;
-
 
   async ngOnInit() {
     this.statusService.getOfflineStatus().subscribe((isOffline) => {
