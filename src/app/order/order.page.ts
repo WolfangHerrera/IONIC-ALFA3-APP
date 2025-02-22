@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from '../services/request/request.service';
 import { IonTabs } from '@ionic/angular';
+import { OrderService } from '../services/order/order.service';
 
 @Component({
   selector: 'app-order',
@@ -13,9 +14,10 @@ export class OrderPage implements OnInit {
   @ViewChild(IonTabs) tabs!: IonTabs;
   isLoading: boolean = true;
   tabOrder: boolean = false;
-  
   order_id: string;
-  dataOrder: any;
+  dataOrder!: any;
+  dataCart!: any;
+
 
   constructor(private route: ActivatedRoute, private router: Router, private requestService: RequestService) {
     this.order_id = this.route.snapshot.paramMap.get('order_id')!;
@@ -24,7 +26,7 @@ export class OrderPage implements OnInit {
     }
   }
 
-  async ngOnInit(){
+  async ngOnInit() {
     await this.getOrderById();
   }
 
@@ -33,7 +35,8 @@ export class OrderPage implements OnInit {
       async (response) => {
         if (response) {
           this.dataOrder = response;
-          this.disableLoading();
+          this.dataCart = response.products_cart;
+          await this.disableLoading();
         }
       },
       async (responseError) => {
@@ -44,7 +47,7 @@ export class OrderPage implements OnInit {
     );
   }
 
-  disableLoading() {
+  async disableLoading() {
     setTimeout(() => {
       this.isLoading = false;
       this.tabs.select('Order');
@@ -61,5 +64,11 @@ export class OrderPage implements OnInit {
 
   onTabChange(event: any) {
     this.setActivePage(event.tab);
+  }
+
+  setDotOnPrice(price: string) {
+    return parseFloat(price).toLocaleString('en-US', {
+      maximumFractionDigits: 2,
+    });
   }
 }

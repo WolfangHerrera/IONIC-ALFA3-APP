@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-order',
+  selector: 'app-order-home',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
   standalone: false,

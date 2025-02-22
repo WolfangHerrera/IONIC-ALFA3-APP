@@ -28,6 +28,8 @@ export class ProductService {
     }
   }
 
+
+
   getItemProducts(item_id: string) {
     return this.dataProducts.filter(
       (product) => product.item_id === item_id

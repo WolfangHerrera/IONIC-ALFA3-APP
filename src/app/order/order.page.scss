@@ -1,7 +1,20 @@
+ion-tab-bar {
+  --ion-tab-bar-background: #000;
+  --ion-tab-bar-color-selected: #efb74c;
+  --ion-tab-bar-color: #cdcdcd;
+  border-top: 1px solid #efb74c;
+  height: 5vh;
+}
+
+ion-toolbar{
+  height: auto;
+  background-color: #000;
+}
+  
 ion-footer{
     margin-bottom: 0;
-  }
-  
+}
+
 ion-header{
   background-color: #000;
   display: flex;
@@ -17,22 +30,16 @@ ion-img {
   margin: 0 10px;
 }
 
-.ion-img{
-  display: flex;
-}
-
-
-.ion-row{
-  background-color: black;
-  padding: 5vh 0;
-  height: 100vh;
-  @media (max-width: 576px) {
-    height: 95vh;
-  }
+ion-app{
+  --background: #000;
+  background-color: #000;
+  padding-top: 5vh;
 }
 
 ion-content{
   --background: #000;
+  background-color: #000;
+  height: 100vh;
 }
 
 .fade-in {
