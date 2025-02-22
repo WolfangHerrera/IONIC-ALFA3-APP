@@ -2,7 +2,6 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from '../services/request/request.service';
 import { IonTabs } from '@ionic/angular';
-import { OrderService } from '../services/order/order.service';
 
 @Component({
   selector: 'app-order',
