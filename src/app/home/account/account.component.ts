@@ -76,7 +76,7 @@ export class AccountComponent implements OnInit {
   }
 
   async sentDataLoginUser() {
-    await this.requestService.loginUser(this.dataRequestLogin).subscribe(
+     this.requestService.loginUser(this.dataRequestLogin).subscribe(
       async (response) => {
         if (response) {
           this.flagIsLogged = true;
