@@ -102,6 +102,29 @@
           <ion-col size="12" class="ion-no-padding">
             <ion-list>
               <ion-item>
+                <ion-select label="DOCUMENT TYPE" label-placement="floating" formControlName="documentTypeCustomer" required>
+                  <ion-select-option value="CC"
+                    >NATIONAL DOCUMENT</ion-select-option>
+                  <ion-select-option value="NIT">NIT</ion-select-option>
+                  <ion-select-option value="PASSPORT">PASSPORT</ion-select-option>
+                  <ion-select-option value="FOREIGN_DOCUMENT"
+                    >FOREIGN DOCUMENT</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  label="DOCUMENT NUMBER"
+                  label-placement="floating"
+                  type="number"
+                  inputmode="numeric" 
+                  pattern="[0-9]*" 
+                  formControlName="documentNumberCustomer"
+                  required minlength="6" maxlength="10"
+                  (ionInput)="validateNumberForm($event)"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
                 <ion-input
                   label="FULL NAME"
                   label-placement="floating"
@@ -138,29 +161,6 @@
                   pattern="[0-9]*" 
                   formControlName="phoneNumberCustomer"
                   required minlength="7" maxlength="10"
-                  (ionInput)="validateNumberForm($event)"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-select label="DOCUMENT TYPE" label-placement="floating" formControlName="documentTypeCustomer" required>
-                  <ion-select-option value="CC"
-                    >NATIONAL DOCUMENT</ion-select-option>
-                  <ion-select-option value="NIT">NIT</ion-select-option>
-                  <ion-select-option value="PASSPORT">PASSPORT</ion-select-option>
-                  <ion-select-option value="FOREIGN_DOCUMENT"
-                    >FOREIGN DOCUMENT</ion-select-option
-                  >
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-input
-                  label="DOCUMENT NUMBER"
-                  label-placement="floating"
-                  type="number"
-                  inputmode="numeric" 
-                  pattern="[0-9]*" 
-                  formControlName="documentNumberCustomer"
-                  required minlength="6" maxlength="10"
                   (ionInput)="validateNumberForm($event)"
                 ></ion-input>
               </ion-item>
