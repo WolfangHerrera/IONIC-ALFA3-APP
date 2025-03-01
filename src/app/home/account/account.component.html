@@ -33,16 +33,7 @@
                 <ion-item>
                   <ion-input label="PASSWORD" label-placement="floating" type="password" formControlName="passwordCustomer" required></ion-input>
                 </ion-item>
-                <ng-container *ngIf="flagRegister">
-                  <ion-item>
-                    <ion-input label="EMAIL" label-placement="floating" type="email" formControlName="emailCustomer" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input label="FULL NAME" label-placement="floating" type="text" formControlName="fullnameCustomer" required></ion-input>
-                  </ion-item>
-                </ng-container>
                 <ion-button *ngIf="!flagRegister" (click)="onSubmitLogin()" [disabled]="loginForm.invalid" expand="full">LOG IN</ion-button>
-                <ion-button *ngIf="flagRegister" (click)="onSubmitLogin()" [disabled]="loginForm.invalid" expand="full">SIGN UP</ion-button>
               </form>
             </ion-card-content>
           </ion-card>
