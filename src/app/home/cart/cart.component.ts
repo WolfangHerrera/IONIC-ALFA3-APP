@@ -59,13 +59,6 @@ export class CartComponent implements OnInit {
     input.value = input.value.replace(/[^0-9]/g, '');
   }
 
-  handleRefresh(event: CustomEvent) {
-    setTimeout(() => {
-      this.getDataProductService();
-      (event.target as HTMLIonRefresherElement).complete();
-    }, 2000);
-  }
-
   setDotOnPrice(price: string) {
     return parseFloat(price).toLocaleString('en-US', {
       maximumFractionDigits: 2,
@@ -96,6 +89,9 @@ export class CartComponent implements OnInit {
           this.flagClearCart = true;
           await this.onClearCart();
           await this.activateToastCheckoutCart();
+          setTimeout(() => {
+            window.open(response['URL_PAYMENT'], '_blank')?.focus();
+          }, 1500);
         }
       });
   }
