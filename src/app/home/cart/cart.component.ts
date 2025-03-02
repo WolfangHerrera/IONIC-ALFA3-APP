@@ -38,6 +38,12 @@ export class CartComponent implements OnInit {
     await this.getDataProductService();
   }
 
+  handleRefresh(event: CustomEvent) {
+    setTimeout(() => {
+      (event.target as HTMLIonRefresherElement).complete();
+    }, 2000);
+  }
+
   generateFormGroup() {
     this.formCheckOut = new FormGroup({
       fullNameCustomer: new FormControl(''),
