@@ -1,5 +1,5 @@
-<ion-content class="ion-no-margin ion-no-padding" scrollY="false" [ngClass]="{'fade-in': !isLoading}">
-  <ion-header *ngIf="!isLoading" class="ion-no-border">
+<ion-content class="ion-no-margin ion-no-padding ion-content-ios" scrollY="false" [ngClass]="{'fade-in': !isLoading}">
+  <ion-header *ngIf="!isLoading" class="ion-no-border ion-padding-md">
       <ion-img
         src="assets/icons/logo.png"
         alt="ALFA3 ELECTRICS-LOGO">
@@ -26,7 +26,7 @@
         <app-cart [tabChanged]="tabCart"></app-cart>
       </div>
     </ion-tab>
-    <ion-footer>
+    <ion-footer class="ion-padding-md">
       <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
         <ion-tab-button tab="Home" selected="true">
         <ion-icon name="home"></ion-icon>
