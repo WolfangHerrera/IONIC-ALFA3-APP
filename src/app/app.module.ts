@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: !isDevMode(),
-  registrationStrategy: 'registerWhenStable:30000'
+  registrationStrategy: 'registerWhenStable:1000'
 }), SharedModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
