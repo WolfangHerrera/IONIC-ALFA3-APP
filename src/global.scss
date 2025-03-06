@@ -32,40 +32,23 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+ /* @import "@ionic/angular/css/palettes/dark.class.css"; */
+ // @import "@ionic/angular/css/palettes/dark.system.css";
+ @import "@ionic/angular/css/palettes/dark.always.css"; 
 
-body {
-    --background: #000;
-    --color: #ffffff;
-    --ion-background-color: #000;
-    --ion-text-color: #ffffff;
-    --ion-item-background: #000;
-    --ion-alert-background: #000;
-    --ion-toolbar-background: #000;
-    --ion-select-background: #000;
-    --ion-select-option-color: #ffffff;
-    background-color: var(--ion-background-color);
-    color: var(--ion-text-color);
-  }
-  
-
-:root {
-  --ion-background-color: #000;
-  --ion-text-color: #ffffff;
-  --ion-item-background: #000;
-  --ion-alert-background: #000;
-  --ion-toolbar-background: #000;
-  --ion-select-background: #000;
-  --ion-select-option-color: #ffffff;
+ body {
+  --background: #121212;
+  --color: #ffffff;
 }
-body.dark {
-  --ion-background-color: #000;
-  --ion-text-color: #ffffff;
-  --ion-item-background: #000;
-  --ion-alert-background: #000;
-  --ion-toolbar-background: #000;
-  --ion-select-background: #000;
-  --ion-select-option-color: #ffffff;
+
+.dark {
+  --background: #121212;
+  --color: #ffffff;
+  --input-background: #333333;
+  --input-color: #ffffff;
+}
+
+.light {
+  --background: #ffffff;
+  --color: #000000;
 }

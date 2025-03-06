@@ -8,9 +8,11 @@ import { Platform } from '@ionic/angular';
   standalone: false,
 })
 export class AppComponent {
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform) {}
+
+  ngOnInit() {
     this.platform.ready().then(() => {
-      document.body.classList.add('dark');
+      document.body.setAttribute('color-theme', 'dark');
     });
   }
 }
