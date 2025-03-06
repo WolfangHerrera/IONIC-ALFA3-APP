@@ -5,7 +5,7 @@
         <ion-col size="12" size-md="6" class="ion-no-padding" style="padding-bottom: 5vh;">
           <h2 class="ion-text-start">OUR PRODUCTS</h2>
           <ion-row class="ion-justify-content-center ion-align-items-center">
-            <ion-col class="ion-padding" size="10" *ngFor="let product of products">
+            <ion-col class="ion-padding" size="12" *ngFor="let product of products">
               <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
             </ion-col>
           </ion-row>
