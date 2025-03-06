@@ -3,7 +3,7 @@ ion-tab-bar {
   --ion-tab-bar-color-selected: #efb74c;
   --ion-tab-bar-color: #cdcdcd;
   border-top: 1px solid #efb74c;
-  height: 5vh;
+  height: 5vw;
 }
 
 ion-toolbar{
@@ -33,7 +33,8 @@ ion-img {
 ion-content{
   --background: #000;
   background-color: #000;
-  height: 100vh;
+  padding: 5vh 0;
+  height: 100vw;
 }
 
 .fade-in {
