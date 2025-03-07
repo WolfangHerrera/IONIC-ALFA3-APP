@@ -4,9 +4,6 @@ ion-tab-bar {
   --ion-tab-bar-color: #cdcdcd;
   border-top: 1px solid #efb74c;
   height: 5vh;
-  @media (min-width: 768px) {
-    height: 8vh;
-  }
 }
 
 ion-toolbar{
@@ -25,9 +22,6 @@ ion-header{
   align-items: center;
   border-bottom: 1px solid #efb74c;
   height: 5vh;
-  @media (min-width: 768px) {
-    height: 8vh;
-  }
 }
 
 ion-img {
