@@ -15,16 +15,18 @@
     </ion-tab>
     <ion-tab tab="Order">
       <div id="Order">
-        <ion-app>
-          <ion-content class="ion-no-margin ion-no-padding" scrollY="false">
+        <ion-app class="ion-no-margin ion-no-padding" scrollY="true">
+          <ion-content class="ion-no-margin ion-no-padding">
             <ion-grid class="ion-no-margin ion-no-padding">
               <ion-row class="ion-justify-content-center ion-align-items-center">
                 <ion-col size="12" size-md="6" class="ion-padding" *ngIf="dataOrder && dataCart">
                   <h1 class="ion-text-start">YOUR ORDER</h1>
-                  <ion-item>
-                    <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
-                    <ion-badge color="success">{{ dataOrder?.status }}</ion-badge>
-                  </ion-item>
+                  <ion-card>
+                    <ion-item>
+                      <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
+                      <ion-badge color="success">{{ dataOrder?.status }}</ion-badge>
+                    </ion-item>
+                  </ion-card>
                   <ion-card>
                     <ion-card-content class="ion-no-margin ion-no-padding">
                       <ion-list>

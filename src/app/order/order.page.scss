@@ -30,10 +30,16 @@ ion-img {
   margin: 0 10px;
 }
 
+ion-app{
+  height: 100vh; 
+  padding: 5vh 0;
+  background-color: #000;
+  --background: #000;
+}
+
 ion-content{
   --background: #000;
   background-color: #000;
-  height: 100vh;
 }
 
 .fade-in {
