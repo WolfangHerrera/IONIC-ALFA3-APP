@@ -152,7 +152,7 @@ export class CartComponent implements OnInit {
       await toast.dismiss();
     }
     toast = await this.toastController.create({
-      message: 'ORDER PLACED SUCCESSFULLY!',
+      message: 'REDIRECTING TO PAYMENT GATEWAY!',
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
