@@ -7,13 +7,8 @@ ion-tab-bar {
 }
 
 ion-toolbar{
-  height: auto;
+  height: 100%;
   background-color: #000;
-}
-
-ion-footer{
-  margin-bottom: 0;
-  height: 5vh;
 }
 
 ion-header{
@@ -34,7 +29,6 @@ ion-img {
 ion-content{
   --background: #000;
   background-color: #000;
-  height: 100%;
 }
 
 .fade-in {
