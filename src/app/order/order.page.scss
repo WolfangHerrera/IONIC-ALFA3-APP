@@ -13,15 +13,6 @@ ion-tab-bar {
   height: 5vh;
 }
 
-ion-toolbar{
-  height: auto;
-  background-color: #000;
-}
-  
-ion-footer{
-    margin-bottom: 0;
-}
-
 ion-header{
   background-color: #000;
   display: flex;
@@ -41,9 +32,6 @@ ion-content{
   --background: #000;
   background-color: #000;
 }
-
-
-
 
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
