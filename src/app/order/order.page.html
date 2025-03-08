@@ -24,7 +24,7 @@
                   <ion-card>
                     <ion-item>
                       <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
-                      <ion-badge color="success">{{ dataOrder?.status }}</ion-badge>
+                        <ion-badge [color]="dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'">{{ dataOrder?.status }}</ion-badge>
                     </ion-item>
                   </ion-card>
                   <ion-card>
