@@ -1,48 +1,48 @@
-  ion-app{
-    padding-top: 5vh;
-    height: 90vh;
-    background-color: #000;
-    --background: #000;
-  }
+ion-app {
+  padding-top: 5vh;
+  height: 95vh;
+  background-color: #000;
+  --background: #000;
+}
 
-  ion-content{
-    --background: #000;
-    background-color: #000;
-  }
-  
-  ion-button {
-    margin-top: 15px;
-    --color: #000;
-    --background: #efb74c;
-  }
+ion-content {
+  --background: #000;
+  background-color: #000;
+}
 
-  ion-card{
-    --background: #000;
-    --color: #efb74c;
-    width: 90%;
-    height: 100%;
-  }
-  
-  ion-card-title {
-    --color: #efb74c;
-  }
-  
-  ion-card-subtitle {
-    --color: #fff;
-  }
+ion-button {
+  margin-top: 15px;
+  --color: #000;
+  --background: #efb74c;
+}
 
-  ion-row{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
+ion-card {
+  --background: #000;
+  --color: #efb74c;
+  width: 90%;
+  height: 100%;
+}
 
-  ion-col{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
+ion-card-title {
+  --color: #efb74c;
+}
+
+ion-card-subtitle {
+  --color: #fff;
+}
+
+ion-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+ion-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}

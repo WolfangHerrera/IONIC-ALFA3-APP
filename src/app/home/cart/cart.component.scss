@@ -1,71 +1,71 @@
-  ion-app{
-    padding-top: 5vh;
-    height: 90vh;
-    background-color: #000;
-    --background: #000;
-  }
+ion-app {
+  padding-top: 5vh;
+  height: 95vh;
+  background-color: #000;
+  --background: #000;
+}
 
-  ion-content{
+ion-content {
   --background: #000;
   background-color: #000;
-  } 
+}
 
 
-  ion-item{
-    margin: 0;
-    padding: 0;
-  }
+ion-item {
+  margin: 0;
+  padding: 0;
+}
 
-  ion-label{
-    padding: 0;
-    margin: 0;
-  }
+ion-label {
+  padding: 0;
+  margin: 0;
+}
 
-  ion-select{
-    padding: 0;
-    margin: 0;
-  }
+ion-select {
+  padding: 0;
+  margin: 0;
+}
 
-  ion-input{
-    padding: 0;
-    margin: 0;
-  }
-  
-  ion-card-content{
-    padding: 0;
-    margin: 0;
-  }
+ion-input {
+  padding: 0;
+  margin: 0;
+}
 
-  .ion-button{
-    width: 120px;
-  }
+ion-card-content {
+  padding: 0;
+  margin: 0;
+}
 
-  .ion-checkout{
-    display: flex;
-    justify-content: end;
-    align-items: center;
+.ion-button {
+  width: 120px;
+}
 
-  }
+.ion-checkout {
+  display: flex;
+  justify-content: end;
+  align-items: center;
 
-  .ion-checkout-items{
-    display: block;
-    padding: 0;
-    margin: 0;
-    justify-content: end;
-    align-items: center;
-  }
+}
 
-  .ion-total-price{
-    display: block;
-    justify-content: end;
-    margin-left: 5vw;
-    align-items: center;
-  }
+.ion-checkout-items {
+  display: block;
+  padding: 0;
+  margin: 0;
+  justify-content: end;
+  align-items: center;
+}
 
-  .ion-checkout-button{
-    width: 100%;
-  }
+.ion-total-price {
+  display: block;
+  justify-content: end;
+  margin-left: 5vw;
+  align-items: center;
+}
 
-  .fade-in {
-    animation: fadeIn 1.5s ease-in-out;
-  }
+.ion-checkout-button {
+  width: 100%;
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
