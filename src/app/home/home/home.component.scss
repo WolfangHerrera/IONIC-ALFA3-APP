@@ -1,4 +1,5 @@
 ion-app{
+  padding-top: 5vh;
   background-color: #000;
   --background: #000;
 }
@@ -17,8 +18,4 @@ ion-card {
   height: auto;
   display: flex;
   flex-direction: column;
-}
-
-.ion-col-products{
-  margin-bottom: 45px;
 }
