@@ -21,7 +21,7 @@
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col class="ion-padding ion-margin-bottom ion-col-products">
           <h2 class="ion-text-center">OUR PRODUCTS</h2>
-          <ion-segment class="ion-hide-md-down" [(ngModel)]="selectedSegment" color="warning">
+          <ion-segment [(ngModel)]="selectedSegment" color="warning">
             <ion-segment-button value="first">
               <ion-label>MULTITOMAS</ion-label>
             </ion-segment-button>
@@ -29,7 +29,7 @@
               <ion-label>REGULADORES</ion-label>
             </ion-segment-button>
           </ion-segment>
-          <ion-segment-view class="ion-hide-md-down">
+          <ion-segment-view>
             <ion-segment-content id="first" *ngIf="selectedSegment === 'first'">
               <ion-row class="ion-no-margin ion-no-padding">
                 <ion-col class="ion-padding" size="6" size-lg="3" *ngFor="let product of powerStrip">
@@ -48,9 +48,9 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid>
+    <ion-grid class="ion-hide-md-down ion-no-margin ion-no-padding">
       <h2 class="ion-text-center">OUR BENEFITS</h2>
-      <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-row class="ion-justify-content-center ion-align-items-center ion-no-margin ion-no-padding">
         <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
           <ion-card class="ion-no-margin ion-no-padding">
             <div style="background-color: white; text-align: center; padding: 2vh 0;">
