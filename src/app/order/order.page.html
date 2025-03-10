@@ -13,46 +13,51 @@
     </ion-tab>
     <ion-tab tab="Order">
       <div id="Order">
-        <ion-grid class="ion-no-margin ion-no-padding">
-          <ion-row class="ion-justify-content-center ion-align-items-center">
-            <ion-col size="12" size-md="6" class="ion-no-padding" *ngIf="dataOrder && dataCart">
-              <h1 class="ion-text-start">YOUR ORDER</h1>
-              <ion-card>
-                <ion-item>
-                  <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
-                  <ion-badge [color]="dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'">{{ dataOrder?.status
-                    }}</ion-badge>
-                </ion-item>
-              </ion-card>
-              <ion-card>
-                <ion-card-content class="ion-no-margin ion-no-padding">
-                  <ion-list>
-                    <ion-item *ngFor="let item of dataCart">
-                      <ion-thumbnail slot="start">
-                        <img alt="ALFA3's Product" style="border-radius: 10px" src="{{ item.img_url }}" />
-                      </ion-thumbnail>
-                      <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
-                      <div class="ion-no-margin">
-                        <h3>{{ item.item_name }}</h3>
-                        <p>$ {{ setDotOnPrice(item.price) }} COP</p>
-                      </div>
+        <ion-app class="ion-no-margin ion-no-padding" scrollY="true">
+          <ion-content class="ion-no-margin ion-padding">
+            <ion-grid class="ion-no-margin ion-no-padding">
+              <ion-row class="ion-justify-content-center ion-align-items-center">
+                <ion-col size="12" size-md="6" class="ion-no-padding" *ngIf="dataOrder && dataCart">
+                  <h1 class="ion-text-start">YOUR ORDER</h1>
+                  <ion-card>
+                    <ion-item>
+                      <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
+                      <ion-badge [color]="dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'">{{
+                        dataOrder?.status
+                        }}</ion-badge>
                     </ion-item>
-                  </ion-list>
-                </ion-card-content>
-              </ion-card>
-              <div class="ion-checkout">
-                <div class="ion-checkout-items">
-                  <h5 class="ion-text-end ion-no-padding ion-no-margin">
-                    TOTAL
-                  </h5>
-                </div>
-                <div class="ion-total-price">
-                  <h2 class="ion-text-end">$ {{ setDotOnPrice(dataOrder?.total_price) }} COP</h2>
-                </div>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+                  </ion-card>
+                  <ion-card>
+                    <ion-card-content class="ion-no-margin ion-no-padding">
+                      <ion-list>
+                        <ion-item *ngFor="let item of dataCart">
+                          <ion-thumbnail slot="start">
+                            <img alt="ALFA3's Product" style="border-radius: 10px" src="{{ item.img_url }}" />
+                          </ion-thumbnail>
+                          <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
+                          <div class="ion-no-margin">
+                            <h3>{{ item.item_name }}</h3>
+                            <p>$ {{ setDotOnPrice(item.price) }} COP</p>
+                          </div>
+                        </ion-item>
+                      </ion-list>
+                    </ion-card-content>
+                  </ion-card>
+                  <div class="ion-checkout">
+                    <div class="ion-checkout-items">
+                      <h5 class="ion-text-end ion-no-padding ion-no-margin">
+                        TOTAL
+                      </h5>
+                    </div>
+                    <div class="ion-total-price">
+                      <h2 class="ion-text-end">$ {{ setDotOnPrice(dataOrder?.total_price) }} COP</h2>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-content>
+        </ion-app>
       </div>
     </ion-tab>
     <ion-footer>
