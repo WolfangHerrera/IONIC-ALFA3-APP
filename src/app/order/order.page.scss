@@ -8,8 +8,8 @@ ion-app{
   --background: #000;
 }
 
-ion-footer{
-  margin-bottom: 0;
+ion-footer {
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 ion-toolbar{
