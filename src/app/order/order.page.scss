@@ -1,8 +1,22 @@
 ion-app{
   padding-top: 5hv;
-  height: 90vh;
+  @media (max-height: 600px) {
+    padding-top: 10vh;
+  }
   background-color: #000;
   --background: #000;
+}
+
+ion-toolbar{
+  height: auto;
+  background-color: #000;
+  --background: #000;
+}
+
+ion-tabs{
+  --background: #000;
+  background-color: #000;
+  height: auto;
 }
 
 ion-tab-bar {
@@ -11,6 +25,9 @@ ion-tab-bar {
   --ion-tab-bar-color: #cdcdcd;
   border-top: 1px solid #efb74c;
   height: 5vh;
+  @media (max-height: 600px) {
+    height: 10vh;
+  }
 }
 
 ion-header{
