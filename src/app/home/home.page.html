@@ -1,25 +1,20 @@
-<ion-content class="ion-no-margin ion-no-padding ion-content-ios" [ngClass]="{'fade-in': !isLoading}">
+<ion-content class="ion-no-margin ion-no-padding ion-content-ios" [ngClass]="{'fade-in': !isLoading}" scrollY="false">
   <ion-header *ngIf="!isLoading" class="ion-no-border">
     <ion-button fill="clear" routerLink="/home">
       <ion-img src="assets/icons/logo.png" alt="ALFA3 ELECTRICS-LOGO">
       </ion-img>
     </ion-button>
   </ion-header>
-  <ion-tabs class="ion-no-margin ion-no-padding" [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
+  <ion-tabs class="ion-no-margin ion-no-padding" [ngClass]="{'fade-in': !isLoading}"
+    (ionTabsDidChange)="onTabChange($event)">
     <ion-tab tab="Loading">
-      <div id="Loading">
-        <app-loading></app-loading>
-      </div>
+      <app-loading></app-loading>
     </ion-tab>
     <ion-tab tab="Home" selected="true">
-      <div id="Home" >
-        <app-home-home [tabChanged]="tabHome"></app-home-home>
-      </div>
+      <app-home-home [tabChanged]="tabHome"></app-home-home>
     </ion-tab>
     <ion-tab tab="Account">
-      <div id="Account">
-        <app-account [tabChanged]="tabAccount"></app-account>
-      </div>
+      <app-account [tabChanged]="tabAccount"></app-account>
     </ion-tab>
     <ion-tab tab="Cart">
       <div id="Cart">
@@ -27,20 +22,20 @@
       </div>
     </ion-tab>
     <ion-footer>
-      <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
+      <ion-tab-bar *ngIf="!isLoading" slot="bottom">
         <ion-tab-button tab="Home" selected="true">
-        <ion-icon name="home"></ion-icon>
-        HOME
+          <ion-icon name="home"></ion-icon>
+          HOME
         </ion-tab-button>
         <ion-tab-button tab="Cart">
-        <ion-icon name="cart"></ion-icon>
-        CART
+          <ion-icon name="cart"></ion-icon>
+          CART
         </ion-tab-button>
         <ion-tab-button tab="Account">
-        <ion-icon name="person"></ion-icon>
-        ACCOUNT
+          <ion-icon name="person"></ion-icon>
+          ACCOUNT
         </ion-tab-button>
-        </ion-tab-bar>
+      </ion-tab-bar>
     </ion-footer>
   </ion-tabs>
 </ion-content>

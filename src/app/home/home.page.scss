@@ -10,7 +10,7 @@ ion-tab-bar {
 }
 
 ion-footer {
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 ion-toolbar{
@@ -22,10 +22,11 @@ ion-toolbar{
 ion-tabs{
   --background: #000;
   background-color: #000;
-  height: auto;
+  height: calc(auto - env(safe-area-inset-bottom));
 }
 
 ion-tab{
+  height: calc(auto - env(safe-area-inset-bottom));
   --background: #000;
   background-color: #000;
 }
