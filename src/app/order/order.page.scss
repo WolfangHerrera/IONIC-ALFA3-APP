@@ -1,7 +1,7 @@
 ion-app{
-  padding-top: 5hv;
+  margin-top: 5vh;
   @media (max-height: 600px) {
-    padding-top: 10vh;
+    margin-top: 10vh;
   }
   background-color: #000;
   --background: #000;
@@ -37,6 +37,9 @@ ion-header{
   align-items: center;
   border-bottom: 1px solid #efb74c;
   height: 5vh;
+  @media (max-height: 600px) {
+    height: 10vh;
+  }
 }
 
 ion-img {

@@ -1,7 +1,7 @@
 ion-app{
-  padding-top: 5vh;
+  margin-top: 5vh;
   @media (max-height: 600px) {
-    padding-top: 10vh;
+    margin-top: 10vh;
   }
   background-color: #000;
   --background: #000;
