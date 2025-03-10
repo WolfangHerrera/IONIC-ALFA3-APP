@@ -4,12 +4,21 @@ ion-tab-bar {
   --ion-tab-bar-color: #cdcdcd;
   border-top: 1px solid #efb74c;
   height: 5vh;
+  @media (max-height: 430px) {
+    height: 10vh;
+  }
 }
 
 ion-tabs{
   --background: #000;
   background-color: #000;
   height: 100%;
+}
+
+ion-tab{
+  --background: #000;
+  background-color: #000;
+  height: 95vh;
 }
 
 ion-header{
@@ -19,6 +28,9 @@ ion-header{
   align-items: center;
   border-bottom: 1px solid #efb74c;
   height: 5vh;
+  @media (max-height: 430px) {
+    height: 10vh;
+  }
 }
 
 ion-img {
@@ -30,7 +42,7 @@ ion-img {
 ion-content{
   --background: #000;
   background-color: #000;
-  height: 95vh;
+  height: 100%;
 }
 
 .fade-in {

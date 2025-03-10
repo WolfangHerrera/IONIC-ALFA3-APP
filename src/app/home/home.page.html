@@ -5,7 +5,7 @@
       </ion-img>
     </ion-button>
   </ion-header>
-  <ion-tabs [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
+  <ion-tabs class="ion-no-margin ion-no-padding" [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
     <ion-tab tab="Loading">
       <div id="Loading">
         <app-loading></app-loading>
