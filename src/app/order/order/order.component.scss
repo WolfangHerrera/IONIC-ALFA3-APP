@@ -1,0 +1,15 @@
+ion-app {
+    height: 100%;
+    padding-top: 4vh;
+    @media (max-height: 600px) {
+        padding-top: 10vh;
+    }
+    background-color: #000;
+    --background: #000;
+}
+
+ion-content {
+    height: 100%;
+    --background: #000;
+    background-color: #000;
+}

@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RequestService } from '../services/request/request.service';
 import { IonTabs } from '@ionic/angular';
+import { RequestService } from '../services/request/request.service';
 
 @Component({
   selector: 'app-order',
@@ -9,14 +9,13 @@ import { IonTabs } from '@ionic/angular';
   styleUrls: ['./order.page.scss'],
   standalone: false,
 })
-export class OrderPage implements OnInit {
+export class OrderPage {
   @ViewChild(IonTabs) tabs!: IonTabs;
   isLoading: boolean = true;
   tabOrder: boolean = false;
   order_id: string;
   dataOrder!: any;
   dataCart!: any;
-
 
   constructor(private route: ActivatedRoute, private router: Router, private requestService: RequestService) {
     this.order_id = this.route.snapshot.paramMap.get('order_id')!;
@@ -65,9 +64,4 @@ export class OrderPage implements OnInit {
     this.setActivePage(event.tab);
   }
 
-  setDotOnPrice(price: string) {
-    return parseFloat(price).toLocaleString('en-US', {
-      maximumFractionDigits: 2,
-    });
-  }
 }

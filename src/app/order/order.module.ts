@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrderPageRoutingModule } from './order-routing.module';
 import { OrderPage } from './order.page';
 import { SharedModule } from '../shared/shared.module';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     OrderPageRoutingModule
   ],
-  declarations: [OrderPage],
+  declarations: [OrderPage, OrderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OrderPageModule {}
