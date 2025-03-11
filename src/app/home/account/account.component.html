@@ -29,10 +29,10 @@
             <ion-card-content>
               <form [formGroup]="loginForm">
                 <ion-item>
-                    <ion-input label="USERNAME" label-placement="floating" type="text" formControlName="usernameCustomer" required autocomplete="off"></ion-input>
+                    <ion-input label="USERNAME" label-placement="floating" type="text" formControlName="usernameCustomer" required autocomplete="off" autocorrect="off" spellcheck="false"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input label="PASSWORD" label-placement="floating" type="password" formControlName="passwordCustomer" required autocomplete="off"></ion-input>
+                  <ion-input label="PASSWORD" label-placement="floating" type="password" formControlName="passwordCustomer" required autocomplete="off" autocorrect="off" spellcheck="false"></ion-input>
                 </ion-item>
                 <ion-button *ngIf="!flagRegister" (click)="onSubmitLogin()" [disabled]="loginForm.invalid" expand="full">LOG IN</ion-button>
               </form>
