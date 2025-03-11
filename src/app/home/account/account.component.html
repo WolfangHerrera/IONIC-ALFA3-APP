@@ -1,12 +1,13 @@
 <ion-app class="ion-no-margin ion-no-padding" scrollY="false">
   <ion-content class="ion-no-margin ion-no-padding">
-    <ion-grid class="ion-no-margin ion-no-padding">
+    <ion-grid class="ion-no-margin ion-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size-md="6" *ngIf="flagIsLogged" class="ion-no-margin ion-no-padding">
+        <ion-col size="12" size-md="6" *ngIf="flagIsLogged" class="ion-no-margin ion-no-padding">
+          <h1 class="ion-text-start">ACCOUNT</h1>
           <ion-card>
-            <ion-card-header>
-              <ion-card-title style="text-align: center;">{{ responseLogin.username }}</ion-card-title>
-              <ion-card-subtitle style="text-align: center;">{{ responseLogin.role }}</ion-card-subtitle>
+            <ion-card-header class="ion-text-center">
+              <ion-card-title>{{ responseLogin.username }}</ion-card-title>
+              <ion-card-subtitle>{{ responseLogin.role }}</ion-card-subtitle>
             </ion-card-header>
             <div style="display: flex; justify-content: center;">
               <ion-avatar>
@@ -17,14 +18,14 @@
               <ion-button expand="full" (click)="onLogout()">LOG OUT</ion-button>
             </ion-card-content>
           </ion-card>
-          </ion-col>
-          <ion-col size-md="6" *ngIf="!flagIsLogged" class="ion-no-padding">
+        </ion-col>
+        <ion-col size="12" size-md="6" *ngIf="!flagIsLogged" class="ion-no-margin ion-no-padding">
+          <h1 class="ion-text-start">ACCOUNT</h1>
           <ion-card>
-            <ion-card-header>
+            <ion-card-header class="ion-text-center">
               <ion-card-title>ALFA3 ELECTRICS</ion-card-title>
               <ion-card-subtitle>HEY! WELCOME TO OUR SHOP</ion-card-subtitle>
             </ion-card-header>
-          
             <ion-card-content>
               <form [formGroup]="loginForm">
                 <ion-item>

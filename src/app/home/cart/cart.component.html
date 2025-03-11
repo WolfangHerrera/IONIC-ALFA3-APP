@@ -2,7 +2,7 @@
   <ion-content class="ion-no-margin ion-no-padding">
     <ion-grid [ngClass]="{'fade-in': flagClearCart}" class="ion-no-margin ion-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="12" size-md="6" class="ion-no-padding">
+        <ion-col size="12" size-md="6" class="ion-no-margin ion-no-padding">
           <h1 class="ion-text-start">YOUR CART</h1>
           <h3 class="ion-text-start">ITEMS</h3>
           <ion-card>
@@ -56,7 +56,8 @@
       </ion-row>
     </ion-grid>
     <ion-grid *ngIf="flagCustomerDetails">
-      <form [formGroup]="formCheckOut">
+      <form [formGroup]="formCheckOut" >
+        <!-- CUSTOMER DETAIL -->
         <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
             <h1 class="ion-text-start">CUSTOMER DETAIL</h1>
@@ -97,7 +98,7 @@
           </ion-col>
         </ion-row>
         <!-- PAYMENT DETAIL -->
-        <!-- <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
             <h3 class="ion-text-start">PAYMENT DETAIL</h3>
             <ion-list>
@@ -111,9 +112,9 @@
               </ion-item>
             </ion-list>
           </ion-col>
-        </ion-row> -->
+        </ion-row>
         <!-- SHIPPING DETAIL -->
-        <!-- <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
             <h3 class="ion-text-start">SHIPPING ADDRESS</h3>
             <ion-card>
@@ -140,17 +141,17 @@
               </ion-card-content>
             </ion-card>
           </ion-col>
-        </ion-row> -->
-        <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-top">
-          <ion-col size="12" size-md="6" class="ion-no-padding">
-            <ion-button (click)="alertCheckoutCart()" color="warning"
-              class="ion-button ion-text-center ion-no-margin ion-no-padding" expand="block" fill="outline"
-              [disabled]="formCheckOut.invalid">
-              ORDER NOW
-            </ion-button>
-          </ion-col>
         </ion-row>
       </form>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="12" size-md="6" class="ion-no-padding ion-margin-top ion-margin-bottom">
+          <ion-button (click)="alertCheckoutCart()" color="warning"
+            class="ion-button ion-text-center ion-no-margin ion-no-padding" expand="block" fill="outline"
+            [disabled]="formCheckOut.invalid">
+            ORDER NOW
+          </ion-button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-content>
 </ion-app>
