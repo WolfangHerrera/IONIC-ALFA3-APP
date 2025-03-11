@@ -22,11 +22,11 @@ ion-toolbar{
 ion-tabs{
   --background: #000;
   background-color: #000;
-  height: calc(auto - env(safe-area-inset-bottom));
+  height: auto;
 }
 
 ion-tab{
-  height: calc(auto - env(safe-area-inset-bottom));
+  height: auto;
   --background: #000;
   background-color: #000;
 }
