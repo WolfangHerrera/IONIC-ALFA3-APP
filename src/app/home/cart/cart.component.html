@@ -56,61 +56,69 @@
       </ion-row>
     </ion-grid>
     <ion-grid *ngIf="flagCustomerDetails">
-      <form [formGroup]="formCheckOut" >
+      <form [formGroup]="formCheckOut">
         <!-- CUSTOMER DETAIL -->
         <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
             <h1 class="ion-text-start">CUSTOMER DETAIL</h1>
             <h3 class="ion-text-start">CUSTOMER INFO</h3>
-            <ion-list>
-              <ion-item>
-                <ion-select label="DOCUMENT TYPE" label-placement="floating" formControlName="documentTypeCustomer"
-                  required>
-                  <ion-select-option value="CC">NATIONAL DOCUMENT</ion-select-option>
-                  <ion-select-option value="NIT">NIT</ion-select-option>
-                  <ion-select-option value="PASSPORT">PASSPORT</ion-select-option>
-                  <ion-select-option value="FOREIGN_DOCUMENT">FOREIGN DOCUMENT</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-input label="DOCUMENT NUMBER" label-placement="floating" type="number" inputmode="numeric"
-                  pattern="[0-9]*" formControlName="documentNumberCustomer" required minlength="6" maxlength="10"
-                  (ionInput)="validateNumberForm($event)"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="FULL NAME" label-placement="floating" class="ion-no-margin ion-no-padding" type="text"
-                  formControlName="fullNameCustomer" required minlength="3"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="BUSINNESS NAME | STREET ADDRESS" label-placement="floating" type="text"
-                  formControlName="streetAddressCustomer" required minlength="3"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="CITY" label-placement="floating" type="text" formControlName="cityCustomer" required
-                  minlength="3"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="PHONE NUMBER" label-placement="floating" type="tel" inputmode="numeric"
-                  pattern="[0-9]*" formControlName="phoneNumberCustomer" required minlength="7" maxlength="10"
-                  (ionInput)="validateNumberForm($event)"></ion-input>
-              </ion-item>
-            </ion-list>
+            <ion-card>
+              <ion-card-content class="ion-no-margin ion-no-padding">
+                <ion-list>
+                  <ion-item>
+                    <ion-select label="DOCUMENT TYPE" label-placement="floating" formControlName="documentTypeCustomer"
+                      required>
+                      <ion-select-option value="CC">NATIONAL DOCUMENT</ion-select-option>
+                      <ion-select-option value="NIT">NIT</ion-select-option>
+                      <ion-select-option value="PASSPORT">PASSPORT</ion-select-option>
+                      <ion-select-option value="FOREIGN_DOCUMENT">FOREIGN DOCUMENT</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="DOCUMENT NUMBER" label-placement="floating" type="number" inputmode="numeric"
+                      pattern="[0-9]*" formControlName="documentNumberCustomer" required minlength="6" maxlength="10"
+                      (ionInput)="validateNumberForm($event)"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="FULL NAME" label-placement="floating" class="ion-no-margin ion-no-padding"
+                      type="text" formControlName="fullNameCustomer" required minlength="3"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="BUSINNESS NAME | STREET ADDRESS" label-placement="floating" type="text"
+                      formControlName="streetAddressCustomer" required minlength="3"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="CITY" label-placement="floating" type="text" formControlName="cityCustomer"
+                      required minlength="3"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="PHONE NUMBER" label-placement="floating" type="tel" inputmode="numeric"
+                      pattern="[0-9]*" formControlName="phoneNumberCustomer" required minlength="7" maxlength="10"
+                      (ionInput)="validateNumberForm($event)"></ion-input>
+                  </ion-item>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
           </ion-col>
         </ion-row>
         <!-- PAYMENT DETAIL -->
         <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
             <h3 class="ion-text-start">PAYMENT DETAIL</h3>
-            <ion-list>
-              <ion-item>
-                <ion-select label="PAYMENT METHOD" label-placement="floating" formControlName="paymentMethodCustomer"
-                  required>
-                  <ion-select-option value="CASH">CASH</ion-select-option>
-                  <ion-select-option value="ACCOUNT">ACCOUNT TRANSFER</ion-select-option>
-                  <ion-select-option value="CARD">CARD</ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
+            <ion-card>
+              <ion-card-content class="ion-no-margin ion-no-padding">
+                <ion-list>
+                  <ion-item>
+                    <ion-select label="PAYMENT METHOD" label-placement="floating"
+                      formControlName="paymentMethodCustomer" required>
+                      <ion-select-option value="CASH">CASH</ion-select-option>
+                      <ion-select-option value="ACCOUNT">ACCOUNT TRANSFER</ion-select-option>
+                      <ion-select-option value="CARD">CARD</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
           </ion-col>
         </ion-row>
         <!-- SHIPPING DETAIL -->
