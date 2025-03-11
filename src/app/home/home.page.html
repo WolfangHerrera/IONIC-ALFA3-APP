@@ -7,21 +7,21 @@
   </ion-header>
   <ion-tabs class="ion-no-margin ion-no-padding" [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
     <ion-tab tab="Loading">
-      <div class="ion-content" id="Loading">
+      <div id="Loading">
         <app-loading></app-loading>
       </div>
     </ion-tab>
-    <ion-tab class="ion-content" tab="Home" selected="true">
+    <ion-tab tab="Home" selected="true">
       <div id="Home" >
         <app-home-home [tabChanged]="tabHome"></app-home-home>
       </div>
     </ion-tab>
-    <ion-tab class="ion-content" tab="Account">
+    <ion-tab tab="Account">
       <div id="Account">
         <app-account [tabChanged]="tabAccount"></app-account>
       </div>
     </ion-tab>
-    <ion-tab class="ion-content" tab="Cart">
+    <ion-tab tab="Cart">
       <div id="Cart">
         <app-cart [tabChanged]="tabCart"></app-cart>
       </div>
