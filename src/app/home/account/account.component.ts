@@ -83,10 +83,8 @@ export class AccountComponent implements OnInit {
           this.flagFade = true;
           this.flagIsLogged = true;
           this.responseLogin = response;
-          setTimeout(() => {
-            this.activateToast('LOGIN SUCCESSFUL!', 'checkmark-circle-outline');
-            this.flagFade = false;
-          }, 2000);
+          this.activateToast('LOGIN SUCCESSFUL!', 'checkmark-circle-outline');
+          this.flagFade = false;
         }
       },
       async (responseError) => {
