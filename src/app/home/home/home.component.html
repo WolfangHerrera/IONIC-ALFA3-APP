@@ -3,7 +3,7 @@
     <ion-grid class="ion-hide-md-up ion-no-margin ion-padding">
       <ion-row class="ion-no-margin ion-no-padding ion-justify-content-center ion-align-items-center">
         <ion-col size="12" size-md="6" class="ion-no-padding">
-          <h2 class="ion-text-start">OUR PRODUCTS</h2>
+          <h1 class="ion-text-start">OUR PRODUCTS</h1>
           <ion-row class="ion-justify-content-center ion-align-items-center">
             <ion-col class="ion-padding" size="12" *ngFor="let product of products">
               <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
@@ -20,7 +20,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col class="ion-padding ion-margin-bottom ion-col-products">
-          <h2 class="ion-text-center">OUR PRODUCTS</h2>
+          <h1 class="ion-text-center">OUR PRODUCTS</h1>
           <ion-segment [(ngModel)]="selectedSegment" color="warning">
             <ion-segment-button value="first">
               <ion-label>MULTITOMAS</ion-label>
