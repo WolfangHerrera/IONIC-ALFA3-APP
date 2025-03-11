@@ -1,8 +1,8 @@
 {
   "name": "ALFA3 ELECTRICS",
   "short_name": "ALFA3",
-  "theme_color": "#000",
-  "background_color": "#000",
+  "background_color": "#000000",
+  "theme_color": "#000000", 
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
