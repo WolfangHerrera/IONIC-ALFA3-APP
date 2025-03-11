@@ -18,6 +18,7 @@ export class AccountComponent implements OnInit {
   @Input() tabChanged: boolean = false;
   flagRegister: boolean = false;
   flagIsLogged: boolean = false;
+  flagFade: boolean = false;
   responseLogin: any;
   dataRequestLogin!: {
     USERNAME: string;
@@ -79,8 +80,13 @@ export class AccountComponent implements OnInit {
      this.requestService.loginUser(this.dataRequestLogin).subscribe(
       async (response) => {
         if (response) {
+          this.flagFade = true;
           this.flagIsLogged = true;
           this.responseLogin = response;
+          setTimeout(() => {
+            this.activateToast('LOGIN SUCCESSFUL!', 'checkmark-circle-outline');
+            this.flagFade = false;
+          }, 2000);
         }
       },
       async (responseError) => {

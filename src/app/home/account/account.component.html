@@ -2,7 +2,7 @@
   <ion-content class="ion-no-margin ion-no-padding">
     <ion-grid class="ion-no-margin ion-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col [ngClass]="{'fade-in': flagIsLogged}" size="12" size-md="6" *ngIf="flagIsLogged" class="ion-no-margin ion-no-padding">
+        <ion-col [ngClass]="{'fade-in': flagIsLogged && flagFade}" size="12" size-md="6" *ngIf="flagIsLogged" class="ion-no-margin ion-no-padding">
           <h1 class="ion-text-start">YOUR ACCOUNT</h1>
           <ion-card>
             <ion-card-header class="ion-text-center">
@@ -19,7 +19,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col [ngClass]="{'fade-in': !flagIsLogged}" size="12" size-md="6" *ngIf="!flagIsLogged" class="ion-no-margin ion-no-padding">
+        <ion-col size="12" size-md="6" *ngIf="!flagIsLogged" class="ion-no-margin ion-no-padding">
           <h1 class="ion-text-start">ACCOUNT</h1>
           <ion-card>
             <ion-card-header class="ion-text-center">
