@@ -129,9 +129,11 @@ export class AccountComponent implements OnInit {
   }
 
   onLogout() {
+    this.flagFade = true;
     this.loginForm.reset();
     this.flagIsLogged = false;
     this.activateToast('LOGOUT SUCCESSFUL!', 'checkmark-circle-outline');
     this.responseLogin = null;
+    this.flagFade = false;
   }
 }
