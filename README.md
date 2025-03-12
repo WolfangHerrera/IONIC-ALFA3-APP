@@ -1,1 +1,1 @@
-[![](docs/preview.gif)](https://alfa3electricos.com)
+[![](docs/Preview.gif)](https://alfa3electricos.com)
