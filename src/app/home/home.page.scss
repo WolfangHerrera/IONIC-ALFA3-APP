@@ -33,6 +33,7 @@ ion-header{
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #efb74c;
+  // padding-top: env(safe-area-inset-top);
   height: 5vh;
   @media (max-height: 600px) {
     height: 10vh;
@@ -48,6 +49,7 @@ ion-img {
 ion-content{
   --background: #000;
   background-color: #000;
+  margin-top: env(safe-area-inset-top);
   height: 100%;
 }
 
