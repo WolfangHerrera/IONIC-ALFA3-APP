@@ -37,7 +37,6 @@ ion-header{
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #efb74c;
-  padding-top: env(safe-area-inset-bottom);
   height: 5vh;
   @media (max-height: 600px) {
     height: 10vh;
