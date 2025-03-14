@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatusService } from '../services/status/status.service';
-import { Subscription } from 'rxjs';
 import { IonTabs, ToastController } from '@ionic/angular';
 import { ProductService } from '../services/products/request.service';
 import { RequestService } from '../services/request/request.service';
+import { LanguageService } from '../services/language/language.service';
+import { typeTabHomeText } from 'src/app/utils/language/tab/text';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +20,11 @@ export class HomePage implements OnInit {
   tabCart: boolean = false;
   tabHome: boolean = false;
   tabAccount: boolean = false;
+  textHomeTab!: typeTabHomeText;
 
-  constructor(private readonly statusService: StatusService, private requestService: RequestService, private productService: ProductService, private toastController: ToastController) {
+  constructor(private readonly statusService: StatusService, private requestService: RequestService, private productService: ProductService, private languageService : LanguageService, private toastController: ToastController) {
     this.getDataItemProduct();
+    this.textHomeTab = this.languageService.getTextHomeTab();
   }
 
   async ngOnInit() {
