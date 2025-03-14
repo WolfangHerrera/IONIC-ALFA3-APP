@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonTabs } from '@ionic/angular';
 import { RequestService } from '../services/request/request.service';
+import { LanguageService } from '../services/language/language.service';
+import { typeTabOrderText } from '../utils/language/tab/text';
 
 @Component({
   selector: 'app-order',
@@ -16,8 +18,10 @@ export class OrderPage {
   order_id: string;
   dataOrder!: any;
   dataCart!: any;
+  textOrderTab!: typeTabOrderText;
 
-  constructor(private route: ActivatedRoute, private router: Router, private requestService: RequestService) {
+  constructor(private route: ActivatedRoute, private router: Router, private requestService: RequestService, private languageService : LanguageService) {
+    this.textOrderTab = this.languageService.getTextOrderTab();
     this.order_id = this.route.snapshot.paramMap.get('order_id')!;
     if(!this.order_id){
       this.navigateToHome();

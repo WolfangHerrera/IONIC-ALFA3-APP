@@ -30,15 +30,15 @@
       <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
         <ion-tab-button tab="Home" selected="true">
         <ion-icon name="home"></ion-icon>
-        HOME
+        {{textHomeTab.tabHome}}
         </ion-tab-button>
         <ion-tab-button tab="Cart">
         <ion-icon name="cart"></ion-icon>
-        CART
+        {{textHomeTab.tabOrder}}
         </ion-tab-button>
         <ion-tab-button tab="Account">
         <ion-icon name="person"></ion-icon>
-        ACCOUNT
+        {{textHomeTab.tabAccount}}
         </ion-tab-button>
         </ion-tab-bar>
     </ion-footer>
