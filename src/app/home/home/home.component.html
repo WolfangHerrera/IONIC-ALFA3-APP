@@ -3,7 +3,7 @@
     <ion-grid class="ion-hide-md-up ion-no-margin ion-padding">
       <ion-row class="ion-no-margin ion-no-padding ion-justify-content-center ion-align-items-center">
         <ion-col size="12" size-md="6" class="ion-no-padding">
-          <h1 class="ion-text-start">OUR PRODUCTS</h1>
+          <h1 class="ion-text-start">{{textHome.mainText}}</h1>
           <ion-row class="ion-justify-content-center ion-align-items-center">
             <ion-col class="ion-padding" size="12" *ngFor="let product of products">
               <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
@@ -20,7 +20,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col class="ion-padding ion-margin-bottom ion-col-products">
-          <h1 class="ion-text-center">OUR PRODUCTS</h1>
+          <h1 class="ion-text-center">{{textHome.mainText}}</h1>
           <ion-segment [(ngModel)]="selectedSegment" color="warning">
             <ion-segment-button value="first">
               <ion-label>MULTITOMAS</ion-label>
@@ -49,7 +49,7 @@
       </ion-row>
     </ion-grid>
     <ion-grid class="ion-hide-md-down ion-no-margin ion-no-padding">
-      <h2 class="ion-text-center">OUR BENEFITS</h2>
+      <h2 class="ion-text-center">{{textHome.mainTextBenefits}}</h2>
       <ion-row class="ion-justify-content-center ion-align-items-center ion-no-margin ion-no-padding">
         <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
           <ion-card class="ion-no-margin ion-no-padding">
@@ -106,9 +106,8 @@
               </svg>
             </div>
           </ion-card>
-          <h3 class="ion-text-center">SHOP FROM ANYWHERE</h3>
-          <h6 class="ion-text-justify">ADD THE PRODUCTS YOU WANT TO YOUR CART. WE'LL DELIVER THEM TO WHEREVER YOU ARE.
-          </h6>
+          <h3 class="ion-text-center">{{textHome.firstMainCardBenefits}}</h3>
+          <h6 class="ion-text-justify">{{textHome.firstSubtextCardBenefits}}</h6>
         </ion-col>
         <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
           <ion-card class="ion-no-margin ion-no-padding">
@@ -133,8 +132,8 @@
               </svg>
             </div>
           </ion-card>
-          <h3 class="ion-text-center">CHOOSE PAYMENT METHOD</h3>
-          <h6 class="ion-text-justify">PAY WITH CARD OR CASH. YOUR MONEY IS PROTECTED WITH MERCADO PAGO.</h6>
+          <h3 class="ion-text-center">{{textHome.secondMainCardBenefits}}</h3>
+          <h6 class="ion-text-justify">{{textHome.secondSubtextCardBenefits}}</h6>
         </ion-col>
         <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
           <ion-card class="ion-no-margin ion-no-padding">
@@ -176,8 +175,8 @@
               </svg>
             </div>
           </ion-card>
-          <h3 class="ion-text-center">YOUR PRODUCTS IN 48 HOURS</h3>
-          <h6 class="ion-text-wrap">YOUR PACKAGES ARE SAFE. YOU HAVE THE SUPPORT OF A NATIONAL SHIPPING COMPANY.</h6>
+          <h3 class="ion-text-center">{{textHome.thirdMainCardBenefits}}</h3>
+          <h6 class="ion-text-wrap">{{textHome.thirdSubtextCardBenefits}}</h6>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -199,8 +198,8 @@
         }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="ion-text-center">
-      <ion-button color="warning" (click)="presentAlert(product.item_id)" fill="outline">MORE INFO</ion-button>
-      <ion-button color="warning" (click)="onAddCart(product.item_id)" fill="outline">ADD CART</ion-button>
+      <ion-button color="warning" (click)="onAddCart(product.item_id)" fill="outline">{{textHome.firstButtonCard}}</ion-button>
+      <ion-button color="warning" (click)="presentAlert(product.item_id)" fill="outline">{{textHome.secondButtonCard}}</ion-button>
     </ion-card-content>
   </ion-card>
 </ng-template>

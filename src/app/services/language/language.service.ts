@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EN_tabHomeText, EN_tabOrderText, ES_tabHomeText, ES_tabOrderText } from 'src/app/utils/language/tab/text';
 import { EN_AccountText, ES_AccountText } from 'src/app/utils/language/home/account/text';
+import { EN_homeText, ES_homeText } from 'src/app/utils/language/home/home/text';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class LanguageService {
 
   getTextHomeAccount(){
     return this.isSpanishLanguage() ? ES_AccountText : EN_AccountText;
+  }
+
+  getTextHomeHome(){
+    return this.isSpanishLanguage() ? ES_homeText : EN_homeText;
   }
 }
