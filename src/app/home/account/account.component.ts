@@ -1,12 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
+import { LanguageService } from 'src/app/services/language/language.service';
 import { RequestService } from 'src/app/services/request/request.service';
+import { typeAccountText } from 'src/app/utils/language/home/account/text';
 
 @Component({
   selector: 'app-account',
@@ -25,12 +22,15 @@ export class AccountComponent implements OnInit {
     PASSWORD: string;
   };
   loginForm!: FormGroup;
+  textAccount!: typeAccountText; 
 
   constructor(
     private requestService: RequestService,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private languageService: LanguageService
   ) {
+    this.textAccount = this.languageService.getTextHomeAccount();
     this.generateFormGroup();
   }
 
@@ -77,7 +77,7 @@ export class AccountComponent implements OnInit {
   }
 
   async sentDataLoginUser() {
-     this.requestService.loginUser(this.dataRequestLogin).subscribe(
+    this.requestService.loginUser(this.dataRequestLogin).subscribe(
       async (response) => {
         if (response) {
           this.flagFade = true;
@@ -94,7 +94,7 @@ export class AccountComponent implements OnInit {
             'person-circle-outline'
           );
           setTimeout(async () => {
-          await this.alertCreateAccount();
+            await this.alertCreateAccount();
           }, 1500);
         }
         if (responseError.error.MESSAGE === 'INVALID PASSWORD') {
