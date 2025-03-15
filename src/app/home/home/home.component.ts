@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
-
+import { typeHomeText } from 'src/app/utils/language/home/home/text';
 
 @Component({
   selector: 'app-home-home',
@@ -10,37 +11,49 @@ import { RequestService } from 'src/app/services/request/request.service';
   styleUrls: ['./home.component.scss'],
   standalone: false,
 })
-export class HomeComponent  {
+export class HomeComponent {
   @Input() tabChanged: boolean = false;
   selectedSegment: string = 'first';
   powerStrip = [];
   voltageRegulator = [];
-  products = []
+  products = [];
+  textHome!: typeHomeText;
 
   ignoreItem(item: { item_id: string }): boolean {
     const ignoredIds = ['EE4S1M', 'E4S1M'];
     return ignoredIds.includes(item.item_id);
   }
 
-  constructor(private requestService: RequestService, private productService: ProductService, private toastController: ToastController, private alertController: AlertController) {
-    this.getDataItemProduct()
+  constructor(
+    private requestService: RequestService,
+    private productService: ProductService,
+    private toastController: ToastController,
+    private alertController: AlertController,
+    private languageService: LanguageService
+  ) {
+    this.textHome = this.languageService.getTextHomeHome();
+    this.getDataItemProduct();
   }
 
   getDataItemProduct() {
-    this.requestService.getItemProducts().subscribe(
-      (response) => {
-        if (response) {
-          this.products = response;
-          this.productService.setDataProducts(this.products);
-          this.voltageRegulator = this.products.filter((item: { item_id: string }) => this.ignoreItem(item));
-          this.powerStrip = this.products.filter((item: { item_id: string }) => !this.ignoreItem(item));
-        }
-      },
-    );
+    this.requestService.getItemProducts().subscribe((response) => {
+      if (response) {
+        this.products = response;
+        this.productService.setDataProducts(this.products);
+        this.voltageRegulator = this.products.filter(
+          (item: { item_id: string }) => this.ignoreItem(item)
+        );
+        this.powerStrip = this.products.filter(
+          (item: { item_id: string }) => !this.ignoreItem(item)
+        );
+      }
+    });
   }
 
   setDotOnPrice(price: string) {
-    return parseFloat(price).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    return parseFloat(price).toLocaleString('en-US', {
+      maximumFractionDigits: 2,
+    });
   }
 
   handleRefresh(event: CustomEvent) {
@@ -60,14 +73,14 @@ export class HomeComponent  {
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
-      swipeGesture:"vertical",
+      swipeGesture: 'vertical',
       position: 'top',
     });
 
     await toast.present();
   }
 
-  async presentAlert(item_id : string) {
+  async presentAlert(item_id: string) {
     const alert = await this.alertController.create({
       header: 'INFORMATION',
       subHeader: `${this.productService.getItemProducts(item_id).item_name}`,
@@ -78,9 +91,9 @@ export class HomeComponent  {
     await alert.present();
   }
 
-  async onAddCart(item_id : string){
+  async onAddCart(item_id: string) {
     await this.productService.addItemToCart(item_id);
     const textToast = await this.productService.getItemProducts(item_id);
-    await this.activateToast(textToast.item_name)
+    await this.activateToast(textToast.item_name);
   }
 }
