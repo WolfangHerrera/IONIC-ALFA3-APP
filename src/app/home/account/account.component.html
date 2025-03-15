@@ -20,7 +20,8 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col [ngClass]="{'fade-in': !flagIsLogged && flagFade}" size="12" size-md="6" *ngIf="!flagIsLogged" class="ion-no-margin ion-no-padding">
+        <ion-col [ngClass]="{'fade-in': !flagIsLogged && flagFade}" size="12" size-md="6" *ngIf="!flagIsLogged"
+          class="ion-no-margin ion-no-padding">
           <h1 class="ion-text-start">{{textAccount.notLoginUser.mainText}}</h1>
           <ion-card>
             <ion-card-header class="ion-text-center">
@@ -30,14 +31,14 @@
             <ion-card-content>
               <form [formGroup]="loginForm">
                 <ion-item>
-                  <ion-input label="{{textAccount.notLoginUser.usernameLabel}}" label-placement="floating" type="text" formControlName="usernameCustomer"
-                    required autocomplete="off" autocorrect="off" spellcheck="false">
+                  <ion-input label="{{textAccount.notLoginUser.usernameLabel}}" label-placement="floating" type="text"
+                    formControlName="usernameCustomer" required autocomplete="off" autocorrect="off" spellcheck="false">
                   </ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input label="{{textAccount.notLoginUser.passwordLabel}}" label-placement="floating" type="password"
-                    formControlName="passwordCustomer" required autocomplete="new-password" autocorrect="off"
-                    spellcheck="false">
+                  <ion-input label="{{textAccount.notLoginUser.passwordLabel}}" label-placement="floating"
+                    type="password" formControlName="passwordCustomer" required autocomplete="new-password"
+                    autocorrect="off" spellcheck="false">
                   </ion-input>
                 </ion-item>
                 <ion-button *ngIf="!flagRegister" (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
