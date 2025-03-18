@@ -28,13 +28,13 @@ export const EN_homeText : typeHomeText = {
 
 export const ES_homeText : typeHomeText = {
     mainText: 'NUESTROS PRODUCTOS',
-    firstButtonCard: 'AGREGAR CARRITO',
+    firstButtonCard: 'AGREGAR',
     secondButtonCard: 'MÁS INFO',
     mainTextBenefits: 'NUESTROS BENEFICIOS',
-    firstMainCardBenefits: 'COMPRA DESDE CUALQUIER LUGAR',
-    firstSubtextCardBenefits: 'AGREGA LOS PRODUCTOS QUE DESEAS A TU CARRITO. TE LOS LLEVAMOS A DONDE ESTÉS.',
-    secondMainCardBenefits: 'ELIGE TU FORMA DE PAGO',
-    secondSubtextCardBenefits: 'PAGA CON TARJETA O EFECTIVO. TU DINERO ESTÁ PROTEGIDO CON MERCADO PAGO.',
-    thirdMainCardBenefits: 'TUS PRODUCTOS EN 48 HORAS',
-    thirdSubtextCardBenefits: 'TUS PAQUETES ESTÁN SEGUROS. CUENTAS CON EL APOYO DE UNA EMPRESA DE ENVÍOS NACIONALES.',
+    firstMainCardBenefits: 'COMPRA DESDE AQUÍ',
+    firstSubtextCardBenefits: 'AGREGA LOS PRODUCTOS A TU CARRITO. TE LOS LLEGA DONDE ESTÉS.',
+    secondMainCardBenefits: 'ELIGE MÉTODO PAGO',
+    secondSubtextCardBenefits: 'PAGA CON TARJETA O EN EFECTIVO. TU DINERO ESTÁ SEGURO EN MERCADO PAGO.',
+    thirdMainCardBenefits: 'TUS PRODUCTOS EN 48H',
+    thirdSubtextCardBenefits: 'TUS PAQUETES ESTÁN SEGUROS. TIENES EL APOYO DE UNA EMPRESA DE ENVÍOS.',
 };
