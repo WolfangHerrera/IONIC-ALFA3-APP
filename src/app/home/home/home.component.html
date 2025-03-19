@@ -199,9 +199,9 @@
     </ion-card-header>
     <ion-card-content class="ion-text-center">
       <ion-button color="warning" (click)="onAddCart(product.item_id)"
-        fill="outline">{{textHome.firstButtonCard}}</ion-button>
+        fill="outline"><ion-icon name="cart-outline" class="ion-margin-end"></ion-icon>{{textHome.firstButtonCard}}</ion-button>
       <ion-button color="warning" (click)="presentAlert(product.item_id)"
-        fill="outline">{{textHome.secondButtonCard}}</ion-button>
+        fill="outline"><ion-icon class="ion-margin-end" name="information-circle-outline"></ion-icon>{{textHome.secondButtonCard}}</ion-button>
     </ion-card-content>
   </ion-card>
 </ng-template>
