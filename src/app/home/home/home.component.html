@@ -32,14 +32,14 @@
           <ion-segment-view>
             <ion-segment-content id="first" *ngIf="selectedSegment === 'first'">
               <ion-row class="ion-no-margin ion-no-padding">
-                <ion-col class="ion-padding" size="6" size-lg="3" *ngFor="let product of powerStrip">
+                <ion-col class="ion-padding" size="6" size-xl="3" *ngFor="let product of powerStrip">
                   <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
                 </ion-col>
               </ion-row>
             </ion-segment-content>
             <ion-segment-content id="second" *ngIf="selectedSegment === 'second'">
               <ion-row class="ion-justify-content-center ion-no-margin ion-no-padding">
-                <ion-col class="ion-padding" size="6" size-lg="3" *ngFor="let product of voltageRegulator">
+                <ion-col class="ion-padding" size="6" size-xl="3" *ngFor="let product of voltageRegulator">
                   <ng-container *ngTemplateOutlet="cardProd; context: { product: product }"></ng-container>
                 </ion-col>
               </ion-row>
@@ -198,10 +198,12 @@
         }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="ion-text-center">
-      <ion-button color="warning" (click)="onAddCart(product.item_id)"
-        fill="outline"><ion-icon name="cart-outline" class="ion-margin-end"></ion-icon>{{textHome.firstButtonCard}}</ion-button>
-      <ion-button color="warning" (click)="presentAlert(product.item_id)"
-        fill="outline"><ion-icon class="ion-margin-end" name="information-circle-outline"></ion-icon>{{textHome.secondButtonCard}}</ion-button>
+      <div class="button-container">
+        <ion-button expand="block" color="warning" (click)="onAddCart(product.item_id)"
+          fill="outline"><ion-icon name="cart-outline" class="ion-margin-end"></ion-icon>{{textHome.firstButtonCard}}</ion-button>
+        <ion-button expand="block" color="warning" (click)="presentAlert(product.item_id)"
+          fill="outline"><ion-icon class="ion-margin-end" name="information-circle-outline"></ion-icon>{{textHome.secondButtonCard}}</ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 </ng-template>
