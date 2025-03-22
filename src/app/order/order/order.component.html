@@ -4,15 +4,15 @@
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col size="12" size-md="6" class="ion-no-padding" *ngIf="dataOrder && dataCart">
           <h1 class="ion-text-start">YOUR ORDER</h1>
-          <ion-card class="ion-no-margin-sm ion-no-padding-sm">
-            <ion-item class="ion-no-margin-sm ion-no-padding-sm">
+          <ion-card class="ion-no-margin ion-no-padding">
+            <ion-item class="ion-no-margin ion-no-padding">
               <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
               <ion-badge [color]="dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'">{{
                 dataOrder?.status
                 }}</ion-badge>
             </ion-item>
           </ion-card>
-          <ion-card class="ion-no-margin-sm ion-no-padding-sm">
+          <ion-card class="ion-no-margin ion-no-padding">
             <ion-card-content class="ion-no-margin ion-no-padding">
               <ion-list class="ion-no-margin ion-no-padding">
                 <ion-item *ngFor="let item of dataCart">
