@@ -3,7 +3,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
-import { typeHomeText } from 'src/app/utils/language/home/home/text';
+import { typeHomeText, typeToastText } from 'src/app/utils/language/home/home/text';
 
 @Component({
   selector: 'app-home-home',
@@ -18,6 +18,7 @@ export class HomeComponent {
   voltageRegulator = [];
   products = [];
   textHome!: typeHomeText;
+  textToast!: typeToastText;
 
   ignoreItem(item: { item_id: string }): boolean {
     const ignoredIds = ['EE4S1M', 'E4S1M'];
@@ -32,6 +33,7 @@ export class HomeComponent {
     private languageService: LanguageService
   ) {
     this.textHome = this.languageService.getTextHomeHome();
+    this.textToast = this.languageService.getTextToast();
     this.getDataItemProduct();
   }
 
@@ -69,7 +71,7 @@ export class HomeComponent {
       await toast.dismiss();
     }
     toast = await this.toastController.create({
-      message: `${text} ADDED TO CART!`,
+      message: `${text} ${this.textToast.message}`,
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
@@ -80,7 +82,7 @@ export class HomeComponent {
     await toast.present();
   }
 
-  async presentAlert(item_id: string) {
+  async activateAlert(item_id: string) {
     const alert = await this.alertController.create({
       header: 'INFORMATION',
       subHeader: `${this.productService.getItemProducts(item_id).item_name}`,

@@ -11,6 +11,19 @@ export type typeHomeText = {
     thirdSubtextCardBenefits: string,
 };
 
+export type typeToastText = {
+    message: string,
+};
+
+export const EN_toastText = {
+    message: 'ADDED TO CART!'
+};
+
+export const ES_toastText = {
+    message: 'AGREGADO AL CARRITO!'
+};
+
+
 
 export const EN_homeText : typeHomeText = {
     mainText: 'OUR PRODUCTS',
