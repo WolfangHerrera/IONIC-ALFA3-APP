@@ -18,6 +18,7 @@ export class OrderPage {
   order_id: string;
   dataOrder!: any;
   dataCart!: any;
+  orderStatus!: string;
   textOrderTab!: typeTabOrderText;
 
   constructor(private route: ActivatedRoute, private router: Router, private requestService: RequestService, private languageService : LanguageService) {
@@ -37,6 +38,7 @@ export class OrderPage {
       async (response) => {
         if (response) {
           this.dataOrder = response;
+          this.orderStatus = this.languageService.returnOrderStatus(this.dataOrder?.status);
           this.dataCart = response.products_cart;
           await this.disableLoading();
         }
