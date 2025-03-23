@@ -23,8 +23,6 @@ export const ES_toastText = {
     message: 'AGREGADO AL CARRITO!'
 };
 
-
-
 export const EN_homeText : typeHomeText = {
     mainText: 'OUR PRODUCTS',
     firstButtonCard: 'ADD CART',

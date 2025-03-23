@@ -2,24 +2,26 @@
   <ion-content class="ion-no-margin ion-padding">
     <ion-grid class="ion-no-margin ion-no-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="12" size-md="6" class="ion-no-padding" *ngIf="dataOrder && dataCart">
-          <h1 class="ion-text-start">YOUR ORDER</h1>
+        <ion-col size="12" size-md="6" class="ion-no-padding" *ngIf="dataOrder && dataCart && orderStatus">
+          <h1 class="ion-text-start">{{ textOrder.mainTitle }}</h1>
           <ion-card class="ion-no-margin ion-no-padding">
-            <ion-item class="ion-no-margin ion-no-padding">
-              <ion-label class="ion-text-start">ORDER # {{ dataOrder.order_id }}</ion-label>
-              <ion-badge [color]="dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'">{{
-                dataOrder?.status
-                }}</ion-badge>
+            <ion-item class="ion-margin-sm-0 ion-padding-sm-0">
+              <ion-label class="ion-text-start">{{ textOrder.subTitle }} {{ dataOrder.order_id }}</ion-label>
+              <ion-badge [color]="
+                  dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'
+                ">{{ orderStatus }}</ion-badge>
             </ion-item>
           </ion-card>
           <ion-card class="ion-no-margin ion-no-padding">
             <ion-card-content class="ion-no-margin ion-no-padding">
               <ion-list class="ion-no-margin ion-no-padding">
-                <ion-item *ngFor="let item of dataCart">
+                <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngFor="let item of dataCart">
                   <ion-thumbnail slot="start">
                     <img alt="ALFA3's Product" style="border-radius: 10px" src="{{ item.img_url }}" />
                   </ion-thumbnail>
-                  <ion-badge slot="start" color="warning">{{item.count}}</ion-badge>
+                  <ion-badge slot="start" color="warning">{{
+                    item.count
+                    }}</ion-badge>
                   <div class="ion-no-margin">
                     <h3>{{ item.item_name }}</h3>
                     <p>$ {{ setDotOnPrice(item.price) }} COP</p>
@@ -30,12 +32,12 @@
           </ion-card>
           <div class="ion-checkout">
             <div class="ion-checkout-items">
-              <h5 class="ion-text-end ion-no-padding ion-no-margin">
-                TOTAL
-              </h5>
+              <h5 class="ion-text-end ion-no-padding ion-no-margin">TOTAL</h5>
             </div>
             <div class="ion-total-price">
-              <h2 class="ion-text-end">$ {{ setDotOnPrice(dataOrder?.total_price) }} COP</h2>
+              <h2 class="ion-text-end">
+                $ {{ setDotOnPrice(dataOrder?.total_price) }} COP
+              </h2>
             </div>
           </div>
         </ion-col>
