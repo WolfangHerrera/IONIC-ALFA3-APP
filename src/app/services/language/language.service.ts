@@ -45,6 +45,6 @@ export class LanguageService {
   }
 
   returnOrderStatus(status: string){
-    return this.isSpanishLanguage() ? orderStatusTranslations[status] : status;
+    return this.isSpanishLanguage() ? orderStatusTranslations[status] : status.replace(/_/g, " ");;
   }
 }
