@@ -1,6 +1,6 @@
 {
     "/apiHost": {
-      "target": "https://alfa3-flask-fd769661555f.herokuapp.com",
+      "target": "https://backend.alfa3electricos.com",
       "secure": false
     }
   }
