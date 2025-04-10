@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -13,24 +13,41 @@ import { typeHomeText, typeToastText } from 'src/app/utils/language/home/home/te
 })
 export class HomeComponent {
   @Input() tabChanged: boolean = false;
+  @ViewChild('customModalIMG', { static: true }) modal!: IonModal;
   selectedSegment: string = 'first';
   powerStrip = [];
   voltageRegulator = [];
   products = [];
   textHome!: typeHomeText;
   textToast!: typeToastText;
+  galleryImages = [
+    'https://http2.mlstatic.com/D_Q_NP_2X_923201-MCO83674092943_042025-E.webp',
+    'https://http2.mlstatic.com/D_Q_NP_2X_951050-MCO83674317985_042025-E.webp',
+    'https://http2.mlstatic.com/D_Q_NP_2X_941067-MCO83650418697_042025-E.webp',
+    'https://http2.mlstatic.com/D_Q_NP_2X_694145-MCO83650438109_042025-AB.webp'
+  ];
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+  };
 
   ignoreItem(item: { item_id: string }): boolean {
     const ignoredIds = ['EE4S1M', 'E4S1M'];
     return ignoredIds.includes(item.item_id);
   }
 
+  
+
   constructor(
     private requestService: RequestService,
     private productService: ProductService,
     private toastController: ToastController,
     private alertController: AlertController,
-    private languageService: LanguageService
+    private languageService: LanguageService,
   ) {
     this.textHome = this.languageService.getTextHomeHome();
     this.textToast = this.languageService.getTextToast();
@@ -50,6 +67,10 @@ export class HomeComponent {
         );
       }
     });
+  }
+
+  openModalIMG() {
+    this.modal.present();
   }
 
   setDotOnPrice(price: string) {
