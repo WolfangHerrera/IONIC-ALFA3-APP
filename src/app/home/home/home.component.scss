@@ -1,5 +1,5 @@
-ion-app{
-  height: 100%; 
+ion-app {
+  height: 100%;
   padding-top: 4vh;
   @media (max-height: 600px) {
     padding-top: 10vh;
@@ -8,7 +8,7 @@ ion-app{
   --background: #000;
 }
 
-ion-content{
+ion-content {
   --background: #000;
   background-color: #000;
 }
@@ -34,29 +34,14 @@ ion-card {
   text-align: center;
 }
 
-ion-modal#example-modal {
-  --width: fit-content;
-  --min-width: 250px;
-  --height: fit-content;
-  --border-radius: 6px;
-  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-}
-
-ion-modal#example-modal h1 {
-  margin: 20px 20px 10px 20px;
-}
-
-ion-modal#example-modal ion-icon {
-  margin-right: 6px;
-
-  width: 48px;
-  height: 48px;
-
-  padding: 4px 0;
-
-  color: #aaaaaa;
-}
-
-ion-modal#example-modal .wrapper {
-  margin-bottom: 10px;
+.ion-button-img {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  transform: translateY(-50%);
+  width: 100%;
+  z-index: 10;
+  padding: 0 20px;
 }
