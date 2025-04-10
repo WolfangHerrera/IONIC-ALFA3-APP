@@ -1,6 +1,7 @@
 <ion-app class="ion-no-margin ion-no-padding" scrollY="true">
   <ion-content class="ion-no-margin ion-no-padding">
     <ion-grid class="ion-hide-md-up ion-no-margin ion-padding">
+
       <ion-row class="ion-no-margin ion-no-padding ion-justify-content-center ion-align-items-center">
         <ion-col size="12" size-md="6" class="ion-no-padding">
           <h1 class="ion-text-start">{{textHome.mainText}}</h1>
@@ -183,10 +184,20 @@
   </ion-content>
 </ion-app>
 
+<ion-modal #customModalIMG>
+  <ng-template>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let img of galleryImages">
+        <img [src]="img" style="width: 100%; height: auto;" />
+      </ion-slide>
+    </ion-slides>
+  </ng-template>
+</ion-modal>
+
 <ng-template #cardProd let-product="product">
   <ion-card class="ion-no-margin ion-no-padding">
     <div style="background-color: white; text-align: center">
-      <img alt="prod-img" src="{{ product.img_url }}" />
+      <img alt="prod-img" style="max-height: 300px;" src="{{ product.img_url }}" (click)="openModalIMG()"/>
     </div>
     <ion-card-header>
       <ion-card-title class="ion-text-center ion-text-wrap">{{
