@@ -26,20 +26,23 @@ export class HomeComponent {
     'https://http2.mlstatic.com/D_Q_NP_2X_941067-MCO83650418697_042025-E.webp',
     'https://http2.mlstatic.com/D_Q_NP_2X_694145-MCO83650438109_042025-AB.webp'
   ];
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-  };
+  currentImageIndex: number = 0;
+
 
   ignoreItem(item: { item_id: string }): boolean {
     const ignoredIds = ['EE4S1M', 'E4S1M'];
     return ignoredIds.includes(item.item_id);
   }
 
+  prevImage() {
+    this.currentImageIndex =
+      (this.currentImageIndex - 1 + this.galleryImages.length) % this.galleryImages.length;
+  }
+
+  nextImage() {
+    this.currentImageIndex =
+      (this.currentImageIndex + 1) % this.galleryImages.length;
+  }
   
 
   constructor(

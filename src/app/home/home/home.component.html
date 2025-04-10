@@ -186,10 +186,14 @@
 
 <ion-modal #customModalIMG>
   <ng-template>
-    <ion-slides pager="true" [options]="slideOpts">
-      <ion-slide *ngFor="let img of galleryImages">
-        <img [src]="img" style="width: 100%; height: auto;" />
+    <ion-slides pager="true">
+      <ion-slide>
+        <img [src]="galleryImages[currentImageIndex]" style="width: 100%; height: auto; border: 3px solid #efb74c;" />
       </ion-slide>
+      <div class="ion-button-img">
+        <ion-button (click)="prevImage()" color="warning"  fill="outline">PREVIOUS</ion-button>
+        <ion-button (click)="nextImage()" color="warning"  fill="outline">NEXT</ion-button>
+      </div>
     </ion-slides>
   </ng-template>
 </ion-modal>
