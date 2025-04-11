@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
   generateFormGroup() {
     this.formCheckOut = new FormGroup({
       fullNameCustomer: new FormControl(''),
+      emailCustomer: new FormControl(''),
       phoneNumberCustomer: new FormControl(''),
       streetAddressCustomer: new FormControl(''),
       cityCustomer: new FormControl(''),
