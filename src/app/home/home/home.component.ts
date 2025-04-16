@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
@@ -14,6 +14,7 @@ import { typeHomeText, typeToastText } from 'src/app/utils/language/home/home/te
 export class HomeComponent {
   @Input() tabChanged: boolean = false;
   @ViewChild('customModalIMG', { static: true }) modal!: IonModal;
+  @ViewChild('customModalIMG', { read: ElementRef }) customModalIMG?: ElementRef;
   selectedSegment: string = 'first';
   powerStrip = [];
   voltageRegulator = [];
@@ -72,8 +73,13 @@ export class HomeComponent {
     });
   }
 
-  openModalIMG() {
-    this.modal.present();
+  async openModalIMG() {
+    if (this.customModalIMG) {
+      const modalIMG = this.customModalIMG.nativeElement;
+      if (modalIMG) {
+        await modalIMG.present();
+      }
+    }
   }
 
   setDotOnPrice(price: string) {
