@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   flagClearCart: boolean = false;
   formCheckOut!: FormGroup;
   flagCustomerDetails: boolean = false;
+  flagShippingDetails: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -53,6 +54,12 @@ export class CartComponent implements OnInit {
       streetAddressShipping: new FormControl(''),
       cityShipping: new FormControl(''),
     });
+  }
+
+  onUseSameInfoChanged(event: any) {
+    console.log(event.detail.checked);
+    this.flagShippingDetails = true ? event.detail.checked : false;
+    console.log(this.flagShippingDetails);
   }
 
   validateNumberForm(event: any) {

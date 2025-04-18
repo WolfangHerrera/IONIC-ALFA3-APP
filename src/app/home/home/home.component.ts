@@ -125,14 +125,14 @@ export class HomeComponent {
       subHeader: `PRECIO: $${this.setDotOnPrice(product.price)} COP`,
       message: `
       <div>
-      <div><strong>Metro cable: </strong>1 metro</div>
-      <div><strong>Color: </strong>Negro</div>
-      <div><strong>Dimensiones: </strong>20 x 4 x 6 cm</div>
-      <div><strong>Peso: </strong>300 gr</div>
-      <div><strong>Certificación: </strong>FFC</div>
-      <div><strong>Voltaje: </strong>110 Voltios</div>
-      <div><strong>Corriente: </strong>15 Amperios</div>
-      <div><strong>Configuración: </strong>4 salidas</div>
+      <div><STRONG>METRO CABLE: </STRONG>1 METRO</div>
+      <div><STRONG>COLOR: </STRONG>NEGRO</div>
+      <div><STRONG>DIMENSIONES: </STRONG>20 X 4 X 6 CM</div>
+      <div><STRONG>PESO: </STRONG>300 GR</div>
+      <div><STRONG>CERTIFICACIÓN: </STRONG>FFC</div>
+      <div><STRONG>VOLTAJE: </STRONG>110 VOLTIOS</div>
+      <div><STRONG>CORRIENTE: </STRONG>15 AMPERIOS</div>
+      <div><STRONG>CONFIGURACIÓN: </STRONG>4 SALIDAS</div>
       </div>
       `,
       buttons: ['OK'],

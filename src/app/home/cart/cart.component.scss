@@ -39,6 +39,15 @@ ion-card-content {
   margin: 0;
 }
 
+ion-checkbox {
+  --checkbox-background-checked: #efb74c;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid #efb74c;
+}
+
 .ion-button {
   width: 120px;
 }
