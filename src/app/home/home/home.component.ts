@@ -74,12 +74,28 @@ export class HomeComponent {
   }
 
   async openModalIMG() {
-    if (this.customModalIMG) {
-      const modalIMG = this.customModalIMG.nativeElement;
-      if (modalIMG) {
-        await modalIMG.present();
-      }
-    }
+    this.activateAlerts();
+    // if (this.customModalIMG) {
+    //   const modalIMG = this.customModalIMG.nativeElement;
+    //   if (modalIMG) {
+    //     await modalIMG.present();
+    //   }
+    // }
+  }
+
+  async activateAlerts() {
+    const alert = await this.alertController.create({
+      message: `
+      <ion-slides class="wrapper" pager="true">
+        <ion-slide>
+          <img src="${this.galleryImages[this.currentImageIndex]}"/>
+        </ion-slide>
+      </ion-slides>
+      `,
+      cssClass: 'no-padding-alert'
+    });
+
+    await alert.present();
   }
 
   setDotOnPrice(price: string) {
