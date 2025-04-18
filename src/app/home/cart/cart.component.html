@@ -119,9 +119,9 @@
                   <ion-item>
                     <ion-select label="PAYMENT METHOD" label-placement="floating"
                       formControlName="paymentMethodCustomer" required>
-                      <ion-select-option value="CASH">CASH</ion-select-option>
-                      <ion-select-option value="ACCOUNT">ACCOUNT TRANSFER</ion-select-option>
-                      <ion-select-option value="CARD">CARD</ion-select-option>
+                        <ion-select-option *ngFor="let method of formSelectPaymethod | keyvalue" [value]="method.key">
+                        {{ method.value }}
+                        </ion-select-option>
                     </ion-select>
                   </ion-item>
                 </ion-list>
