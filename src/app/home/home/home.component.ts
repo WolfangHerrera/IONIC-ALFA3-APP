@@ -73,26 +73,16 @@ export class HomeComponent {
     });
   }
 
-  async openModalIMG() {
-    this.activateAlerts();
-    // if (this.customModalIMG) {
-    //   const modalIMG = this.customModalIMG.nativeElement;
-    //   if (modalIMG) {
-    //     await modalIMG.present();
-    //   }
-    // }
-  }
-
-  async activateAlerts() {
+  async showImage(image: string) {
     const alert = await this.alertController.create({
       message: `
-      <ion-slides class="wrapper" pager="true">
+      <ion-slides class="wrapper">
         <ion-slide>
-          <img src="${this.galleryImages[this.currentImageIndex]}"/>
+          <img src="${image}"/>
         </ion-slide>
       </ion-slides>
       `,
-      cssClass: 'no-padding-alert'
+      cssClass: 'no-padding-alert',
     });
 
     await alert.present();
