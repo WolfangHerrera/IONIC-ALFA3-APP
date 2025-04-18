@@ -53,9 +53,39 @@
   --color: #000000;
 }
 
-.no-padding-modal .modal-wrapper {
-  --padding: 0 !important;
+.no-padding-alert .alert-wrapper {
   padding: 0 !important;
   margin: 0 !important;
-  --background: transparent;
+  max-width: 100% !important;
+  width: auto !important;
+  --min-width: unset !important;
+}
+
+.no-padding-alert .alert-head {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+.no-padding-alert .alert-button-group{
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+.no-padding-alert .alert-message {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+.no-padding-alert .alert-message img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
