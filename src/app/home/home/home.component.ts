@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
@@ -11,7 +11,7 @@ import { typeHomeText, typeToastText } from 'src/app/utils/language/home/home/te
   styleUrls: ['./home.component.scss'],
   standalone: false,
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   @Input() tabChanged: boolean = false;
   @ViewChild('customModalIMG', { static: true }) modal!: IonModal;
   @ViewChild('customModalIMG', { read: ElementRef }) customModalIMG?: ElementRef;
@@ -21,30 +21,11 @@ export class HomeComponent {
   products = [];
   textHome!: typeHomeText;
   textToast!: typeToastText;
-  galleryImages = [
-    'https://http2.mlstatic.com/D_Q_NP_2X_923201-MCO83674092943_042025-E.webp',
-    'https://http2.mlstatic.com/D_Q_NP_2X_951050-MCO83674317985_042025-E.webp',
-    'https://http2.mlstatic.com/D_Q_NP_2X_941067-MCO83650418697_042025-E.webp',
-    'https://http2.mlstatic.com/D_Q_NP_2X_694145-MCO83650438109_042025-AB.webp'
-  ];
-  currentImageIndex: number = 0;
-
 
   ignoreItem(item: { item_id: string }): boolean {
     const ignoredIds = ['EE4S1M', 'E4S1M'];
     return ignoredIds.includes(item.item_id);
   }
-
-  prevImage() {
-    this.currentImageIndex =
-      (this.currentImageIndex - 1 + this.galleryImages.length) % this.galleryImages.length;
-  }
-
-  nextImage() {
-    this.currentImageIndex =
-      (this.currentImageIndex + 1) % this.galleryImages.length;
-  }
-  
 
   constructor(
     private requestService: RequestService,
@@ -57,6 +38,13 @@ export class HomeComponent {
     this.textToast = this.languageService.getTextToast();
     this.getDataItemProduct();
   }
+
+  async ngAfterViewInit() {
+    await setTimeout(async () => {
+       await this.showWelcomeMessage();
+    }, 4000);
+  }
+
 
   getDataItemProduct() {
     this.requestService.getItemProducts().subscribe((response) => {
@@ -73,6 +61,38 @@ export class HomeComponent {
     });
   }
 
+  async showWelcomeMessage() {
+    const wholeSaleWhatsapp = localStorage.getItem('wholeSaleWhatsapp');
+    if (wholeSaleWhatsapp === 'true') {
+      return;
+    }
+    const alert = await this.alertController.create({
+      header: 'BUYING WHOLESALE?',
+      subHeader: 'LET’S CHAT ON WHATSAPP FOR THE BEST SERVICE!',
+      message: `
+      <ion-slides class="wrapper">
+      <ion-slide>
+      <img src="assets/icons/logo.png"/>
+      </ion-slide>
+      </ion-slides>
+      `,
+      buttons: [{
+        text: 'YES, OPEN WHATSAPP',
+        handler: () => {
+          this.wholeSaleWhatsapp('yes');
+        },
+      },{
+        text: 'NO, THANKS',
+        handler: () => {
+          this.wholeSaleWhatsapp();
+        },
+      }],
+      cssClass: 'image-welcome-alert',
+    });
+
+    await alert.present();
+  }
+
   async showImage(image: string) {
     const alert = await this.alertController.create({
       message: `
@@ -82,11 +102,20 @@ export class HomeComponent {
         </ion-slide>
       </ion-slides>
       `,
-      cssClass: 'no-padding-alert',
+      cssClass: 'no-padding-image-alert',
     });
 
     await alert.present();
   }
+
+  wholeSaleWhatsapp(choice = 'not') {
+    localStorage.setItem('wholeSaleWhatsapp', 'true');
+    if (choice === 'yes') {
+      window.open('https://wa.me/573229873311', '_blank');
+    }
+
+  }
+  
 
   setDotOnPrice(price: string) {
     return parseFloat(price).toLocaleString('en-US', {
