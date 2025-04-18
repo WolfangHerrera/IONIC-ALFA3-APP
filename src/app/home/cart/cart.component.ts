@@ -57,9 +57,7 @@ export class CartComponent implements OnInit {
   }
 
   onUseSameInfoChanged(event: any) {
-    console.log(event.detail.checked);
     this.flagShippingDetails = true ? event.detail.checked : false;
-    console.log(this.flagShippingDetails);
   }
 
   validateNumberForm(event: any) {

@@ -63,7 +63,7 @@
             <h2 class="ion-text-start">CUSTOMER DETAIL</h2>
             <h3 class="ion-text-start">CUSTOMER INFO</h3>
             <ion-checkbox labelPlacement="end" (ionChange)="onUseSameInfoChanged($event)">
-              WOULD YOU LIKE TO USE THE SAME INFORMATION FOR SHIPPING?
+              USE SAME INFORMATION FOR SHIPPING?
             </ion-checkbox>
             <ion-card>
               <ion-card-content class="ion-no-margin ion-no-padding">
@@ -87,8 +87,14 @@
                       type="text" formControlName="fullNameCustomer" required minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
+                    <ion-input label="PHONE NUMBER" label-placement="floating" type="tel" inputmode="numeric"
+                      pattern="[0-9]*" formControlName="phoneNumberCustomer" required minlength="7" maxlength="10"
+                      (ionInput)="validateNumberForm($event)"></ion-input>
+                  </ion-item>
+                  <ion-item>
                     <ion-input label="EMAIL" label-placement="floating" class="ion-no-margin ion-no-padding"
-                      type="text" formControlName="emailCustomer" required minlength="3"></ion-input>
+                      type="email" formControlName="emailCustomer" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                      minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input label="BUSINNESS NAME | STREET ADDRESS" label-placement="floating" type="text"
@@ -97,11 +103,6 @@
                   <ion-item>
                     <ion-input label="CITY" label-placement="floating" type="text" formControlName="cityCustomer"
                       required minlength="3"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input label="PHONE NUMBER" label-placement="floating" type="tel" inputmode="numeric"
-                      pattern="[0-9]*" formControlName="phoneNumberCustomer" required minlength="7" maxlength="10"
-                      (ionInput)="validateNumberForm($event)"></ion-input>
                   </ion-item>
                 </ion-list>
               </ion-card-content>
