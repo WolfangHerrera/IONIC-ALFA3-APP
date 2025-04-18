@@ -19,6 +19,13 @@ export class CartComponent implements OnInit {
   formCheckOut!: FormGroup;
   flagCustomerDetails: boolean = false;
   flagShippingDetails: boolean = false;
+  formSelectPaymethod = {
+    CARD: 'CREDIT CARD / DEBIT CARD',
+    ACCOUNT: 'ACCOUNT TRANSFER (PSE)',
+    BANK: 'ACCOUNT TRANSFER (BANK)',
+    NEQUI: 'NEQUI',
+    DAVIPLATA: 'DAVIPLATA',
+  }
 
   constructor(
     private productService: ProductService,
