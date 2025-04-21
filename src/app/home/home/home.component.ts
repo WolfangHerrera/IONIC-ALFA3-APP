@@ -11,7 +11,7 @@ import { typeHomeText, typeToastText } from 'src/app/utils/language/home/home/te
   styleUrls: ['./home.component.scss'],
   standalone: false,
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent {
   @Input() tabChanged: boolean = false;
   @ViewChild('customModalIMG', { static: true }) modal!: IonModal;
   @ViewChild('customModalIMG', { read: ElementRef }) customModalIMG?: ElementRef;
@@ -37,16 +37,8 @@ export class HomeComponent implements AfterViewInit {
   ) {
     this.textHome = this.languageService.getTextHomeHome();
     this.textToast = this.languageService.getTextToast();
-    this.textToastWholesale = this.languageService.getTextToastWholesale();
     this.getDataItemProduct();
   }
-
-  async ngAfterViewInit() {
-    await setTimeout(async () => {
-       await this.showWelcomeMessage();
-    }, 4000);
-  }
-
 
   getDataItemProduct() {
     this.requestService.getItemProducts().subscribe((response) => {
@@ -63,38 +55,6 @@ export class HomeComponent implements AfterViewInit {
     });
   }
 
-  async showWelcomeMessage() {
-    const wholeSaleWhatsapp = localStorage.getItem('wholeSaleWhatsapp');
-    if (wholeSaleWhatsapp === 'true') {
-      return;
-    }
-    const alert = await this.alertController.create({
-      header: this.textToastWholesale.header,
-      subHeader: this.textToastWholesale.subHeader,
-      message: `
-      <ion-slides class="wrapper">
-      <ion-slide>
-      <img src="assets/icons/logo.png"/>
-      </ion-slide>
-      </ion-slides>
-      `,
-      buttons: [{
-        text: this.textToastWholesale.buttonText || 'YES, OPEN WHATSAPP',
-        handler: () => {
-          this.wholeSaleWhatsapp('yes');
-        },
-      },{
-        text: this.textToastWholesale.buttonText2 || 'NO, THANKS',
-        handler: () => {
-          this.wholeSaleWhatsapp();
-        },
-      }],
-      cssClass: 'image-welcome-alert',
-    });
-
-    await alert.present();
-  }
-
   async showImage(image: string) {
     const alert = await this.alertController.create({
       message: `
@@ -108,14 +68,6 @@ export class HomeComponent implements AfterViewInit {
     });
 
     await alert.present();
-  }
-
-  wholeSaleWhatsapp(choice = 'not') {
-    localStorage.setItem('wholeSaleWhatsapp', 'true');
-    if (choice === 'yes') {
-      const message = encodeURIComponent('Hello, I am interested in buying wholesale.');
-      window.open(`https://wa.me/573229873311?text=${message}`, '_blank');
-    }
   }
   
 
@@ -156,7 +108,7 @@ export class HomeComponent implements AfterViewInit {
       subHeader: `PRECIO: $${this.setDotOnPrice(product.price)} COP`,
       message: `
       <div>
-      <div><STRONG>METRO CABLE: </STRONG>1 METRO</div>
+      <div><STRONG>CABLE: </STRONG>1 METRO</div>
       <div><STRONG>COLOR: </STRONG>NEGRO</div>
       <div><STRONG>DIMENSIONES: </STRONG>20 X 4 X 6 CM</div>
       <div><STRONG>PESO: </STRONG>300 GR</div>
