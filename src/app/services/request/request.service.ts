@@ -20,6 +20,12 @@ export class RequestService {
     return this.http.post(`${this.apiUrl}/loginUser`, dataRequest);
   }
 
+  registerUser(dataRequest: {
+    USERNAME: string;
+  }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/registerUser`, dataRequest);
+  }
+
   createOrder(dataRequest: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/createOrder`, dataRequest);
   }
