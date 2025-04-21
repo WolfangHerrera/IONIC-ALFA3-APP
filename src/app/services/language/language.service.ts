@@ -34,7 +34,7 @@ export class LanguageService {
   }
 
   getTextHomeCart(){
-    return this.isSpanishLanguage() ? ES_cartText : EN_cartText;
+    return this.isSpanishLanguage() ? ES_cartText : ES_cartText;
   }
 
   getTextOrderTab(){

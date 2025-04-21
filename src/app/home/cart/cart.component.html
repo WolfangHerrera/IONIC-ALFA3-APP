@@ -42,7 +42,7 @@
                 SUB-TOTAL
               </h5>
               <h6 class="ion-text-end ion-no-padding ion-no-margin">
-                {{ itemsCount }} item<span *ngIf="itemsCount > 1">s</span>
+                {{ itemsCount }} ITEM<span *ngIf="itemsCount > 1">S</span>
               </h6>
             </div>
             <div class="ion-total-price">
@@ -78,26 +78,26 @@
                   </ion-item>
                   <ion-item>
                     <ion-input label="{{textCart.documentNumberCustomer}}" label-placement="floating" type="number" inputmode="numeric"
-                      pattern="[0-9]*" formControlName="documentNumberCustomer" required minlength="6" maxlength="10"
+                      pattern="[0-9]*" formControlName="documentNumberCustomer" [required]="!flagShippingDetails" minlength="6" maxlength="10"
                       (ionInput)="validateNumberForm($event)"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input label="{{textCart.fullNameCustomer}}" label-placement="floating" class="ion-no-margin ion-no-padding"
-                      type="text" formControlName="fullNameCustomer" required minlength="3"></ion-input>
+                      type="text" formControlName="fullNameCustomer" [required]="!flagShippingDetails" minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input label="{{textCart.phoneNumberCustomer}}" label-placement="floating" type="tel" inputmode="numeric"
-                      pattern="[0-9]*" formControlName="phoneNumberCustomer" required minlength="7" maxlength="10"
+                      pattern="[0-9]*" formControlName="phoneNumberCustomer" [required]="!flagShippingDetails" minlength="7" maxlength="10"
                       (ionInput)="validateNumberForm($event)"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input label="{{textCart.emailCustomer}}" label-placement="floating" class="ion-no-margin ion-no-padding"
-                      type="email" formControlName="emailCustomer" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                      type="email" formControlName="emailCustomer" [required]="!flagShippingDetails" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                       minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input label="{{textCart.streetAddressCustomer}}" label-placement="floating" type="text"
-                      formControlName="streetAddressCustomer" required minlength="3"></ion-input>
+                      formControlName="streetAddressCustomer" [required]="!flagShippingDetails" minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input label="{{textCart.cityCustomer}}" label-placement="floating" type="text" formControlName="cityCustomer"
@@ -129,7 +129,7 @@
                       formControlName="streetAddressShipping" minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="{{textCart.cityShipping}}" label-placement="floating" type="text" formControlName="cityShipping"
+                    <ion-input label="{{textCart.cityShipping}}" required label-placement="floating" type="text" formControlName="cityShipping"
                       minlength="3"></ion-input>
                   </ion-item>
                 </ion-list>
@@ -161,7 +161,7 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="12" size-md="6" class="ion-no-padding ion-margin-top ion-margin-bottom">
           <ion-button (click)="alertCheckoutCart()" color="warning"
-            class="ion-button ion-text-center ion-no-margin ion-no-padding" expand="block" fill="solid"
+            class="ion-text-center ion-no-margin ion-no-padding" expand="block" fill="solid"
             [disabled]="formCheckOut.invalid">
             {{textCart.buttonOrder}}
           </ion-button>

@@ -20,22 +20,22 @@ export class CartComponent implements OnInit {
   flagClearCart: boolean = false;
   formCheckOut!: FormGroup;
   flagCustomerDetails: boolean = false;
-  flagShippingDetails: boolean = false;
+  flagShippingDetails: boolean = true;
   formSelectPaymethod = {
     CARD: 'CREDIT CARD / DEBIT CARD',
     ACCOUNT: 'ACCOUNT TRANSFER (PSE)',
     BANCOLOMBIA: 'BANCOLOMBIA (ACCOUNT)',
     NEQUI: 'NEQUI',
     DAVIPLATA: 'DAVIPLATA',
-  }
-  textCart!: typeCartText; 
+  };
+  textCart!: typeCartText;
 
   constructor(
     private productService: ProductService,
     private requestService: RequestService,
     private alertController: AlertController,
     private toastController: ToastController,
-    private languageService: LanguageService,
+    private languageService: LanguageService
   ) {
     this.textCart = this.languageService.getTextHomeCart();
     this.generateFormGroup();
@@ -65,12 +65,21 @@ export class CartComponent implements OnInit {
       phoneNumberShipping: new FormControl(''),
       streetAddressShipping: new FormControl(''),
       cityShipping: new FormControl(''),
-      useSameInfo: new FormControl(false),
+      useSameInfo: new FormControl(!this.flagShippingDetails),
     });
   }
 
   onUseSameInfoChanged(event: any) {
-    this.flagShippingDetails = true ? event.detail.checked : false;
+    this.flagShippingDetails = event.detail.checked ? true : false;
+    if (this.flagShippingDetails) {
+      this.formCheckOut.patchValue({
+        fullNameShipping: this.formCheckOut.value.fullNameCustomer,
+        phoneNumberShipping: this.formCheckOut.value.phoneNumberCustomer,
+        streetAddressShipping: this.formCheckOut.value.streetAddressCustomer,
+        cityShipping: this.formCheckOut.value.cityCustomer,
+        useSameInfo: this.flagShippingDetails,
+      });
+    }
   }
 
   validateNumberForm(event: any) {
@@ -84,10 +93,10 @@ export class CartComponent implements OnInit {
     });
   }
 
-  onCheckOutCart() {
+  async onCheckOutCart() {
     const customerDetails = localStorage.getItem('customerDetails');
     if (customerDetails) {
-      this.alertFormLocalStorage();
+      await this.alertFormLocalStorage();
     }
     this.flagCustomerDetails = true;
   }
@@ -98,14 +107,20 @@ export class CartComponent implements OnInit {
     this.getDataProductService();
   }
 
-
   async onConfirmOrder() {
     const orderDetails = {
       CUSTOMER_DETAILS: this.formCheckOut.value,
       PRODUCTS_CART: this.listProducts,
       TOTAL_PRICE: this.totalPrice,
     };
-    localStorage.setItem('customerDetails', JSON.stringify(this.formCheckOut.value));
+    localStorage.setItem(
+      'customerDetails',
+      JSON.stringify(this.formCheckOut.value)
+    );
+    localStorage.setItem(
+      'flagShippingDetails',
+      String(this.flagShippingDetails)
+    );
     await this.requestService
       .createOrder(orderDetails)
       .subscribe(async (response) => {
@@ -114,13 +129,15 @@ export class CartComponent implements OnInit {
         await this.onClearCart();
         await this.activateToastCheckoutCart(response);
         setTimeout(() => {
-          window.location.href = response['URL_PAYMENT']
+          window.location.href = response['URL_PAYMENT'];
         }, 1000);
       });
   }
 
   buildMessageToastCheckoutCart(response: any) {
-    return response['STATUS'] === 'MP' ? this.textCart.toastCheckoutCartRedirect : this.textCart.toastCheckoutCart;
+    return response['STATUS'] === 'MP'
+      ? this.textCart.toastCheckoutCartRedirect
+      : this.textCart.toastCheckoutCart;
   }
 
   async getDataProductService() {
@@ -160,7 +177,7 @@ export class CartComponent implements OnInit {
           },
         },
         {
-          text: this.textCart?.alertTextDeleteItem?.buttons?.[0] ?? 'CANCEL',
+          text: this.textCart?.alertTextDeleteItem?.buttons?.[1] ?? 'CANCEL',
           handler: () => {
             if (flagLastItem) {
               this.onUpdateItem(item_id, true);
@@ -173,7 +190,7 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
-  async activateToastCheckoutCart(status : string) {
+  async activateToastCheckoutCart(status: string) {
     const message = this.buildMessageToastCheckoutCart(status);
     let toast = await this.toastController.getTop();
 
@@ -199,20 +216,26 @@ export class CartComponent implements OnInit {
       backdropDismiss: false,
       buttons: [
         {
-          text: this.textCart?.alertTextLocalStorage?.buttons?.[0] ?? 'USE PREVIOUS INFO',
+          text:
+            this.textCart?.alertTextLocalStorage?.buttons?.[0] ??
+            'USE PREVIOUS INFO',
           handler: () => {
             const customerDetails = localStorage.getItem('customerDetails');
             if (customerDetails) {
               this.formCheckOut.setValue(JSON.parse(customerDetails));
             }
-            const flagShippingDetails = localStorage.getItem('flagShippingDetails');
-            if (flagShippingDetails) {
-              this.flagShippingDetails = true;
-            }
+            this.flagShippingDetails =
+              localStorage.getItem('flagShippingDetails') === 'true'
+                ? true
+                : false;
+            this.formCheckOut.patchValue({
+              useSameInfo: this.flagShippingDetails,
+            });
           },
         },
         {
-          text: this.textCart?.alertTextLocalStorage?.buttons?.[0] ?? 'START OVER',
+          text:
+            this.textCart?.alertTextLocalStorage?.buttons?.[1] ?? 'START OVER',
           handler: async () => {
             this.formCheckOut.reset();
             localStorage.removeItem('customerDetails');
@@ -232,13 +255,17 @@ export class CartComponent implements OnInit {
       backdropDismiss: false,
       buttons: [
         {
-          text: this.textCart?.alertTextCheckoutCart?.buttons?.[0] ?? 'CONFIRM ORDER',
+          text:
+            this.textCart?.alertTextCheckoutCart?.buttons?.[0] ??
+            'CONFIRM ORDER',
           handler: async () => {
             await this.onConfirmOrder();
           },
         },
         {
-          text: this.textCart?.alertTextCheckoutCart?.buttons?.[0] ?? 'CANCEL ORDER',
+          text:
+            this.textCart?.alertTextCheckoutCart?.buttons?.[1] ??
+            'CANCEL ORDER',
         },
       ],
     });
