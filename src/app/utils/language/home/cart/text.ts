@@ -152,7 +152,7 @@ export const ES_cartText : typeCartText = {
     mainText: 'TU CARRITO',
     subtitleText: 'ARTÍCULOS',
     emptyCartText: 'NO HAY ARTÍCULOS EN EL CARRITO',
-    buttonCart: 'REALIZAR PEDIDO',
+    buttonCart: 'CONTINUAR',
     mainTextCustomerDetails: 'DETALLES DEL CLIENTE',
     subtextCustomerDetails: 'INFORMACIÓN DEL CLIENTE',
     checkboxCustomerDetails: '¿USAR LA MISMA INFORMACIÓN PARA EL ENVÍO?',
