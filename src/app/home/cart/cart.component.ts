@@ -112,23 +112,15 @@ export class CartComponent implements OnInit {
         this.flagCustomerDetails = false;
         this.flagClearCart = true;
         await this.onClearCart();
-        await this.activateToastCheckoutCart();
-        if (response['STATUS'] === 'MP') {
-          setTimeout(() => {
-            window.location.href = response['URL_PAYMENT']
-          }, 1000);
-        }
-        else{
-            setTimeout(() => {
-            const url = response['URL_PAYMENT'];
-            if (url.startsWith('https://')) {
-              window.location.href = url;
-            } else {
-              console.error('Invalid URL:', url);
-            }
-            }, 1000);
-        }
+        await this.activateToastCheckoutCart(response);
+        setTimeout(() => {
+          window.location.href = response['URL_PAYMENT']
+        }, 1000);
       });
+  }
+
+  buildMessageToastCheckoutCart(response: any) {
+    return response['STATUS'] === 'MP' ? this.textCart.toastCheckoutCartRedirect : this.textCart.toastCheckoutCart;
   }
 
   async getDataProductService() {
@@ -157,18 +149,18 @@ export class CartComponent implements OnInit {
 
   async alertDeleteItem(item_id: string, flagLastItem: boolean = false) {
     const alert = await this.alertController.create({
-      header: 'DELETE PRODUCT?',
-      message: 'IT WILL BE REMOVED FROM YOUR CART.',
+      header: this.textCart.alertTextDeleteItem.header,
+      message: this.textCart.alertTextDeleteItem.message,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'ACCEPT',
+          text: this.textCart?.alertTextDeleteItem?.buttons?.[0] ?? 'DELETE',
           handler: () => {
             this.onDeleteItem(item_id);
           },
         },
         {
-          text: 'CANCEL',
+          text: this.textCart?.alertTextDeleteItem?.buttons?.[0] ?? 'CANCEL',
           handler: () => {
             if (flagLastItem) {
               this.onUpdateItem(item_id, true);
@@ -181,13 +173,16 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
-  async activateToastCheckoutCart() {
+  async activateToastCheckoutCart(status : string) {
+    const message = this.buildMessageToastCheckoutCart(status);
     let toast = await this.toastController.getTop();
+
     if (toast) {
       await toast.dismiss();
     }
+
     toast = await this.toastController.create({
-      message: 'REDIRECTING TO PAYMENT GATEWAY!',
+      message: message,
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
@@ -200,11 +195,11 @@ export class CartComponent implements OnInit {
 
   async alertFormLocalStorage() {
     const alert = await this.alertController.create({
-      header: 'DO YOU WANT TO USE THE PREVIOUS INFORMATION?',
+      header: this.textCart.alertTextLocalStorage.header,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'USE PREVIOUS INFO',
+          text: this.textCart?.alertTextLocalStorage?.buttons?.[0] ?? 'USE PREVIOUS INFO',
           handler: () => {
             const customerDetails = localStorage.getItem('customerDetails');
             if (customerDetails) {
@@ -217,7 +212,7 @@ export class CartComponent implements OnInit {
           },
         },
         {
-          text: 'START OVER',
+          text: this.textCart?.alertTextLocalStorage?.buttons?.[0] ?? 'START OVER',
           handler: async () => {
             this.formCheckOut.reset();
             localStorage.removeItem('customerDetails');
@@ -232,18 +227,18 @@ export class CartComponent implements OnInit {
 
   async alertCheckoutCart() {
     const alert = await this.alertController.create({
-      header: 'PROCEED WITH YOUR ORDER?',
-      message: 'TAP CONFIRM ORDER TO FINALIZE YOUR PURCHASE.',
+      header: this.textCart.alertTextCheckoutCart.header,
+      message: this.textCart.alertTextCheckoutCart.message,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'CONFIRM ORDER',
+          text: this.textCart?.alertTextCheckoutCart?.buttons?.[0] ?? 'CONFIRM ORDER',
           handler: async () => {
             await this.onConfirmOrder();
           },
         },
         {
-          text: 'CANCEL ORDER',
+          text: this.textCart?.alertTextCheckoutCart?.buttons?.[0] ?? 'CANCEL ORDER',
         },
       ],
     });

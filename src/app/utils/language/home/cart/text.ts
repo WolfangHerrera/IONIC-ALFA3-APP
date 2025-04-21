@@ -23,7 +23,18 @@ export type typeCartText = {
     paymethodLabel: string
     formSelectPaymethod: typeFormSelectPaymethod
     buttonOrder: string
+    alertTextDeleteItem: alertText
+    alertTextLocalStorage: alertText
+    alertTextCheckoutCart: alertText
+    toastCheckoutCart: string
+    toastCheckoutCartRedirect: string
 };
+
+type alertText = {
+    header?: string,
+    message?: string,
+    buttons?: string[]
+}
 
 type typeFormDocumentType = {
     CC: string,
@@ -39,6 +50,40 @@ type typeFormSelectPaymethod = {
     NEQUI: string,
     DAVIPLATA: string,
 };
+
+const EN_alertTextDeleteItem: alertText = {
+    header: 'DELETE PRODUCT?',
+    message: 'IT WILL BE REMOVED FROM YOUR CART.',
+    buttons: ['DELETE','CANCEL'],
+}
+
+const ES_alertTextDeleteItem: alertText = {
+    header: '¿ELIMINAR PRODUCTO?',
+    message: '¡SE ELIMINARA DEL CARRITO!',
+    buttons: ['ELIMINAR','CANCELAR'],
+}
+
+const EN_alertTextLocalStorage: alertText = {
+    header: 'DO YOU WANT TO USE THE PREVIOUS INFORMATION?',
+    buttons: ['USE PREVIOUS INFO','START OVER'],
+}
+
+const ES_alertTextLocalStorage: alertText = {
+    header: '¿DESEA USAR LA INFORMACIÓN ANTERIOR?',
+    buttons: ['USAR INFORMACIÓN ANTERIOR','EMPEZAR DE NUEVO'],
+}
+
+const EN_alertTextCheckoutCart: alertText = {
+    header: 'PROCEED WITH YOUR ORDER?',
+    message: 'TAP CONFIRM ORDER TO FINALIZE YOUR PURCHASE.',
+    buttons: ['CONFIRM ORDER','CANCEL ORDER'],
+}
+
+const ES_alertTextCheckoutCart: alertText = {
+    header: '¿REALIZAR PEDIDO?',
+    message: 'TOQUE CONFIRMAR PEDIDO PARA FINALIZAR SU COMPRA.',
+    buttons: ['CONFIRMAR PEDIDO','CANCELAR PEDIDO'],
+}
 
 const EN_formDocumentType = {
     CC: 'CITIZENSHIP DOCUMENT',
@@ -95,6 +140,11 @@ export const EN_cartText : typeCartText = {
     paymethodLabel: 'PAYMENT METHOD',
     formSelectPaymethod: EN_formSelectPaymethod,
     buttonOrder: 'ORDER NOW',
+    alertTextDeleteItem: EN_alertTextDeleteItem,
+    alertTextLocalStorage: EN_alertTextLocalStorage,
+    alertTextCheckoutCart: EN_alertTextCheckoutCart,
+    toastCheckoutCart: 'ORDER PLACED SUCCESSFULLY',
+    toastCheckoutCartRedirect: 'REDIRECTING TO PAYMENT GATEWAY!',
 };
 
 
@@ -123,4 +173,9 @@ export const ES_cartText : typeCartText = {
     paymethodLabel: 'MÉTODO DE PAGO',
     formSelectPaymethod: ES_formSelectPaymethod,
     buttonOrder: 'CONFIRMAR PEDIDO',
+    alertTextDeleteItem: ES_alertTextDeleteItem,
+    alertTextLocalStorage: ES_alertTextLocalStorage,
+    alertTextCheckoutCart: ES_alertTextCheckoutCart,
+    toastCheckoutCart: 'PEDIDO REALIZADO CON ÉXITO',
+    toastCheckoutCartRedirect: '¡REDIRIGIENDO A MERCADOPAGO!',
 };
