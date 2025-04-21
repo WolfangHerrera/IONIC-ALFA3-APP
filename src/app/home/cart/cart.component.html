@@ -3,8 +3,8 @@
     <ion-grid [ngClass]="{ 'fade-in': flagClearCart }" class="ion-no-margin ion-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col size="12" size-md="6" class="ion-no-margin ion-no-padding">
-          <h1 class="ion-text-start">YOUR CART</h1>
-          <h3 class="ion-text-start">ITEMS</h3>
+          <h1 class="ion-text-start">{{textCart.mainText}}</h1>
+          <h3 class="ion-text-start">{{textCart.subtitleText}}</h3>
           <ion-card class="ion-no-margin ion-no-padding">
             <ion-card-content class="ion-no-margin ion-no-padding">
               <ion-list class="ion-no-margin ion-no-padding">
@@ -31,7 +31,7 @@
                 </ion-item>
                 <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngIf="listProducts.length === 0">
                   <ion-icon name="cart"></ion-icon>
-                  <ion-label class="ion-text-center">NO ITEMS IN CART</ion-label>
+                  <ion-label class="ion-text-center">{{textCart.emptyCartText}}</ion-label>
                 </ion-item>
               </ion-list>
             </ion-card-content>
@@ -49,7 +49,7 @@
               <h2 class="ion-text-end">$ {{ setDotOnPrice(totalPrice) }}</h2>
               <ion-button (click)="onCheckOutCart()" color="warning"
                 class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block"
-                fill="outline">CHECKOUT</ion-button>
+                fill="outline">{{textCart.buttonCart}}</ion-button>
             </div>
           </div>
         </ion-col>
@@ -60,69 +60,48 @@
         <!-- CUSTOMER DETAIL -->
         <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
-            <h2 class="ion-text-start">CUSTOMER DETAIL</h2>
-            <h3 class="ion-text-start">CUSTOMER INFO</h3>
+            <h2 class="ion-text-start">{{textCart.mainTextCustomerDetails}}</h2>
+            <h3 class="ion-text-start">{{textCart.subtextCustomerDetails}}</h3>
             <ion-checkbox labelPlacement="end" (ionChange)="onUseSameInfoChanged($event)" formControlName="useSameInfo">
-              USE SAME INFORMATION FOR SHIPPING?
+              {{textCart.checkboxCustomerDetails}}
             </ion-checkbox>
             <ion-card>
               <ion-card-content class="ion-no-margin ion-no-padding">
                 <ion-list>
                   <ion-item>
-                    <ion-select label="DOCUMENT TYPE" label-placement="floating" formControlName="documentTypeCustomer"
+                    <ion-select label="{{textCart.documentTypeLabel}}" label-placement="floating" formControlName="documentTypeCustomer"
                       required>
-                      <ion-select-option value="CC">NATIONAL DOCUMENT</ion-select-option>
-                      <ion-select-option value="NIT">NIT</ion-select-option>
-                      <ion-select-option value="PASSPORT">PASSPORT</ion-select-option>
-                      <ion-select-option value="FOREIGN_DOCUMENT">FOREIGN DOCUMENT</ion-select-option>
+                      <ion-select-option *ngFor="let method of textCart.formDocumentType | keyvalue" [value]="method.key">
+                        {{ method.value }}
+                        </ion-select-option>
                     </ion-select>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="DOCUMENT NUMBER" label-placement="floating" type="number" inputmode="numeric"
+                    <ion-input label="{{textCart.documentNumberCustomer}}" label-placement="floating" type="number" inputmode="numeric"
                       pattern="[0-9]*" formControlName="documentNumberCustomer" required minlength="6" maxlength="10"
                       (ionInput)="validateNumberForm($event)"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="FULL NAME" label-placement="floating" class="ion-no-margin ion-no-padding"
+                    <ion-input label="{{textCart.fullNameCustomer}}" label-placement="floating" class="ion-no-margin ion-no-padding"
                       type="text" formControlName="fullNameCustomer" required minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="PHONE NUMBER" label-placement="floating" type="tel" inputmode="numeric"
+                    <ion-input label="{{textCart.phoneNumberCustomer}}" label-placement="floating" type="tel" inputmode="numeric"
                       pattern="[0-9]*" formControlName="phoneNumberCustomer" required minlength="7" maxlength="10"
                       (ionInput)="validateNumberForm($event)"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="EMAIL" label-placement="floating" class="ion-no-margin ion-no-padding"
+                    <ion-input label="{{textCart.emailCustomer}}" label-placement="floating" class="ion-no-margin ion-no-padding"
                       type="email" formControlName="emailCustomer" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                       minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="BUSINNESS NAME | STREET ADDRESS" label-placement="floating" type="text"
+                    <ion-input label="{{textCart.streetAddressCustomer}}" label-placement="floating" type="text"
                       formControlName="streetAddressCustomer" required minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="CITY" label-placement="floating" type="text" formControlName="cityCustomer"
+                    <ion-input label="{{textCart.cityCustomer}}" label-placement="floating" type="text" formControlName="cityCustomer"
                       required minlength="3"></ion-input>
-                  </ion-item>
-                </ion-list>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-        <!-- PAYMENT DETAIL -->
-        <ion-row class="ion-justify-content-center ion-align-items-center">
-          <ion-col size="12" size-md="6" class="ion-no-padding">
-            <h3 class="ion-text-start">PAYMENT DETAIL</h3>
-            <ion-card>
-              <ion-card-content class="ion-no-margin ion-no-padding">
-                <ion-list>
-                  <ion-item>
-                    <ion-select label="PAYMENT METHOD" label-placement="floating"
-                      formControlName="paymentMethodCustomer" required>
-                        <ion-select-option *ngFor="let method of formSelectPaymethod | keyvalue" [value]="method.key">
-                        {{ method.value }}
-                        </ion-select-option>
-                    </ion-select>
                   </ion-item>
                 </ion-list>
               </ion-card-content>
@@ -132,26 +111,46 @@
         <!-- SHIPPING DETAIL -->
         <ion-row *ngIf="!flagShippingDetails" class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="6" class="ion-no-padding">
-            <h3 class="ion-text-start">SHIPPING ADDRESS</h3>
+            <h3 class="ion-text-start">{{textCart.mainTextShipping}}</h3>
             <ion-card>
               <ion-card-content class="ion-no-margin ion-no-padding">
                 <ion-list>
                   <ion-item>
-                    <ion-input label="FULL NAME" label-placement="floating" type="text"
+                    <ion-input label="{{textCart.fullNameShipping}}" label-placement="floating" type="text"
                       formControlName="fullNameShipping" minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="PHONE NUMBER" label-placement="floating" type="tel" inputmode="numeric"
+                    <ion-input label="{{textCart.phoneNumberShipping}}" label-placement="floating" type="tel" inputmode="numeric"
                       pattern="[0-9]*" formControlName="phoneNumberShipping" minlength="7" maxlength="10"
                       (ionInput)="validateNumberForm($event)"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="BUSINNESS NAME | STREET ADDRESS" label-placement="floating" type="text"
+                    <ion-input label="{{textCart.streetAddressShipping}}" label-placement="floating" type="text"
                       formControlName="streetAddressShipping" minlength="3"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-input label="CITY" label-placement="floating" type="text" formControlName="cityShipping"
+                    <ion-input label="{{textCart.cityShipping}}" label-placement="floating" type="text" formControlName="cityShipping"
                       minlength="3"></ion-input>
+                  </ion-item>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <!-- PAYMENT DETAIL -->
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+          <ion-col size="12" size-md="6" class="ion-no-padding">
+            <h3 class="ion-text-start">{{textCart.mainTextPayment}}</h3>
+            <ion-card>
+              <ion-card-content class="ion-no-margin ion-no-padding">
+                <ion-list>
+                  <ion-item>
+                    <ion-select label="{{textCart.paymethodLabel}}" label-placement="floating"
+                      formControlName="paymentMethodCustomer" required>
+                        <ion-select-option *ngFor="let method of textCart.formSelectPaymethod | keyvalue" [value]="method.key">
+                        {{ method.value }}
+                        </ion-select-option>
+                    </ion-select>
                   </ion-item>
                 </ion-list>
               </ion-card-content>
@@ -164,7 +163,7 @@
           <ion-button (click)="alertCheckoutCart()" color="warning"
             class="ion-button ion-text-center ion-no-margin ion-no-padding" expand="block" fill="solid"
             [disabled]="formCheckOut.invalid">
-            ORDER NOW
+            {{textCart.buttonOrder}}
           </ion-button>
         </ion-col>
       </ion-row>

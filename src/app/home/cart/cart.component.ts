@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
+import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
+import { typeCartText } from 'src/app/utils/language/home/cart/text';
 
 @Component({
   selector: 'app-cart',
@@ -26,13 +28,16 @@ export class CartComponent implements OnInit {
     NEQUI: 'NEQUI',
     DAVIPLATA: 'DAVIPLATA',
   }
+  textCart!: typeCartText; 
 
   constructor(
     private productService: ProductService,
     private requestService: RequestService,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private languageService: LanguageService,
   ) {
+    this.textCart = this.languageService.getTextHomeCart();
     this.generateFormGroup();
   }
 
