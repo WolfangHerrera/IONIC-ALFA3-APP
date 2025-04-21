@@ -62,7 +62,7 @@
           <ion-col size="12" size-md="6" class="ion-no-padding">
             <h2 class="ion-text-start">CUSTOMER DETAIL</h2>
             <h3 class="ion-text-start">CUSTOMER INFO</h3>
-            <ion-checkbox labelPlacement="end" (ionChange)="onUseSameInfoChanged($event)">
+            <ion-checkbox labelPlacement="end" (ionChange)="onUseSameInfoChanged($event)" formControlName="useSameInfo">
               USE SAME INFORMATION FOR SHIPPING?
             </ion-checkbox>
             <ion-card>
@@ -162,7 +162,7 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="12" size-md="6" class="ion-no-padding ion-margin-top ion-margin-bottom">
           <ion-button (click)="alertCheckoutCart()" color="warning"
-            class="ion-button ion-text-center ion-no-margin ion-no-padding" expand="block" fill="outline"
+            class="ion-button ion-text-center ion-no-margin ion-no-padding" expand="block" fill="solid"
             [disabled]="formCheckOut.invalid">
             ORDER NOW
           </ion-button>
