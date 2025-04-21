@@ -37,19 +37,25 @@
             </ion-card-content>
           </ion-card>
           <div *ngIf="listProducts.length !== 0" class="ion-checkout">
-            <div class="ion-checkout-items">
-              <h5 class="ion-text-end ion-no-padding ion-no-margin">
-                SUB-TOTAL
-              </h5>
-              <h6 class="ion-text-end ion-no-padding ion-no-margin">
-                {{ itemsCount }} ITEM<span *ngIf="itemsCount > 1">S</span>
-              </h6>
-            </div>
             <div class="ion-total-price">
-              <h2 class="ion-text-end">$ {{ setDotOnPrice(totalPrice) }}</h2>
-              <ion-button (click)="onCheckOutCart()" color="warning"
+              <div style="display: flex;">
+                <div class="ion-checkout-items">
+                  <h5 class="ion-text-end ion-no-padding ion-no-margin">
+                    SUB-TOTAL
+                  </h5>
+                  <h6 class="ion-text-end ion-no-padding ion-no-margin">
+                    {{ itemsCount }} ITEM<span *ngIf="itemsCount > 1">S</span>
+                  </h6>
+                </div>
+                <div style="margin-left: 10px">
+                  <h2 style="margin-top: 5px;" class="ion-text-end ion-no-margin ion-no-padding">$ {{ setDotOnPrice(totalPrice) }}</h2>
+                </div>
+              </div>
+              <div style="margin-top: 20px; display: flex; justify-content: end;">
+                <ion-button (click)="onCheckOutCart()" color="warning"
                 class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block"
                 fill="outline">{{textCart.buttonCart}}</ion-button>
+              </div>
             </div>
           </div>
         </ion-col>

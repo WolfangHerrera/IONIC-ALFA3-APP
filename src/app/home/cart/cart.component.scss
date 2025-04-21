@@ -65,12 +65,13 @@ ion-checkbox::part(container) {
   margin: 0;
   justify-content: end;
   align-items: center;
+  margin-left: 10px;
 }
 
 .ion-total-price {
+  padding-top: 20px;
   display: block;
   justify-content: end;
-  margin-left: 1vw;
   align-items: center;
 }
 
