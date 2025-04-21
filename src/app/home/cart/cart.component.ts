@@ -157,18 +157,18 @@ export class CartComponent implements OnInit {
 
   async alertDeleteItem(item_id: string, flagLastItem: boolean = false) {
     const alert = await this.alertController.create({
-      header: 'DELETE PRODUCT?',
-      message: 'IT WILL BE REMOVED FROM YOUR CART.',
+      header: this.textCart.alertTextDeleteItem.header,
+      message: this.textCart.alertTextDeleteItem.message,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'ACCEPT',
+          text: this.textCart?.alertTextDeleteItem?.buttons?.[0] ?? 'DELETE',
           handler: () => {
             this.onDeleteItem(item_id);
           },
         },
         {
-          text: 'CANCEL',
+          text: this.textCart?.alertTextDeleteItem?.buttons?.[0] ?? 'CANCEL',
           handler: () => {
             if (flagLastItem) {
               this.onUpdateItem(item_id, true);
@@ -183,9 +183,11 @@ export class CartComponent implements OnInit {
 
   async activateToastCheckoutCart() {
     let toast = await this.toastController.getTop();
+
     if (toast) {
       await toast.dismiss();
     }
+    
     toast = await this.toastController.create({
       message: 'REDIRECTING TO PAYMENT GATEWAY!',
       icon: 'cart-outline',
@@ -200,11 +202,11 @@ export class CartComponent implements OnInit {
 
   async alertFormLocalStorage() {
     const alert = await this.alertController.create({
-      header: 'DO YOU WANT TO USE THE PREVIOUS INFORMATION?',
+      header: this.textCart.alertTextLocalStorage.header,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'USE PREVIOUS INFO',
+          text: this.textCart?.alertTextLocalStorage?.buttons?.[0] ?? 'USE PREVIOUS INFO',
           handler: () => {
             const customerDetails = localStorage.getItem('customerDetails');
             if (customerDetails) {
@@ -217,7 +219,7 @@ export class CartComponent implements OnInit {
           },
         },
         {
-          text: 'START OVER',
+          text: this.textCart?.alertTextLocalStorage?.buttons?.[0] ?? 'START OVER',
           handler: async () => {
             this.formCheckOut.reset();
             localStorage.removeItem('customerDetails');
@@ -232,18 +234,18 @@ export class CartComponent implements OnInit {
 
   async alertCheckoutCart() {
     const alert = await this.alertController.create({
-      header: 'PROCEED WITH YOUR ORDER?',
-      message: 'TAP CONFIRM ORDER TO FINALIZE YOUR PURCHASE.',
+      header: this.textCart.alertTextCheckoutCart.header,
+      message: this.textCart.alertTextCheckoutCart.message,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'CONFIRM ORDER',
+          text: this.textCart?.alertTextCheckoutCart?.buttons?.[0] ?? 'CONFIRM ORDER',
           handler: async () => {
             await this.onConfirmOrder();
           },
         },
         {
-          text: 'CANCEL ORDER',
+          text: this.textCart?.alertTextCheckoutCart?.buttons?.[0] ?? 'CANCEL ORDER',
         },
       ],
     });
