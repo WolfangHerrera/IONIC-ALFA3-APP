@@ -1,5 +1,7 @@
 export type typeHomeText = {
     mainText: string,
+    segmentLabel1: string,
+    segmentLabel2: string,
     firstButtonCard: string,
     secondButtonCard: string,
     mainTextBenefits: string,
@@ -12,8 +14,26 @@ export type typeHomeText = {
 };
 
 export type typeToastText = {
-    message: string,
+    message?: string,
+    header?: string,
+    subHeader?: string,
+    buttonText?: string;
+    buttonText2?: string;
 };
+
+export const EN_toastTextWholesale: typeToastText = {
+    header: 'BUYING WHOLESALE?',
+    subHeader: 'LET’S CHAT ON WHATSAPP FOR THE BEST SERVICE!',
+    buttonText: 'YES, OPEN WHATSAPP',
+    buttonText2: 'NO, THANKS',
+}
+
+export const ES_toastTextWholesale: typeToastText = {
+    header: '¿COMPRA AL POR MAYOR?',
+    subHeader: '¡HABLEMOS POR WHATSAPP PARA UNA MEJOR ASESORIA!',
+    buttonText: 'SÍ, ABRIR WHATSAPP',
+    buttonText2: 'NO, GRACIAS',
+}
 
 export const EN_toastText = {
     message: 'ADDED TO CART!'
@@ -23,8 +43,11 @@ export const ES_toastText = {
     message: 'AGREGADO AL CARRITO!'
 };
 
+
 export const EN_homeText : typeHomeText = {
     mainText: 'OUR PRODUCTS',
+    segmentLabel1: 'POWER STRIP',
+    segmentLabel2: 'VOLTAGE REGULATOR',
     firstButtonCard: 'ADD CART',
     secondButtonCard: 'MORE INFO',
     mainTextBenefits: 'OUR BENEFITS',
@@ -39,6 +62,8 @@ export const EN_homeText : typeHomeText = {
 
 export const ES_homeText : typeHomeText = {
     mainText: 'NUESTROS PRODUCTOS',
+    segmentLabel1: 'MULTITOMA',
+    segmentLabel2: 'REGULADOR DE VOLTAJE',
     firstButtonCard: 'AGREGAR',
     secondButtonCard: 'MÁS INFO',
     mainTextBenefits: 'NUESTROS BENEFICIOS',
