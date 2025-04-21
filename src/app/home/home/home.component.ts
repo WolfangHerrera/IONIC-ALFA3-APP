@@ -21,6 +21,7 @@ export class HomeComponent implements AfterViewInit {
   products = [];
   textHome!: typeHomeText;
   textToast!: typeToastText;
+  textToastWholesale!: typeToastText;
 
   ignoreItem(item: { item_id: string }): boolean {
     const ignoredIds = ['EE4S1M', 'E4S1M'];
@@ -36,6 +37,7 @@ export class HomeComponent implements AfterViewInit {
   ) {
     this.textHome = this.languageService.getTextHomeHome();
     this.textToast = this.languageService.getTextToast();
+    this.textToastWholesale = this.languageService.getTextToastWholesale();
     this.getDataItemProduct();
   }
 
@@ -67,8 +69,8 @@ export class HomeComponent implements AfterViewInit {
       return;
     }
     const alert = await this.alertController.create({
-      header: 'BUYING WHOLESALE?',
-      subHeader: 'LET’S CHAT ON WHATSAPP FOR THE BEST SERVICE!',
+      header: this.textToastWholesale.header,
+      subHeader: this.textToastWholesale.subHeader,
       message: `
       <ion-slides class="wrapper">
       <ion-slide>
@@ -77,12 +79,12 @@ export class HomeComponent implements AfterViewInit {
       </ion-slides>
       `,
       buttons: [{
-        text: 'YES, OPEN WHATSAPP',
+        text: this.textToastWholesale.buttonText || 'YES, OPEN WHATSAPP',
         handler: () => {
           this.wholeSaleWhatsapp('yes');
         },
       },{
-        text: 'NO, THANKS',
+        text: this.textToastWholesale.buttonText2 || 'NO, THANKS',
         handler: () => {
           this.wholeSaleWhatsapp();
         },
@@ -111,9 +113,9 @@ export class HomeComponent implements AfterViewInit {
   wholeSaleWhatsapp(choice = 'not') {
     localStorage.setItem('wholeSaleWhatsapp', 'true');
     if (choice === 'yes') {
-      window.open('https://wa.me/573229873311', '_blank');
+      const message = encodeURIComponent('Hello, I am interested in buying wholesale.');
+      window.open(`https://wa.me/573229873311?text=${message}`, '_blank');
     }
-
   }
   
 

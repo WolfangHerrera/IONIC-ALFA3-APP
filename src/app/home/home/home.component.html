@@ -24,10 +24,10 @@
           <h1 class="ion-text-center">{{textHome.mainText}}</h1>
           <ion-segment [(ngModel)]="selectedSegment" color="warning">
             <ion-segment-button value="first">
-              <ion-label>MULTITOMAS</ion-label>
+              <ion-label>{{textHome.segmentLabel1}}</ion-label>
             </ion-segment-button>
             <ion-segment-button value="second">
-              <ion-label>REGULADORES</ion-label>
+              <ion-label>{{textHome.segmentLabel2}}</ion-label>
             </ion-segment-button>
           </ion-segment>
           <ion-segment-view>
@@ -187,7 +187,7 @@
 <ng-template #cardProd let-product="product">
   <ion-card class="ion-no-margin ion-no-padding">
     <div style="background-color: white; text-align: center">
-      <img alt="prod-img" style="max-height: 300px;" src="{{ product.img_url }}" (click)="showImage(product.img_url)"/>
+      <img alt="prod-img" style="max-height: 250px;" src="{{ product.img_url }}" (click)="showImage(product.img_url)"/>
     </div>
     <ion-card-header>
       <ion-card-title class="ion-text-center ion-text-wrap">{{

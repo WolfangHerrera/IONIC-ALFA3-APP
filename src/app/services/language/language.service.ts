@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { EN_tabHomeText, EN_tabOrderText, ES_tabHomeText, ES_tabOrderText } from 'src/app/utils/language/tab/text';
 import { EN_AccountText, ES_AccountText } from 'src/app/utils/language/home/account/text';
-import { EN_homeText, EN_toastText, ES_homeText, ES_toastText } from 'src/app/utils/language/home/home/text';
+import { EN_homeText, EN_toastText, EN_toastTextWholesale, ES_homeText, ES_toastText, ES_toastTextWholesale } from 'src/app/utils/language/home/home/text';
 import { EN_orderText, ES_orderText, orderStatusTranslations } from 'src/app/utils/language/order/text';
+import { EN_cartText, ES_cartText } from 'src/app/utils/language/home/cart/text';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,16 @@ export class LanguageService {
     return this.isSpanishLanguage() ? ES_toastText : EN_toastText;
   }
 
+  getTextToastWholesale(){
+    return this.isSpanishLanguage() ? ES_toastTextWholesale : EN_toastTextWholesale;
+  }
+
   getTextHomeTab(){
     return this.isSpanishLanguage() ? ES_tabHomeText : EN_tabHomeText;
+  }
+
+  getTextHomeCart(){
+    return this.isSpanishLanguage() ? ES_cartText : EN_cartText;
   }
 
   getTextOrderTab(){

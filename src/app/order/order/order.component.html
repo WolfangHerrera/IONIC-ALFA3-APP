@@ -6,7 +6,7 @@
           <h1 class="ion-text-start">{{ textOrder.mainTitle }}</h1>
           <ion-card class="ion-no-margin ion-no-padding">
             <ion-item class="ion-margin-sm-0 ion-padding-sm-0">
-              <ion-label class="ion-text-start">{{ textOrder.subTitle }} {{ dataOrder.order_id }}</ion-label>
+              <ion-label class="ion-text-start">{{ dataOrder.order_id }}</ion-label>
               <ion-badge [color]="
                   dataOrder?.status === 'CONFIRMED' ? 'success' : 'warning'
                 ">{{ orderStatus }}</ion-badge>
