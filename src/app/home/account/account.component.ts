@@ -88,14 +88,14 @@ export class AccountComponent implements OnInit {
           this.flagFade = true;
           this.flagIsLogged = true;
           this.responseLogin = response;
-          this.activateToast('REGISTER SUCCESSFUL!', 'checkmark-circle-outline');
+          this.activateToast(this.textAccount.notLoginUser.toastTextRegister.message, 'checkmark-circle-outline');
           this.flagFade = false;
         }
       },
       async (responseError) => {
         if (responseError.error.MESSAGE === 'USER ALREADY EXIST') {
           await this.activateToast(
-            'SORRY, THAT USERNAME IS ALREADY TAKEN! :)',
+            this.textAccount.notLoginUser.toastTextUserAlreadyExist.message,
             'person-circle-outline'
           );
         }
@@ -110,14 +110,14 @@ export class AccountComponent implements OnInit {
           this.flagFade = true;
           this.flagIsLogged = true;
           this.responseLogin = response;
-          this.activateToast('LOGIN SUCCESSFUL!', 'checkmark-circle-outline');
+          this.activateToast(this.textAccount.notLoginUser.toastTextLogin.message, 'checkmark-circle-outline');
           this.flagFade = false;
         }
       },
       async (responseError) => {
         if (responseError.error.MESSAGE === 'USER NOT EXIST') {
           await this.activateToast(
-            'SORRY, WE COULDN NOT FIND AN ACCOUNT WITH THAT USERNAME! :)',
+            this.textAccount.notLoginUser.toastTextUserNotExist.message,
             'person-circle-outline'
           );
           setTimeout(async () => {
@@ -126,7 +126,7 @@ export class AccountComponent implements OnInit {
         }
         if (responseError.error.MESSAGE === 'INVALID PASSWORD') {
           await this.activateToast(
-            'SORRY, THAT PASSWORD IS NOT RIGHT! :)',
+            this.textAccount.notLoginUser.toastTextInvalidPassword.message,
             'person-circle-outline'
           );
         }
@@ -136,18 +136,18 @@ export class AccountComponent implements OnInit {
 
   async alertCreateAccount() {
     const alert = await this.alertController.create({
-      header: 'DO YOU WANT TO CREATE AN ACCOUNT?',
-      message: 'TAP ACCEPT TO CREATE YOUR ACCOUNT.',
+      header: this.textAccount.notLoginUser.alertTextCreateAccount.header,
+      message: this.textAccount.notLoginUser.alertTextCreateAccount.message,
       backdropDismiss: false,
       buttons: [
         {
-          text: 'ACCEPT',
+          text: this.textAccount?.notLoginUser?.alertTextCreateAccount?.buttons?.[0] || 'ACCEPT',
           handler: () => {
             this.flagRegister = true;
           },
         },
         {
-          text: 'CANCEL',
+          text: this.textAccount?.notLoginUser?.alertTextCreateAccount?.buttons?.[1] || 'CANCEL',
         },
       ],
     });
@@ -159,7 +159,7 @@ export class AccountComponent implements OnInit {
     this.flagFade = true;
     this.loginForm.reset();
     this.flagIsLogged = false;
-    this.activateToast('LOGOUT SUCCESSFUL!', 'checkmark-circle-outline');
+    this.activateToast(this.textAccount.notLoginUser.toastTextLogout.message, 'checkmark-circle-outline');
     this.responseLogin = null;
     this.flagFade = false;
   }

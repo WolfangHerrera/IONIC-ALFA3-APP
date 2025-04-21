@@ -11,12 +11,83 @@ type typeNotLoginUserText = {
     passwordLabel: string,
     buttonCard: string,
     buttonCard2: string,
+    alertTextCreateAccount: alertText,
+    toastTextRegister: alertText,
+    toastTextUserAlreadyExist: alertText,
+    toastTextLogin: alertText,
+    toastTextUserNotExist: alertText,
+    toastTextInvalidPassword: alertText,
+    toastTextLogout: alertText,
 };
+
+type alertText = {
+    header?: string,
+    message?: string,
+    buttons?: string[]
+}
 
 export type typeAccountText = {
     loginUser: typeLoginUserText,
     notLoginUser: typeNotLoginUserText,
 };
+
+const EN_toastTextRegister : alertText = {
+    message: 'REGISTER SUCCESSFUL!',
+}
+
+const ES_toastTextRegister : alertText = {
+    message: 'REGISTRO EXITOSO!',
+}
+
+const EN_toastTextUserAlreadyExist : alertText = {
+    message: 'SORRY, THAT USERNAME IS ALREADY TAKEN! :)',
+}
+const ES_toastTextUserAlreadyExist : alertText = {
+    message: 'LO SENTIMOS, ESE NOMBRE DE USUARIO YA ESTÁ OCUPADO! :)',
+}
+
+const EN_toastTextLogin : alertText = {
+    message: 'LOGIN SUCCESSFUL!',
+}
+
+const ES_toastTextLogin : alertText = {
+    message: 'INICIO DE SESIÓN EXITOSO!',
+}
+
+const EN_toastTextUserNotExist : alertText = {
+    message: 'SORRY, WE COULDN NOT FIND AN ACCOUNT WITH THAT USERNAME! :)',
+}
+const ES_toastTextUserNotExist : alertText = {
+    message: 'LO SENTIMOS, NO PUDIMOS ENCONTRAR UNA CUENTA CON ESE NOMBRE DE USUARIO! :)',
+}
+
+const EN_toastTextInvalidPassword : alertText = {
+    message: 'SORRY, THAT PASSWORD IS NOT RIGHT! :)',
+}
+
+const ES_toastTextInvalidPassword : alertText = {
+    message: 'LO SENTIMOS, ESA CONTRASEÑA NO ES CORRECTA! :)',
+}
+
+const EN_toastTextLogout : alertText = {
+    message: 'LOGOUT SUCCESSFUL!',
+}
+
+const ES_toastTextLogout : alertText = {
+    message: 'SESIÓN CERRADA EXITOSAMENTE!',
+}
+
+const EN_alertCreateAccount: alertText = {
+    header: 'DO YOU WANT TO CREATE AN ACCOUNT?',
+    message: 'TAP ACCEPT TO CREATE YOUR ACCOUNT.',
+    buttons: ['ACCEPT', 'CANCEL'],
+}
+
+const ES_alertCreateAccount: alertText = {
+    header: '¿DESEA CREAR UNA CUENTA?',
+    message: 'TAP EN ACEPTAR PARA CREAR SU CUENTA.',
+    buttons: ['ACEPTAR', 'CANCELAR'],
+}
 
 const EN_loginUserText : typeLoginUserText = {
     mainText: 'YOUR ACCOUNT',
@@ -36,6 +107,13 @@ const EN_notLoginUserText : typeNotLoginUserText = {
     passwordLabel: 'PASSWORD',
     buttonCard: 'LOGIN',
     buttonCard2: 'REGISTER',
+    alertTextCreateAccount: EN_alertCreateAccount,
+    toastTextRegister: EN_toastTextRegister,
+    toastTextUserAlreadyExist: EN_toastTextUserAlreadyExist,
+    toastTextLogin: EN_toastTextLogin,
+    toastTextUserNotExist: EN_toastTextUserNotExist,
+    toastTextInvalidPassword: EN_toastTextInvalidPassword,
+    toastTextLogout: EN_toastTextLogout,
 };
 
 const ES_notLoginUserText : typeNotLoginUserText = {
@@ -46,6 +124,13 @@ const ES_notLoginUserText : typeNotLoginUserText = {
     passwordLabel: 'CONTRASEÑA',
     buttonCard: 'INICIAR SESIÓN',
     buttonCard2: 'REGISTRAR',
+    alertTextCreateAccount: ES_alertCreateAccount,
+    toastTextRegister: ES_toastTextRegister,
+    toastTextUserAlreadyExist: ES_toastTextUserAlreadyExist,
+    toastTextLogin: ES_toastTextLogin,
+    toastTextUserNotExist: ES_toastTextUserNotExist,
+    toastTextInvalidPassword: ES_toastTextInvalidPassword,
+    toastTextLogout: ES_toastTextLogout,
 };
 
 export const EN_AccountText : typeAccountText = {
