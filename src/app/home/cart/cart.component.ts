@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/products/request.service';
@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   formSelectPaymethod = {
     CARD: 'CREDIT CARD / DEBIT CARD',
     ACCOUNT: 'ACCOUNT TRANSFER (PSE)',
-    BANK: 'ACCOUNT TRANSFER (BANK)',
+    BANCOLOMBIA: 'BANCOLOMBIA (ACCOUNT)',
     NEQUI: 'NEQUI',
     DAVIPLATA: 'DAVIPLATA',
   }
@@ -60,6 +60,7 @@ export class CartComponent implements OnInit {
       phoneNumberShipping: new FormControl(''),
       streetAddressShipping: new FormControl(''),
       cityShipping: new FormControl(''),
+      useSameInfo: new FormControl(false),
     });
   }
 
@@ -79,6 +80,10 @@ export class CartComponent implements OnInit {
   }
 
   onCheckOutCart() {
+    const customerDetails = localStorage.getItem('customerDetails');
+    if (customerDetails) {
+      this.alertFormLocalStorage();
+    }
     this.flagCustomerDetails = true;
   }
 
@@ -88,23 +93,35 @@ export class CartComponent implements OnInit {
     this.getDataProductService();
   }
 
+
   async onConfirmOrder() {
     const orderDetails = {
       CUSTOMER_DETAILS: this.formCheckOut.value,
       PRODUCTS_CART: this.listProducts,
       TOTAL_PRICE: this.totalPrice,
     };
+    localStorage.setItem('customerDetails', JSON.stringify(this.formCheckOut.value));
     await this.requestService
       .createOrder(orderDetails)
       .subscribe(async (response) => {
-        if (response) {
-          this.flagCustomerDetails = false;
-          this.flagClearCart = true;
-          await this.onClearCart();
-          await this.activateToastCheckoutCart();
+        this.flagCustomerDetails = false;
+        this.flagClearCart = true;
+        await this.onClearCart();
+        await this.activateToastCheckoutCart();
+        if (response['STATUS'] === 'MP') {
           setTimeout(() => {
             window.location.href = response['URL_PAYMENT']
           }, 1000);
+        }
+        else{
+            setTimeout(() => {
+            const url = response['URL_PAYMENT'];
+            if (url.startsWith('https://')) {
+              window.location.href = url;
+            } else {
+              console.error('Invalid URL:', url);
+            }
+            }, 1000);
         }
       });
   }
@@ -174,6 +191,38 @@ export class CartComponent implements OnInit {
     });
 
     await toast.present();
+  }
+
+  async alertFormLocalStorage() {
+    const alert = await this.alertController.create({
+      header: 'DO YOU WANT TO USE THE PREVIOUS INFORMATION?',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'USE PREVIOUS INFO',
+          handler: () => {
+            const customerDetails = localStorage.getItem('customerDetails');
+            if (customerDetails) {
+              this.formCheckOut.setValue(JSON.parse(customerDetails));
+            }
+            const flagShippingDetails = localStorage.getItem('flagShippingDetails');
+            if (flagShippingDetails) {
+              this.flagShippingDetails = true;
+            }
+          },
+        },
+        {
+          text: 'START OVER',
+          handler: async () => {
+            this.formCheckOut.reset();
+            localStorage.removeItem('customerDetails');
+            localStorage.removeItem('flagShippingDetails');
+            this.flagShippingDetails = false;
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   async alertCheckoutCart() {
