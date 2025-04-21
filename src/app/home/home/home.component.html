@@ -20,7 +20,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col class="ion-padding ion-margin-bottom ion-col-products">
+        <ion-col class="ion-padding ion-margin-bottom">
           <h1 class="ion-text-center">{{textHome.mainText}}</h1>
           <ion-segment [(ngModel)]="selectedSegment" color="warning">
             <ion-segment-button value="first">
@@ -52,7 +52,7 @@
     <ion-grid class="ion-hide-md-down ion-no-margin ion-no-padding">
       <h2 class="ion-text-center">{{textHome.mainTextBenefits}}</h2>
       <ion-row class="ion-justify-content-center ion-align-items-center ion-no-margin ion-no-padding">
-        <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
+        <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom">
           <ion-card class="ion-no-margin ion-no-padding">
             <div style="background-color: white; text-align: center; padding: 2vh 0;">
               <svg width="90" height="72" viewBox="0 0 90 81" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,9 +108,9 @@
             </div>
           </ion-card>
           <h3 class="ion-text-center">{{textHome.firstMainCardBenefits}}</h3>
-          <h6 class="ion-text-justify">{{textHome.firstSubtextCardBenefits}}</h6>
+            <h6 class="ion-text-justify">{{textHome.firstSubtextCardBenefits}}</h6>
         </ion-col>
-        <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
+        <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom">
           <ion-card class="ion-no-margin ion-no-padding">
             <div style="background-color: white; text-align: center; padding: 2vh 0;">
               <svg width="110" height="72" viewBox="0 0 78 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,10 +133,10 @@
               </svg>
             </div>
           </ion-card>
-          <h3 class="ion-text-center">{{textHome.secondMainCardBenefits}}</h3>
-          <h6 class="ion-text-justify">{{textHome.secondSubtextCardBenefits}}</h6>
+          <h3 class="ion-text-center ion-text-wrap">{{textHome.secondMainCardBenefits}}</h3>
+          <h6 class="ion-text-justify ion-text-wrap">{{textHome.secondSubtextCardBenefits}}</h6>
         </ion-col>
-        <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom ion-col-products">
+        <ion-col size-sm="12" size-md="3" class="ion-padding ion-margin-bottom">
           <ion-card class="ion-no-margin ion-no-padding">
             <div style="background-color: white; text-align: center; padding: 2vh 0;">
               <svg xmlns="http://www.w3.org/2000/svg" width="98" height="72" viewBox="0 0 67 50" fill="none">
