@@ -26,6 +26,8 @@ export type typeCartText = {
     alertTextDeleteItem: alertText
     alertTextLocalStorage: alertText
     alertTextCheckoutCart: alertText
+    toastCheckoutCart: string
+    toastCheckoutCartRedirect: string
 };
 
 type alertText = {
@@ -141,6 +143,8 @@ export const EN_cartText : typeCartText = {
     alertTextDeleteItem: EN_alertTextDeleteItem,
     alertTextLocalStorage: EN_alertTextLocalStorage,
     alertTextCheckoutCart: EN_alertTextCheckoutCart,
+    toastCheckoutCart: 'ORDER PLACED SUCCESSFULLY',
+    toastCheckoutCartRedirect: 'REDIRECTING TO PAYMENT GATEWAY!',
 };
 
 
@@ -172,4 +176,6 @@ export const ES_cartText : typeCartText = {
     alertTextDeleteItem: ES_alertTextDeleteItem,
     alertTextLocalStorage: ES_alertTextLocalStorage,
     alertTextCheckoutCart: ES_alertTextCheckoutCart,
+    toastCheckoutCart: 'PEDIDO REALIZADO CON ÉXITO',
+    toastCheckoutCartRedirect: '¡REDIRIGIENDO A MERCADOPAGO!',
 };

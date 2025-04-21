@@ -112,23 +112,15 @@ export class CartComponent implements OnInit {
         this.flagCustomerDetails = false;
         this.flagClearCart = true;
         await this.onClearCart();
-        await this.activateToastCheckoutCart();
-        if (response['STATUS'] === 'MP') {
-          setTimeout(() => {
-            window.location.href = response['URL_PAYMENT']
-          }, 1000);
-        }
-        else{
-            setTimeout(() => {
-            const url = response['URL_PAYMENT'];
-            if (url.startsWith('https://')) {
-              window.location.href = url;
-            } else {
-              console.error('Invalid URL:', url);
-            }
-            }, 1000);
-        }
+        await this.activateToastCheckoutCart(response);
+        setTimeout(() => {
+          window.location.href = response['URL_PAYMENT']
+        }, 1000);
       });
+  }
+
+  buildMessageToastCheckoutCart(response: any) {
+    return response['STATUS'] === 'MP' ? this.textCart.toastCheckoutCartRedirect : this.textCart.toastCheckoutCart;
   }
 
   async getDataProductService() {
@@ -181,15 +173,16 @@ export class CartComponent implements OnInit {
     await alert.present();
   }
 
-  async activateToastCheckoutCart() {
+  async activateToastCheckoutCart(status : string) {
+    const message = this.buildMessageToastCheckoutCart(status);
     let toast = await this.toastController.getTop();
 
     if (toast) {
       await toast.dismiss();
     }
-    
+
     toast = await this.toastController.create({
-      message: 'REDIRECTING TO PAYMENT GATEWAY!',
+      message: message,
       icon: 'cart-outline',
       duration: 2500,
       positionAnchor: 'footer',
