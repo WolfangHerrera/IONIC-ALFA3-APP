@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   formSelectPaymethod = {
     CARD: 'CREDIT CARD / DEBIT CARD',
     ACCOUNT: 'ACCOUNT TRANSFER (PSE)',
-    BANK: 'ACCOUNT TRANSFER (BANK)',
+    BANCOLOMBIA: 'BANCOLOMBIA (ACCOUNT)',
     NEQUI: 'NEQUI',
     DAVIPLATA: 'DAVIPLATA',
   }
@@ -97,14 +97,24 @@ export class CartComponent implements OnInit {
     await this.requestService
       .createOrder(orderDetails)
       .subscribe(async (response) => {
-        if (response) {
-          this.flagCustomerDetails = false;
-          this.flagClearCart = true;
-          await this.onClearCart();
-          await this.activateToastCheckoutCart();
+        this.flagCustomerDetails = false;
+        this.flagClearCart = true;
+        await this.onClearCart();
+        await this.activateToastCheckoutCart();
+        if (response['STATUS'] === 'MP') {
           setTimeout(() => {
             window.location.href = response['URL_PAYMENT']
           }, 1000);
+        }
+        else{
+            setTimeout(() => {
+            const url = response['URL_PAYMENT'];
+            if (url.startsWith('https://')) {
+              window.location.href = url;
+            } else {
+              console.error('Invalid URL:', url);
+            }
+            }, 1000);
         }
       });
   }
