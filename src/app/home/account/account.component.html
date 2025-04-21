@@ -31,18 +31,18 @@
             <ion-card-content>
               <form [formGroup]="loginForm">
                 <ion-item>
-                  <ion-input label="{{textAccount.notLoginUser.usernameLabel}}" label-placement="floating" type="text"
-                    formControlName="usernameCustomer" required autocomplete="off" autocorrect="off" spellcheck="false">
-                  </ion-input>
+                  <ion-input label="{{textAccount.notLoginUser.usernameLabel}}" label-placement="floating" type="tel" inputmode="numeric"
+                  pattern="[0-9]*" formControlName="usernameCustomer" minlength="7" maxlength="10" required autocomplete="off" autocorrect="off" spellcheck="false"
+                  (ionInput)="validateNumberForm($event)"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-input label="{{textAccount.notLoginUser.passwordLabel}}" label-placement="floating"
-                    type="password" formControlName="passwordCustomer" required autocomplete="new-password"
+                    type="password" formControlName="passwordCustomer" minlength="7" required autocomplete="new-password"
                     autocorrect="off" spellcheck="false">
                   </ion-input>
                 </ion-item>
-                <ion-button *ngIf="!flagRegister" (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
-                  expand="full">{{textAccount.notLoginUser.buttonCard}}</ion-button>
+                <ion-button (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
+                  expand="full">{{ !flagRegister ? textAccount.notLoginUser.buttonCard : textAccount.notLoginUser.buttonCard2}}</ion-button>
               </form>
             </ion-card-content>
           </ion-card>

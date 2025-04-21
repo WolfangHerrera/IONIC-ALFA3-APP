@@ -10,6 +10,7 @@ type typeNotLoginUserText = {
     usernameLabel: string,
     passwordLabel: string,
     buttonCard: string,
+    buttonCard2: string,
 };
 
 export type typeAccountText = {
@@ -31,18 +32,20 @@ const EN_notLoginUserText : typeNotLoginUserText = {
     mainText: 'ACCOUNT',
     titleCard: 'ALFA3 ELECTRICS',
     subtitleCard: 'HEY! WELCOME TO OUR SHOP',
-    usernameLabel: 'USERNAME',
+    usernameLabel: 'DOCUMENT NUMBER',
     passwordLabel: 'PASSWORD',
-    buttonCard: 'LOGIN'
+    buttonCard: 'LOGIN',
+    buttonCard2: 'REGISTER',
 };
 
 const ES_notLoginUserText : typeNotLoginUserText = {
     mainText: 'CUENTA',
     titleCard: 'ALFA3 ELÉCTRICOS',
     subtitleCard: 'HEY! BIENVENIDO A NUESTRA TIENDA',
-    usernameLabel: 'USUARIO',
+    usernameLabel: 'NÚMERO DE DOCUMENTO',
     passwordLabel: 'CONTRASEÑA',
-    buttonCard: 'INICIAR SESIÓN'
+    buttonCard: 'INICIAR SESIÓN',
+    buttonCard2: 'REGISTRAR',
 };
 
 export const EN_AccountText : typeAccountText = {

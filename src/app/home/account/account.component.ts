@@ -17,7 +17,7 @@ export class AccountComponent implements OnInit {
   flagIsLogged: boolean = false;
   flagFade: boolean = false;
   responseLogin: any;
-  dataRequestLogin!: {
+  dataRequest!: {
     USERNAME: string;
     PASSWORD: string;
   };
@@ -60,6 +60,11 @@ export class AccountComponent implements OnInit {
     await toast.present();
   }
 
+  validateNumberForm(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, '');
+  }
+
   handleRefresh(event: CustomEvent) {
     setTimeout(() => {
       (event.target as HTMLIonRefresherElement).complete();
@@ -68,7 +73,7 @@ export class AccountComponent implements OnInit {
 
   async onSubmitLogin() {
     if (this.loginForm.valid) {
-      this.dataRequestLogin = {
+      this.dataRequest = {
         USERNAME: this.loginForm.get('usernameCustomer')?.value,
         PASSWORD: this.loginForm.get('passwordCustomer')?.value,
       };
@@ -76,8 +81,30 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  async sendDataRegisterUser(){
+    this.requestService.registerUser(this.dataRequest).subscribe(
+      async (response) => {
+        if (response) {
+          this.flagFade = true;
+          this.flagIsLogged = true;
+          this.responseLogin = response;
+          this.activateToast('REGISTER SUCCESSFUL!', 'checkmark-circle-outline');
+          this.flagFade = false;
+        }
+      },
+      async (responseError) => {
+        if (responseError.error.MESSAGE === 'USER ALREADY EXIST') {
+          await this.activateToast(
+            'SORRY, THAT USERNAME IS ALREADY TAKEN! :)',
+            'person-circle-outline'
+          );
+        }
+      }
+    );
+  }
+
   async sentDataLoginUser() {
-    this.requestService.loginUser(this.dataRequestLogin).subscribe(
+    this.requestService.loginUser(this.dataRequest).subscribe(
       async (response) => {
         if (response) {
           this.flagFade = true;
