@@ -18,6 +18,8 @@ type typeNotLoginUserText = {
     toastTextUserNotExist: alertText,
     toastTextInvalidPassword: alertText,
     toastTextLogout: alertText,
+    toastTextUserRegister: alertText,
+    toastTextRegisterFailed: alertText,
 };
 
 type alertText = {
@@ -30,6 +32,22 @@ export type typeAccountText = {
     loginUser: typeLoginUserText,
     notLoginUser: typeNotLoginUserText,
 };
+
+const EN_toastTextRegisterFailed : alertText = {
+    message: 'FAILED TO REGISTER USER!',
+}
+
+const ES_toastTextRegisterFailed : alertText = {
+    message: 'FALLO EN EL REGISTRO DEL USUARIO!',
+}
+
+const EN_toastTextUserRegister : alertText = {
+    message: 'USER REGISTER SUCCESSFUL!',
+}
+
+const ES_toastTextUserRegister : alertText = {
+    message: 'USUARIO REGISTRADO EXITOSAMENTE!',
+}
 
 const EN_toastTextRegister : alertText = {
     message: 'REGISTER SUCCESSFUL!',
@@ -114,6 +132,8 @@ const EN_notLoginUserText : typeNotLoginUserText = {
     toastTextUserNotExist: EN_toastTextUserNotExist,
     toastTextInvalidPassword: EN_toastTextInvalidPassword,
     toastTextLogout: EN_toastTextLogout,
+    toastTextUserRegister: EN_toastTextUserRegister,
+    toastTextRegisterFailed: EN_toastTextRegisterFailed,
 };
 
 const ES_notLoginUserText : typeNotLoginUserText = {
@@ -131,6 +151,8 @@ const ES_notLoginUserText : typeNotLoginUserText = {
     toastTextUserNotExist: ES_toastTextUserNotExist,
     toastTextInvalidPassword: ES_toastTextInvalidPassword,
     toastTextLogout: ES_toastTextLogout,
+    toastTextUserRegister: ES_toastTextUserRegister,
+    toastTextRegisterFailed: ES_toastTextRegisterFailed,
 };
 
 export const EN_AccountText : typeAccountText = {

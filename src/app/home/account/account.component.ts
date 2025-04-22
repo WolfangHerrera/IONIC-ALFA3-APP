@@ -87,7 +87,7 @@ export class AccountComponent implements OnInit {
         if (response) {
           this.flagFade = true;
           this.flagIsLogged = true;
-          this.responseLogin = response;
+          await this.sentDataLoginUser();
           this.activateToast(this.textAccount.notLoginUser.toastTextRegister.message, 'checkmark-circle-outline');
           this.flagFade = false;
         }
@@ -142,8 +142,9 @@ export class AccountComponent implements OnInit {
       buttons: [
         {
           text: this.textAccount?.notLoginUser?.alertTextCreateAccount?.buttons?.[0] || 'ACCEPT',
-          handler: () => {
+          handler: async () => {
             this.flagRegister = true;
+            await this.sendDataRegisterUser()
           },
         },
         {
