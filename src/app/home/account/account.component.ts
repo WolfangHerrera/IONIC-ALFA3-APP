@@ -114,6 +114,7 @@ export class AccountComponent implements OnInit {
           this.responseLogin = response;
           this.activateToast(this.textAccount.notLoginUser.toastTextLogin.message, 'checkmark-circle-outline');
           this.flagFade = false;
+          await this.saveDataFromOrderToUser();
         }
       },
       async (responseError) => {
@@ -134,6 +135,29 @@ export class AccountComponent implements OnInit {
         }
       }
     );
+  }
+
+  async saveDataFromOrderToUser(){
+    const customerDetails = JSON.parse(localStorage.getItem('customerDetails') || '{}');
+    
+    if (customerDetails && customerDetails.fullNameCustomer) {
+      this.responseLogin.username = customerDetails.fullNameCustomer;
+      const dataRequest = {
+        USERNAME: String(customerDetails.documentNumberCustomer),
+        CUSTOMER_DETAILS: customerDetails
+      }
+      console.log('dataRequest', dataRequest);
+      
+      this.requestService.updateUser(dataRequest).subscribe(
+        async (response) => {
+          if (response) {
+            console.log('response', response);
+            await this.activateToast(
+              'USER UPDATED!!!!!!',
+              'person-circle-outline'
+            );
+          }})
+    }
   }
 
   async alertCreateAccount() {

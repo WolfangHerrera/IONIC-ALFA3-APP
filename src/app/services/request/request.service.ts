@@ -27,6 +27,15 @@ export class RequestService {
     return this.http.post(`${this.apiUrl}/registerUser`, dataRequest);
   }
 
+  updateUser(dataRequest: {
+    USERNAME: string;
+    CUSTOMER_DETAILS: string;
+  }): Observable<any> {
+    console.log('updateUser', dataRequest);
+    
+    return this.http.put(`${this.apiUrl}/updateUser`, dataRequest);
+  }
+
   createOrder(dataRequest: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/createOrder`, dataRequest);
   }

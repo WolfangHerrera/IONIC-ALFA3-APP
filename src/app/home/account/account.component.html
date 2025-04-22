@@ -8,7 +8,7 @@
           <ion-card>
             <ion-card-header class="ion-text-center">
               <ion-card-title>{{ responseLogin.username }}</ion-card-title>
-              <ion-card-subtitle>{{ responseLogin.role }}</ion-card-subtitle>
+              <ion-card-subtitle>HELLO! {{ responseLogin.role || 'USER' }}</ion-card-subtitle>
             </ion-card-header>
             <div style="display: flex; justify-content: center;">
               <ion-avatar>
@@ -28,6 +28,11 @@
               <ion-card-title>{{textAccount.notLoginUser.titleCard}}</ion-card-title>
               <ion-card-subtitle>{{textAccount.notLoginUser.subtitleCard}}</ion-card-subtitle>
             </ion-card-header>
+            <div style="display: flex; justify-content: center;">
+              <ion-avatar>
+                <img alt="Silhouette of a person's head" src="assets/icons/wd-logo.png" />
+              </ion-avatar>
+            </div>
             <ion-card-content>
               <form [formGroup]="loginForm">
                 <ion-item>
