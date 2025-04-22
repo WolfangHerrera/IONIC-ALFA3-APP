@@ -22,6 +22,7 @@ export class RequestService {
 
   registerUser(dataRequest: {
     USERNAME: string;
+    PASSWORD: string;
   }): Observable<any> {
     return this.http.post(`${this.apiUrl}/registerUser`, dataRequest);
   }
