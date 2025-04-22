@@ -87,9 +87,11 @@ export class AccountComponent implements OnInit {
         if (response) {
           this.flagFade = true;
           this.flagIsLogged = true;
-          await this.sentDataLoginUser();
           this.activateToast(this.textAccount.notLoginUser.toastTextRegister.message, 'checkmark-circle-outline');
           this.flagFade = false;
+          setTimeout(async () => {
+            await this.sentDataLoginUser();
+          }, 1500);
         }
       },
       async (responseError) => {
