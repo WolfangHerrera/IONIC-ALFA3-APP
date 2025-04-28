@@ -55,7 +55,7 @@ export class HomePage implements OnInit, AfterViewInit{
   disableLoading() {
     setTimeout(() => {
       this.isLoading = false;
-      this.tabs.select('Home');
+      this.tabs.select('Account');
     }, 1000);
   }
 
