@@ -7,8 +7,8 @@
           <h1 class="ion-text-start">{{textAccount.loginUser.mainText}}</h1>
           <ion-card>
             <ion-card-header class="ion-text-center">
-              <ion-card-title>{{ responseLogin.customer_details.fullNameCustomer || responseLogin.username }}</ion-card-title>
-              <ion-card-subtitle>HELLO! {{ responseLogin.role || 'USER' }}</ion-card-subtitle>
+              <ion-card-title>{{ responseLogin.username }}</ion-card-title>
+              <ion-card-subtitle>HELLO! {{ responseLogin.role }}</ion-card-subtitle>
             </ion-card-header>
             <div style="display: flex; justify-content: center;">
               <ion-avatar>
@@ -16,7 +16,27 @@
               </ion-avatar>
             </div>
             <ion-card-content>
-              <ion-button expand="full" (click)="onLogout()">{{textAccount.loginUser.buttonCard}}</ion-button>
+              <div class="">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Title</ion-card-title>
+                    <ion-card-subtitle>Subtitle</ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p>Lorrem</p>
+                  </ion-card-content>
+                </ion-card>
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Title</ion-card-title>
+                    <ion-card-subtitle>Subtitle</ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p>Lorrem</p>
+                  </ion-card-content>
+                </ion-card>
+              </div>
+              <ion-button expand="full" color="warning" (click)="onLogout()">LOGOUT</ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>

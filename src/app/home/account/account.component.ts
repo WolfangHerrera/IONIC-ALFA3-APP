@@ -33,6 +33,12 @@ export class AccountComponent implements OnInit {
   ) {
     this.textAccount = this.languageService.getTextHomeAccount();
     this.generateFormGroup();
+    this.flagIsLogged = localStorage.getItem('flagIsLogged') === 'true';
+    console.log('flagIsLogged', this.flagIsLogged);
+    if (this.flagIsLogged) {
+      console.log('flagIsLogged', this.flagIsLogged);
+      this.responseLogin = JSON.parse(localStorage.getItem('userData') || '{}');
+    }
   }
 
   ngOnInit() {}
@@ -111,10 +117,11 @@ export class AccountComponent implements OnInit {
           this.flagFade = true;
           this.flagIsLogged = true;
           localStorage.setItem('flagIsLogged', 'true');
+          console.log('response', response);
           this.responseLogin = response;
           this.activateToast(this.textAccount.notLoginUser.toastTextLogin.message, 'checkmark-circle-outline');
           this.flagFade = false;
-          await this.saveDataFromOrderToUser();
+          localStorage.setItem('userData', JSON.stringify(response));
         }
       },
       async (responseError) => {
@@ -137,26 +144,16 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  async saveDataFromOrderToUser(){
-    const customerDetails = JSON.parse(localStorage.getItem('customerDetails') || '{}');
-    
-    if (customerDetails && customerDetails.fullNameCustomer) {
-      this.responseLogin.username = customerDetails.fullNameCustomer;
-      const dataRequest = {
-        USERNAME: String(customerDetails.documentNumberCustomer),
-        CUSTOMER_DETAILS: customerDetails
-      }
-      
-      this.requestService.updateUser(dataRequest).subscribe(
-        async (response) => {
-          if (response) {
-            console.log('response', response);
-            await this.activateToast(
-              'USER UPDATED!!!!!!',
-              'person-circle-outline'
-            );
-          }})
-    }
+  async saveDataFromOrderToUser(response: any){
+    // this.requestService.updateUser(dataRequest).subscribe(
+    //   async (response) => {
+    //     if (response) {
+    //       console.log('response', response);
+    //       await this.activateToast(
+    //         'USER UPDATED!!!!!!',
+    //         'person-circle-outline'
+    //       );
+    //     }})
   }
 
   async alertCreateAccount() {

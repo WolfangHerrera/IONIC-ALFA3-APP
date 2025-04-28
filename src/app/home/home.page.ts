@@ -102,10 +102,11 @@ export class HomePage implements OnInit, AfterViewInit{
   }
 
   async showWelcomeMessage() {
-    // const wholeSaleWhatsapp = localStorage.getItem('wholeSaleWhatsapp');
-    // if (wholeSaleWhatsapp === 'true') {
-    //   return;
-    // }
+    const wholeSaleWhatsapp = localStorage.getItem('wholeSaleWhatsapp');
+    const isUserLoggedIn = localStorage.getItem('flagIsLogged');
+    if (wholeSaleWhatsapp === 'true' || isUserLoggedIn === 'true') {
+      return;
+    }
     const alert = await this.alertController.create({
       header: this.textToastWholesale.header,
       subHeader: this.textToastWholesale.subHeader,
