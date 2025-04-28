@@ -20,6 +20,7 @@ export class AccountComponent implements OnInit {
   dataRequest!: {
     USERNAME: string;
     PASSWORD: string;
+    CUSTOMER_DETAILS?: string;
   };
   loginForm!: FormGroup;
   textAccount!: typeAccountText; 
@@ -86,9 +87,7 @@ export class AccountComponent implements OnInit {
       async (response) => {
         if (response) {
           this.flagFade = true;
-          this.flagIsLogged = true;
           this.activateToast(this.textAccount.notLoginUser.toastTextRegister.message, 'checkmark-circle-outline');
-          this.flagFade = false;
           setTimeout(async () => {
             await this.sentDataLoginUser();
           }, 1500);
@@ -111,6 +110,7 @@ export class AccountComponent implements OnInit {
         if (response) {
           this.flagFade = true;
           this.flagIsLogged = true;
+          localStorage.setItem('flagIsLogged', 'true');
           this.responseLogin = response;
           this.activateToast(this.textAccount.notLoginUser.toastTextLogin.message, 'checkmark-circle-outline');
           this.flagFade = false;
@@ -146,7 +146,6 @@ export class AccountComponent implements OnInit {
         USERNAME: String(customerDetails.documentNumberCustomer),
         CUSTOMER_DETAILS: customerDetails
       }
-      console.log('dataRequest', dataRequest);
       
       this.requestService.updateUser(dataRequest).subscribe(
         async (response) => {
