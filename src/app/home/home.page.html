@@ -10,12 +10,12 @@
         <app-loading></app-loading>
       </div>
     </ion-tab>
-    <ion-tab tab="Home">
+    <ion-tab tab="Home" selected="true">
       <div id="Home" >
         <app-home-home [tabChanged]="tabHome"></app-home-home>
       </div>
     </ion-tab>
-    <ion-tab tab="Account" selected="true">
+    <ion-tab tab="Account">
       <div id="Account">
         <app-account [tabChanged]="tabAccount"></app-account>
       </div>
@@ -27,7 +27,7 @@
     </ion-tab>
     <ion-footer>
       <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
-        <ion-tab-button tab="Home">
+        <ion-tab-button tab="Home" selected="true">
         <ion-icon name="home"></ion-icon>
         {{textHomeTab.tabHome}}
         </ion-tab-button>
@@ -35,7 +35,7 @@
         <ion-icon name="cart"></ion-icon>
         {{textHomeTab.tabCart}}
         </ion-tab-button>
-        <ion-tab-button tab="Account" selected="true">
+        <ion-tab-button tab="Account">
         <ion-icon name="person"></ion-icon>
         {{textHomeTab.tabAccount}}
         </ion-tab-button>
