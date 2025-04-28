@@ -1,8 +1,8 @@
 ion-tab-bar {
   --ion-tab-bar-background: #000;
-  --ion-tab-bar-color-selected: #efb74c;
+  --ion-tab-bar-color-selected: #ffce30;
   --ion-tab-bar-color: #cdcdcd;
-  border-top: 1px solid #efb74c;
+  border-top: 1px solid #ffce30;
   height: 5dvh;
   @media (max-height: 600px) {
     height: 10dvh;
@@ -32,7 +32,7 @@ ion-header{
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #efb74c;
+  border-bottom: 1px solid #ffce30;
   height: 5dvh;
   @media (max-height: 600px) {
     height: 10dvh;
