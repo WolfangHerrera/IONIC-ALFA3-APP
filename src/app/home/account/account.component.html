@@ -8,7 +8,7 @@
           <ion-card>
             <ion-card-header class="ion-text-center">
               <ion-card-title>{{ responseLogin.username }}</ion-card-title>
-              <ion-card-subtitle>HELLO! {{ responseLogin.role }}</ion-card-subtitle>
+              <ion-card-subtitle>HELLO {{ responseLogin.role || 'USER' }}!</ion-card-subtitle>
             </ion-card-header>
             <div style="display: flex; justify-content: center;">
               <ion-avatar>
@@ -16,24 +16,18 @@
               </ion-avatar>
             </div>
             <ion-card-content>
-              <div class="">
-                <ion-card>
+              <div class="card-content-login">
+                <ion-card style="border: 1px solid #ffce30;">
                   <ion-card-header>
-                    <ion-card-title>Title</ion-card-title>
-                    <ion-card-subtitle>Subtitle</ion-card-subtitle>
+                    <ion-card-title class="ion-text-center"><ion-icon name="reorder-four-outline" size="large"></ion-icon></ion-card-title>
+                    <ion-card-subtitle class="ion-text-center">YOUR ORDERS</ion-card-subtitle>
                   </ion-card-header>
-                  <ion-card-content>
-                    <p>Lorrem</p>
-                  </ion-card-content>
                 </ion-card>
-                <ion-card>
+                <ion-card style="border: 1px solid #ffce30;">
                   <ion-card-header>
-                    <ion-card-title>Title</ion-card-title>
-                    <ion-card-subtitle>Subtitle</ion-card-subtitle>
+                    <ion-card-title class="ion-text-center"><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-card-title>
+                    <ion-card-subtitle class="ion-text-center">YOUR INFORMATION</ion-card-subtitle>
                   </ion-card-header>
-                  <ion-card-content>
-                    <p>Lorrem</p>
-                  </ion-card-content>
                 </ion-card>
               </div>
               <ion-button expand="full" color="warning" (click)="onLogout()">LOGOUT</ion-button>

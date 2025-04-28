@@ -33,6 +33,13 @@ ion-card-subtitle {
   --color: #fff;
 }
 
+.card-content-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .fade-in {
   animation: fadeIn 1.5s ease-in-out;
 }

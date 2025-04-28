@@ -1,6 +1,6 @@
 export type typeTabHomeText = {
     tabHome: string,
-    tabOrder: string,
+    tabCart: string,
     tabAccount: string,
 };
 
@@ -10,7 +10,7 @@ export type typeTabOrderText = {
 
 export const EN_tabHomeText : typeTabHomeText = {
     tabHome: 'HOME',
-    tabOrder: 'ORDER',
+    tabCart: 'CART',
     tabAccount: 'ACCOUNT',
 };
 
@@ -41,7 +41,7 @@ export const ES_toastTextWholesale: typeToastText = {
 
 export const ES_tabHomeText : typeTabHomeText = {
     tabHome: 'INICIO',
-    tabOrder: 'CARRITO',
+    tabCart: 'CARRITO',
     tabAccount: 'CUENTA',
 };
 
