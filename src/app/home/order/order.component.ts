@@ -10,9 +10,13 @@ import { RequestService } from 'src/app/services/request/request.service';
 })
 export class OrderComponent  implements OnInit {
   @Input() tabChanged: boolean = false;
+  flagIsLogged: boolean = false;
   listOrders: any[] = [];
   constructor(private toastController: ToastController, private readonly requestService: RequestService) {
+    this.flagIsLogged = localStorage.getItem('flagKeepLoggedIn') === 'true';
+    if (this.flagIsLogged) {
     this.getOrders();
+   }
   }
 
   ngOnInit() {}
@@ -26,7 +30,6 @@ export class OrderComponent  implements OnInit {
       },
       error: (responseError) => {
         console.error(responseError);
-        this.activateToast(responseError.ERROR, 'alert-circle-outline');
       },
     });
   }

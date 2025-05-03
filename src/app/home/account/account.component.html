@@ -60,7 +60,10 @@
                     autocorrect="off" spellcheck="false">
                   </ion-input>
                 </ion-item>
-                <ion-button color="warning" (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
+                <ion-checkbox class="ion-margin-top" labelPlacement="end" (ionChange)="onKeepMeLoggedInChanged($event)">
+                  KEEP ME LOGGED IN
+                </ion-checkbox>
+                <ion-button  class="ion-margin-top" color="warning" (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
                   expand="full">{{ !flagRegister ? textAccount.notLoginUser.buttonCard : textAccount.notLoginUser.buttonCard2}}</ion-button>
               </form>
             </ion-card-content>

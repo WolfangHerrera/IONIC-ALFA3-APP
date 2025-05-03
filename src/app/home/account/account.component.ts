@@ -16,12 +16,12 @@ export class AccountComponent implements OnInit {
   @Output() navigateTab: EventEmitter<string> = new EventEmitter();
   flagRegister: boolean = false;
   flagIsLogged: boolean = false;
+  flagKeepLoggedIn: boolean = false;
   flagFade: boolean = false;
   responseLogin: any;
   dataRequest!: {
     USERNAME: string;
     PASSWORD: string;
-    CUSTOMER_DETAILS?: string;
   };
   loginForm!: FormGroup;
   textAccount!: typeAccountText;
@@ -34,9 +34,10 @@ export class AccountComponent implements OnInit {
   ) {
     this.textAccount = this.languageService.getTextHomeAccount();
     this.generateFormGroup();
-    this.flagIsLogged = localStorage.getItem('flagIsLogged') === 'true';
-    if (this.flagIsLogged) {
-      this.responseLogin = JSON.parse(localStorage.getItem('userData') || '{}');
+    this.flagKeepLoggedIn = localStorage.getItem('flagKeepLoggedIn') === 'true';
+    if (this.flagKeepLoggedIn) {
+      this.dataRequest = JSON.parse(localStorage.getItem('userData') || '{}');
+      this.sentDataLoginUser(false);
     }
   }
 
@@ -51,7 +52,6 @@ export class AccountComponent implements OnInit {
 
   onNavigateToOrders() {
     this.navigateTab.emit('Order');
-    this.activateToast('TEST', 'checkmark-circle-outline');
   }
 
   async activateToast(text?: string, icon?: string) {
@@ -117,20 +117,27 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  async sentDataLoginUser() {
+  onKeepMeLoggedInChanged(event: any) {
+    this.flagKeepLoggedIn = event.detail.checked ? true : false;
+  }
+
+  async sentDataLoginUser(showToast: boolean = true) {
     this.requestService.loginUser(this.dataRequest).subscribe({
       next: async (response) => {
         if (response) {
           this.flagFade = true;
-          this.flagIsLogged = true;
-          localStorage.setItem('flagIsLogged', 'true');
+          if (showToast) {
+            this.activateToast(
+              this.textAccount.notLoginUser.toastTextLogin.message,
+              'checkmark-circle-outline'
+            );
+          }
           this.responseLogin = response;
-          this.activateToast(
-            this.textAccount.notLoginUser.toastTextLogin.message,
-            'checkmark-circle-outline'
-          );
+          localStorage.setItem('flagIsLogged', 'true');
+          localStorage.setItem('userData', JSON.stringify(this.dataRequest));
+          localStorage.setItem('flagKeepLoggedIn', JSON.stringify(this.flagKeepLoggedIn));
+          this.flagIsLogged = true;
           this.flagFade = false;
-          localStorage.setItem('userData', JSON.stringify(response));
         }
       },
       error: async (responseError) => {
