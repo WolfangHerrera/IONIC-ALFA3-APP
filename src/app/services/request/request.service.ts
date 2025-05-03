@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RequestService {
-  private apiUrl = 'https://backend.alfa3electricos.com';
+  // private apiUrl = 'https://backend.alfa3electricos.com';
+  private apiUrl = 'http://localhost:8081';
   constructor(private http: HttpClient) { }
 
   getItemProducts(): Observable<any> {
@@ -31,8 +32,6 @@ export class RequestService {
     USERNAME: string;
     CUSTOMER_DETAILS: string;
   }): Observable<any> {
-    console.log('updateUser', dataRequest);
-    
     return this.http.put(`${this.apiUrl}/updateUser`, dataRequest);
   }
 
@@ -40,7 +39,11 @@ export class RequestService {
     return this.http.post(`${this.apiUrl}/createOrder`, dataRequest);
   }
 
-  getOrderById(queryParam: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getOrder/${queryParam}`);
+  getOrderById(orderId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getOrder/${orderId}`);
+  }
+
+  getOrderByCustomerId(customerId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getOrdersByCustomerId/${customerId}`);
   }
 }

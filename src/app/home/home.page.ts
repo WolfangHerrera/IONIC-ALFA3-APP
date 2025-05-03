@@ -60,7 +60,7 @@ export class HomePage implements OnInit, AfterViewInit{
   disableLoading() {
     setTimeout(() => {
       this.isLoading = false;
-      this.tabs.select('Home');
+      this.tabs.select('Order');
     }, 1000);
   }
 
@@ -74,7 +74,6 @@ export class HomePage implements OnInit, AfterViewInit{
   }
 
   navigateTab(tab: string) {
-    console.log('tab', tab);
     this.setActivePage(tab);
     this.tabs.select(tab);
   }
@@ -110,9 +109,6 @@ export class HomePage implements OnInit, AfterViewInit{
   }
 
   onTabChange(event: any) {
-    console.log('Tab changed:', event.tab);
-    console.log('navigateTab', this.navigateTab);
-    
     this.setActivePage(event.tab);
   }
 

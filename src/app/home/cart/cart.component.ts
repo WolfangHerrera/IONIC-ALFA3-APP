@@ -112,6 +112,7 @@ export class CartComponent implements OnInit {
       CUSTOMER_DETAILS: this.formCheckOut.value,
       PRODUCTS_CART: this.listProducts,
       TOTAL_PRICE: this.totalPrice,
+      ITEM_COUNT: this.itemsCount,
     };
     localStorage.setItem(
       'customerDetails',

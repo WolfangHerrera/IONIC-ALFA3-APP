@@ -3,12 +3,26 @@
     <ion-grid class="ion-no-margin ion-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col size="12" size-md="6" class="ion-no-margin ion-no-padding">
-          <h1 class="ion-text-start">ORDENES</h1>
-          <h3 class="ion-text-start">VISUALIZA Y GESTIONA TUS ORDENES</h3>
+          <h1 class="ion-text-start">YOUR ORDERS</h1>
+          <h3 class="ion-text-start">REVIEW AND MANAGE YOUR ORDERS EASILY.</h3>
           <ion-card class="ion-no-margin ion-no-padding">
             <ion-card-content class="ion-no-margin ion-no-padding">
               <ion-list class="ion-no-margin ion-no-padding">
-                <ion-item class="ion-margin-sm-0 ion-padding-sm-0">
+                <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngFor="let item of listOrders">
+                  <ion-thumbnail slot="start">
+                    <img alt="ALFA3's Product" style="border-radius: 10px" src="{{ item.products_cart[0].img_url }}" />
+                  </ion-thumbnail>
+                  <ion-badge slot="end" color="warning">{{ setSpaceOnStatus(item.status) }}</ion-badge>
+                  <div class="ion-no-margin">
+                    <h2>{{ item.order_id }}</h2>
+                    <h5>{{ item.item_count }} ITEM<span *ngIf="item.item_count > 1">S</span></h5>
+                    <p>$ {{ setDotOnPrice(item.total_price) }} COP</p>
+                  </div>
+                  <ion-button slot="end" color="warning" shape="round"
+                    fill="clear"><ion-icon  size="small" slot="icon-only" ios="create-outline"
+                      md="ellipsis-horizontal-outline"></ion-icon></ion-button>
+                </ion-item>
+                <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngIf="listOrders.length === 0">
                   <ion-icon name="cart"></ion-icon>
                   <ion-label class="ion-text-center">NO TIENES ORDENES AÚN</ion-label>
                 </ion-item>

@@ -24,7 +24,7 @@ export class AccountComponent implements OnInit {
     CUSTOMER_DETAILS?: string;
   };
   loginForm!: FormGroup;
-  textAccount!: typeAccountText; 
+  textAccount!: typeAccountText;
 
   constructor(
     private requestService: RequestService,
@@ -49,10 +49,9 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  onNavigateToOrders(){
+  onNavigateToOrders() {
     this.navigateTab.emit('Order');
     this.activateToast('TEST', 'checkmark-circle-outline');
-
   }
 
   async activateToast(text?: string, icon?: string) {
@@ -93,12 +92,15 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  async sendDataRegisterUser(){
+  async sendDataRegisterUser() {
     this.requestService.registerUser(this.dataRequest).subscribe(
       async (response) => {
         if (response) {
           this.flagFade = true;
-          this.activateToast(this.textAccount.notLoginUser.toastTextRegister.message, 'checkmark-circle-outline');
+          this.activateToast(
+            this.textAccount.notLoginUser.toastTextRegister.message,
+            'checkmark-circle-outline'
+          );
           setTimeout(async () => {
             await this.sentDataLoginUser();
           }, 1500);
@@ -116,19 +118,22 @@ export class AccountComponent implements OnInit {
   }
 
   async sentDataLoginUser() {
-    this.requestService.loginUser(this.dataRequest).subscribe(
-      async (response) => {
+    this.requestService.loginUser(this.dataRequest).subscribe({
+      next: async (response) => {
         if (response) {
           this.flagFade = true;
           this.flagIsLogged = true;
           localStorage.setItem('flagIsLogged', 'true');
           this.responseLogin = response;
-          this.activateToast(this.textAccount.notLoginUser.toastTextLogin.message, 'checkmark-circle-outline');
+          this.activateToast(
+            this.textAccount.notLoginUser.toastTextLogin.message,
+            'checkmark-circle-outline'
+          );
           this.flagFade = false;
           localStorage.setItem('userData', JSON.stringify(response));
         }
       },
-      async (responseError) => {
+      error: async (responseError) => {
         if (responseError.error.MESSAGE === 'USER NOT EXIST') {
           await this.activateToast(
             this.textAccount.notLoginUser.toastTextUserNotExist.message,
@@ -144,8 +149,8 @@ export class AccountComponent implements OnInit {
             'person-circle-outline'
           );
         }
-      }
-    );
+      },
+    });
   }
 
   async alertCreateAccount() {
@@ -155,14 +160,18 @@ export class AccountComponent implements OnInit {
       backdropDismiss: false,
       buttons: [
         {
-          text: this.textAccount?.notLoginUser?.alertTextCreateAccount?.buttons?.[0] || 'ACCEPT',
+          text:
+            this.textAccount?.notLoginUser?.alertTextCreateAccount
+              ?.buttons?.[0] || 'ACCEPT',
           handler: async () => {
             this.flagRegister = true;
-            await this.sendDataRegisterUser()
+            await this.sendDataRegisterUser();
           },
         },
         {
-          text: this.textAccount?.notLoginUser?.alertTextCreateAccount?.buttons?.[1] || 'CANCEL',
+          text:
+            this.textAccount?.notLoginUser?.alertTextCreateAccount
+              ?.buttons?.[1] || 'CANCEL',
         },
       ],
     });
@@ -174,7 +183,10 @@ export class AccountComponent implements OnInit {
     this.flagFade = true;
     this.loginForm.reset();
     this.flagIsLogged = false;
-    this.activateToast(this.textAccount.notLoginUser.toastTextLogout.message, 'checkmark-circle-outline');
+    this.activateToast(
+      this.textAccount.notLoginUser.toastTextLogout.message,
+      'checkmark-circle-outline'
+    );
     this.responseLogin = null;
     this.flagFade = false;
   }
