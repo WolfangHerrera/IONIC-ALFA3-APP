@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { RequestService } from 'src/app/services/request/request.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-home',
@@ -12,17 +14,35 @@ export class OrderComponent  implements OnInit {
   @Input() tabChanged: boolean = false;
   flagIsLogged: boolean = false;
   listOrders: any[] = [];
-  constructor(private toastController: ToastController, private readonly requestService: RequestService) {
-    this.flagIsLogged = localStorage.getItem('flagKeepLoggedIn') === 'true';
-    if (this.flagIsLogged) {
-    this.getOrders();
-   }
+  userData : any;
+  
+  constructor(private toastController: ToastController, private readonly requestService: RequestService, private userService: UserService) {
+  }
+  
+  async ngOnInit() {
+    this.getOrdersInit();
   }
 
-  ngOnInit() {}
+  async getOrdersInit(){
+    this.userService.getIsLoggedObservable()
+      .pipe(
+        filter(isLogged => isLogged === true),
+        take(1)
+      )
+      .subscribe(() => {
+        this.userData = this.userService.getUserData();
+        this.getOrders();
+      });
+  }
+
+  async ngOnChanges() {
+    if (this.tabChanged) {
+      await this.ngOnInit();
+    }
+  }
 
   async getOrders(){
-    this.requestService.getOrderByCustomerId('').subscribe({
+    this.requestService.getOrderByCustomerId(this.userData.username).subscribe({
       next: (response) => {
         if (response) {
           this.listOrders = response;

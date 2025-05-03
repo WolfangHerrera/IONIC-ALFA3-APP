@@ -6,6 +6,7 @@ import { RequestService } from '../services/request/request.service';
 import { LanguageService } from '../services/language/language.service';
 import { typeTabHomeText, typeToastText } from 'src/app/utils/language/tab/text';
 import { Title, Meta } from '@angular/platform-browser';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { Title, Meta } from '@angular/platform-browser';
 export class HomePage implements OnInit, AfterViewInit{
   @ViewChild(IonTabs) tabs!: IonTabs;
   isOffline: boolean = navigator.onLine;
+  flagIsLogged: boolean = false;
   isLoading: boolean = true;
   toast!: ToastController;
   tabOrder: boolean = false;
@@ -29,6 +31,7 @@ export class HomePage implements OnInit, AfterViewInit{
     private readonly statusService: StatusService,
     private requestService: RequestService,
     private productService: ProductService,
+    private userService: UserService,
     private languageService: LanguageService,
     private toastController: ToastController,
     private alertController: AlertController,

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { RequestService } from 'src/app/services/request/request.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { typeAccountText } from 'src/app/utils/language/home/account/text';
 
 @Component({
@@ -30,7 +31,8 @@ export class AccountComponent implements OnInit {
     private requestService: RequestService,
     private toastController: ToastController,
     private alertController: AlertController,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userService: UserService
   ) {
     this.textAccount = this.languageService.getTextHomeAccount();
     this.generateFormGroup();
@@ -133,7 +135,8 @@ export class AccountComponent implements OnInit {
             );
           }
           this.responseLogin = response;
-          localStorage.setItem('flagIsLogged', 'true');
+          this.userService.setUserData(this.responseLogin);
+          this.userService.setIsLogged(true);
           localStorage.setItem('userData', JSON.stringify(this.dataRequest));
           localStorage.setItem('flagKeepLoggedIn', JSON.stringify(this.flagKeepLoggedIn));
           this.flagIsLogged = true;
