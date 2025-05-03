@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -32,7 +33,8 @@ export class AccountComponent implements OnInit {
     private toastController: ToastController,
     private alertController: AlertController,
     private languageService: LanguageService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.textAccount = this.languageService.getTextHomeAccount();
     this.generateFormGroup();
@@ -53,7 +55,8 @@ export class AccountComponent implements OnInit {
   }
 
   onNavigateToOrders() {
-    this.navigateTab.emit('Order');
+    this.router.navigate(['account/orders']);
+    // this.navigateTab.emit('Order');
   }
 
   async activateToast(text?: string, icon?: string) {

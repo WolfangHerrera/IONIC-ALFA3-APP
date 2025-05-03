@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { RequestService } from 'src/app/services/request/request.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { filter, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-home',
@@ -16,7 +17,16 @@ export class OrderComponent  implements OnInit {
   listOrders: any[] = [];
   userData : any;
   
-  constructor(private toastController: ToastController, private readonly requestService: RequestService, private userService: UserService) {
+  constructor(private toastController: ToastController, private readonly requestService: RequestService, private userService: UserService, private router: Router) {
+    this.userService.getIsLoggedObservable()
+      .pipe(
+        filter(isLogged => isLogged === true),
+        take(1)
+      )
+      .subscribe(() => {
+        this.userData = this.userService.getUserData();
+        this.getOrders();
+      });
   }
   
   async ngOnInit() {
@@ -39,6 +49,11 @@ export class OrderComponent  implements OnInit {
     if (this.tabChanged) {
       await this.ngOnInit();
     }
+  }
+
+  onNavigateToAccount(){
+    this.router.navigate(['']);
+
   }
 
   async getOrders(){
