@@ -15,22 +15,36 @@
                 <img alt="Silhouette of a person's head" src="assets/icons/wd-logo.png" />
               </ion-avatar>
             </div>
-            <ion-card-content class="ion-no-padding ion-no-margin">
+            <ion-card-content class="ion-no-padding ion-no-margin ion-margin-top" >
               <div class="card-content-login">
-                <ion-card style="border: 1px solid #ffce30;" (click)="onNavigateToOrders()">
-                  <ion-card-header class="ion-no-margin">
+                <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;" (click)="onNavigateToOrders()">
+                  <ion-card-header>
                     <ion-card-title class="ion-text-center"><ion-icon name="reorder-four-outline" size="large"></ion-icon></ion-card-title>
                     <ion-card-subtitle class="ion-text-center">YOUR ORDERS</ion-card-subtitle>
                   </ion-card-header>
                 </ion-card>
-                <ion-card style="border: 1px solid #ffce30;">
+                <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;">
                   <ion-card-header>
                     <ion-card-title class="ion-text-center"><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-card-title>
                     <ion-card-subtitle class="ion-text-center ion-text-nowrap">YOUR INFO</ion-card-subtitle>
                   </ion-card-header>
                 </ion-card>
               </div>
-              <ion-button expand="full" color="warning" (click)="onLogout()">LOGOUT</ion-button>
+              <div *ngIf="responseLogin.role === 'ADMIN'" class="card-content-login ion-margin-top">
+                <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;" (click)="onNavigateToOrders()">
+                  <ion-card-header>
+                    <ion-card-title class="ion-text-center"><ion-icon name="logo-mastodon" size="large"></ion-icon></ion-card-title>
+                    <ion-card-subtitle class="ion-text-center">MELI ORDERS</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+                <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;">
+                  <ion-card-header>
+                    <ion-card-title class="ion-text-center"><ion-icon name="man" size="large"></ion-icon></ion-card-title>
+                    <ion-card-subtitle class="ion-text-center ion-text-nowrap">ADMIN PANEL</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </div>
+              <ion-button class="ion-margin-top" expand="full" color="warning" (click)="onLogout()">LOGOUT</ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>

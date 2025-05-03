@@ -14,12 +14,14 @@
                   </ion-thumbnail>
                   <ion-badge slot="end" color="warning">{{ setSpaceOnStatus(item.status) }}</ion-badge>
                   <div class="ion-no-margin">
-                    <h2>{{ item.order_id }}</h2>
+                    <h2 class="ion-hide-md-down">{{ item.order_id }}</h2>
+                    <h2 class="ion-hide-md-up">{{ getFormattedDateFromString(item.order_id) }}</h2>
+
                     <h5>{{ item.item_count }} ITEM<span *ngIf="item.item_count > 1">S</span></h5>
                     <p>$ {{ setDotOnPrice(item.total_price) }} COP</p>
                   </div>
                   <ion-button slot="end" color="warning" shape="round"
-                    fill="clear"><ion-icon  size="small" slot="icon-only" ios="create-outline"
+                    fill="clear"><ion-icon  size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
                       md="ellipsis-horizontal-outline"></ion-icon></ion-button>
                 </ion-item>
                 <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngIf="listOrders.length === 0">

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RequestService {
   // private apiUrl = 'https://backend.alfa3electricos.com';
-  private apiUrl = 'http://localhost:8081';
+  private apiUrl = 'http://192.168.1.22:8081';
   constructor(private http: HttpClient) { }
 
   getItemProducts(): Observable<any> {

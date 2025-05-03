@@ -41,7 +41,7 @@ export class HomePage implements OnInit, AfterViewInit{
     this.getDataItemProduct();
     this.textHomeTab = this.languageService.getTextHomeTab();
     this.textToastWholesale = this.languageService.getTextToastWholesale();
-    this.titleService.setTitle('ALFA 3 ELÉCTRICOS | MULTITOMAS Y REGULADORES DE VOLTAJE');
+    this.titleService.setTitle('ALFA3 ELÉCTRICOS | MULTITOMAS Y REGULADORES DE VOLTAJE');
     this.metaService.updateTag({ name: 'description', content: 'FABRICANTES DE MULTITOMAS Y REGULADORES DE VOLTAJE EN BOGOTÁ' });
   }
   
@@ -63,7 +63,7 @@ export class HomePage implements OnInit, AfterViewInit{
   disableLoading() {
     setTimeout(() => {
       this.isLoading = false;
-      this.tabs.select('Home');
+      this.tabs.select('Account');
     }, 1000);
   }
 
