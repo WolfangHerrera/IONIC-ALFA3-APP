@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StatusService } from '../services/status/status.service';
 import { AlertController, IonTabs, ToastController } from '@ionic/angular';
 import { ProductService } from '../services/products/request.service';
 import { RequestService } from '../services/request/request.service';
 import { LanguageService } from '../services/language/language.service';
 import { typeTabHomeText, typeToastText } from 'src/app/utils/language/tab/text';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -30,14 +31,17 @@ export class HomePage implements OnInit, AfterViewInit{
     private productService: ProductService,
     private languageService: LanguageService,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private titleService: Title, 
+    private metaService: Meta
   ) {
     this.getDataItemProduct();
     this.textHomeTab = this.languageService.getTextHomeTab();
     this.textToastWholesale = this.languageService.getTextToastWholesale();
-
+    this.titleService.setTitle('ALFA 3 ELÉCTRICOS | MULTITOMAS Y REGULADORES DE VOLTAJE');
+    this.metaService.updateTag({ name: 'description', content: 'FABRICANTES DE MULTITOMAS Y REGULADORES DE VOLTAJE EN BOGOTÁ' });
   }
-
+  
   async ngOnInit() {
     this.statusService.getOfflineStatus().subscribe((isOffline) => {
       this.isOffline = isOffline;
