@@ -17,12 +17,17 @@
     </ion-tab>
     <ion-tab tab="Account">
       <div id="Account">
-        <app-account [tabChanged]="tabAccount"></app-account>
+        <app-account (navigateTab)="navigateTab($event)" [tabChanged]="tabAccount"></app-account>
       </div>
     </ion-tab>
     <ion-tab tab="Cart">
       <div id="Cart">
         <app-cart [tabChanged]="tabCart"></app-cart>
+      </div>
+    </ion-tab>
+    <ion-tab tab="Order">
+      <div id="Order">
+        <app-order-home [tabChanged]="tabOrder"></app-order-home>
       </div>
     </ion-tab>
     <ion-footer>

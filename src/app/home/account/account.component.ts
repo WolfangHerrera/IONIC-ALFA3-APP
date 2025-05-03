@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
@@ -13,6 +13,7 @@ import { typeAccountText } from 'src/app/utils/language/home/account/text';
 })
 export class AccountComponent implements OnInit {
   @Input() tabChanged: boolean = false;
+  @Output() navigateTab: EventEmitter<string> = new EventEmitter();
   flagRegister: boolean = false;
   flagIsLogged: boolean = false;
   flagFade: boolean = false;
@@ -46,6 +47,12 @@ export class AccountComponent implements OnInit {
       usernameCustomer: new FormControl(''),
       passwordCustomer: new FormControl(''),
     });
+  }
+
+  onNavigateToOrders(){
+    this.navigateTab.emit('Order');
+    this.activateToast('TEST', 'checkmark-circle-outline');
+
   }
 
   async activateToast(text?: string, icon?: string) {

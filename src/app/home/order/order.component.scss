@@ -1,9 +1,14 @@
-ion-app{
+ion-app {
+  height: 100%; 
+  padding-top: 4dvh;
+  @media (max-height: 600px) {
+    padding-top: 10dvh;
+  }
   background-color: #000;
   --background: #000;
 }
 
-ion-row{
-  display: flex;
-  justify-content: center;
+ion-content {
+  --background: #000;
+  background-color: #000;
 }

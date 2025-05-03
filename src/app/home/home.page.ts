@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { StatusService } from '../services/status/status.service';
 import { AlertController, IonTabs, ToastController } from '@ionic/angular';
 import { ProductService } from '../services/products/request.service';
@@ -17,6 +17,7 @@ export class HomePage implements OnInit, AfterViewInit{
   isOffline: boolean = navigator.onLine;
   isLoading: boolean = true;
   toast!: ToastController;
+  tabOrder: boolean = false;
   tabCart: boolean = false;
   tabHome: boolean = false;
   tabAccount: boolean = false;
@@ -68,6 +69,12 @@ export class HomePage implements OnInit, AfterViewInit{
     });
   }
 
+  navigateTab(tab: string) {
+    console.log('tab', tab);
+    this.setActivePage(tab);
+    this.tabs.select(tab);
+  }
+
   wholeSaleWhatsapp(choice = 'not') {
     localStorage.setItem('wholeSaleWhatsapp', 'true');
     if (choice === 'yes') {
@@ -80,6 +87,7 @@ export class HomePage implements OnInit, AfterViewInit{
     this.tabCart = page === 'Cart';
     this.tabHome = page === 'Home';
     this.tabAccount = page === 'Account';
+    this.tabOrder = page === 'Order';
   }
 
   async presentToast() {
@@ -98,6 +106,9 @@ export class HomePage implements OnInit, AfterViewInit{
   }
 
   onTabChange(event: any) {
+    console.log('Tab changed:', event.tab);
+    console.log('navigateTab', this.navigateTab);
+    
     this.setActivePage(event.tab);
   }
 
