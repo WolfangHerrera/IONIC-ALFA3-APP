@@ -1,0 +1,15 @@
+ion-header{
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ffce30;
+    height: 5dvh;
+    @media (max-height: 600px) {
+      height: 10dvh;
+    }
+  }
+  
+  ion-img {
+    height: 4vh;
+  }
