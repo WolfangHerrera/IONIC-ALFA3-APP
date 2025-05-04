@@ -26,6 +26,11 @@
         <app-order-home [tabChanged]="tabOrder"></app-order-home>
       </div>
     </ion-tab>
+    <ion-tab tab="OrderWholesale">
+      <div id="OrderWholesale">
+        <app-order-wholesale [tabChanged]="tabOrderWholesale"></app-order-wholesale>
+      </div>
+    </ion-tab>
     <ion-footer>
       <ion-tab-bar *ngIf="!isLoading" slot="bottom"> 
         <ion-tab-button tab="Home" selected="true">

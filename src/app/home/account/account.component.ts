@@ -55,8 +55,11 @@ export class AccountComponent implements OnInit {
   }
 
   onNavigateToOrders() {
-    this.router.navigate(['account/orders']);
-    // this.navigateTab.emit('Order');
+    this.navigateTab.emit('Order');
+  }
+
+  onNavigateToOrdersWholesale() {
+    this.navigateTab.emit('OrderWholesale');
   }
 
   async activateToast(text?: string, icon?: string) {
@@ -201,6 +204,11 @@ export class AccountComponent implements OnInit {
       'checkmark-circle-outline'
     );
     this.responseLogin = null;
+    this.userService.setUserData(this.responseLogin);
+    this.userService.setIsLogged(false);
+    localStorage.removeItem('userData');
+    localStorage.removeItem('flagKeepLoggedIn');
+    localStorage.removeItem('flagIsLogged');
     this.flagFade = false;
   }
 }

@@ -10,6 +10,7 @@ import { CartComponent } from "./cart/cart.component";
 import { AccountComponent } from "./account/account.component";
 import { HomeComponent } from "./home/home.component";
 import { SharedModule } from '../shared/shared.module';
+import { OrderWholesaleComponent } from './order-wholesale/order-wholesale.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SharedModule } from '../shared/shared.module';
     CartComponent,
     AccountComponent,
     HomeComponent,
+    OrderWholesaleComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

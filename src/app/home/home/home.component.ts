@@ -77,13 +77,6 @@ export class HomeComponent {
     });
   }
 
-  handleRefresh(event: CustomEvent) {
-    setTimeout(() => {
-      this.getDataItemProduct();
-      (event.target as HTMLIonRefresherElement).complete();
-    }, 2000);
-  }
-
   async activateToast(text?: string) {
     let toast = await this.toastController.getTop();
     if (toast) {

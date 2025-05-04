@@ -1,18 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { filter, take } from 'rxjs';
 import { RequestService } from 'src/app/services/request/request.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { filter, take } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-order-home',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
+  selector: 'app-order-wholesale',
+  templateUrl: './order-wholesale.component.html',
+  styleUrls: ['./order-wholesale.component.scss'],
   standalone: false,
 })
-export class OrderComponent  implements OnInit {
-  @Input() tabChanged: boolean = false;
+export class OrderWholesaleComponent  implements OnInit {
+@Input() tabChanged: boolean = false;
   flagIsLogged: boolean = false;
   listOrders: any[] = [];
   userData : any;

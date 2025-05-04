@@ -23,6 +23,7 @@ export class HomePage implements OnInit, AfterViewInit{
   tabOrder: boolean = false;
   tabCart: boolean = false;
   tabHome: boolean = false;
+  tabOrderWholesale: boolean = false;
   tabAccount: boolean = false;
   textHomeTab!: typeTabHomeText;
   textToastWholesale!: typeToastText;
@@ -31,7 +32,6 @@ export class HomePage implements OnInit, AfterViewInit{
     private readonly statusService: StatusService,
     private requestService: RequestService,
     private productService: ProductService,
-    private userService: UserService,
     private languageService: LanguageService,
     private toastController: ToastController,
     private alertController: AlertController,
@@ -94,6 +94,7 @@ export class HomePage implements OnInit, AfterViewInit{
     this.tabHome = page === 'Home';
     this.tabAccount = page === 'Account';
     this.tabOrder = page === 'Order';
+    this.tabOrderWholesale = page === 'OrderWholesale';
   }
 
   async presentToast() {

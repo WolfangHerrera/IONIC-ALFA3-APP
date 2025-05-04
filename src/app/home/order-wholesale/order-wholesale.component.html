@@ -1,0 +1,51 @@
+<ion-app class="ion-no-margin ion-no-padding" scrollY="false">
+  <ion-content class="ion-no-margin ion-no-padding">
+    <ion-grid class="ion-no-margin ion-padding">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="12" size-md="6" class="ion-no-margin ion-no-padding">
+          <h1 class="ion-text-start">MELI ORDERS</h1>
+          <h3 class="ion-text-start">
+            REVIEW, CHECK AND PAY YOUR MELI ORDERS.
+          </h3>
+          <ion-card class="ion-no-margin ion-no-padding">
+            <ion-card-content class="ion-no-margin ion-no-padding">
+              <ion-list class="ion-no-margin ion-no-padding">
+                <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngFor="let item of listOrders">
+                  <ion-thumbnail slot="start" class="ion-no-margin">
+                    <img alt="ALFA3's Product" style="border-radius: 10px" src="{{ item.products_cart[0].img_url }}" />
+                  </ion-thumbnail>
+                  <div>
+                    <ion-checkbox class="ion-margin" color="warning"></ion-checkbox>
+                  </div>
+                  <ion-badge slot="end" color="warning">{{
+                    setSpaceOnStatus(item.status)
+                    }}</ion-badge>
+                  <div class="ion-no-margin">
+                    <h2 class="ion-hide-md-down">{{ item.order_id }}</h2>
+                    <h2 class="ion-hide-md-up">
+                      {{ getFormattedDateFromString(item.order_id) }}
+                    </h2>
+                    <h5>
+                      {{ item.item_count }} ITEM<span *ngIf="item.item_count > 1">S</span>
+                    </h5>
+                    <p>$ {{ setDotOnPrice(item.total_price) }} COP</p>
+                  </div>
+                  <ion-button (click)="onNavigateToAccount()" slot="end" color="warning" shape="round" fill="clear">
+                    <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
+                      md="ellipsis-horizontal-outline">
+                    </ion-icon>
+                  </ion-button>
+                </ion-item>
+                <!-- NO ITEMS -->
+                <ion-item class="ion-margin-sm-0 ion-padding-sm-0" *ngIf="listOrders.length === 0">
+                  <ion-icon name="cart"></ion-icon>
+                  <ion-label class="ion-text-center">NO TIENES ORDENES AÚN</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-app>

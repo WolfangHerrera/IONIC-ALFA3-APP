@@ -31,7 +31,7 @@
                 </ion-card>
               </div>
               <div *ngIf="responseLogin.role === 'ADMIN'" class="card-content-login ion-margin-top">
-                <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;" (click)="onNavigateToOrders()">
+                <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;" (click)="onNavigateToOrdersWholesale()">
                   <ion-card-header>
                     <ion-card-title class="ion-text-center"><ion-icon name="logo-mastodon" size="large"></ion-icon></ion-card-title>
                     <ion-card-subtitle class="ion-text-center">MELI ORDERS</ion-card-subtitle>
@@ -61,23 +61,34 @@
                 <img alt="Silhouette of a person's head" src="assets/icons/wd-logo.png" />
               </ion-avatar>
             </div>
-            <ion-card-content>
+            <ion-card-content class="ion-no-margin">
               <form [formGroup]="loginForm">
-                <ion-item>
+                <ion-item class="ion-hide-md-down ion-no-margin">
                   <ion-input label="{{textAccount.notLoginUser.usernameLabel}}" label-placement="floating" type="tel" inputmode="numeric"
                   pattern="[0-9]*" formControlName="usernameCustomer" minlength="7" maxlength="10" required autocomplete="off" autocorrect="off" spellcheck="false"
                   (ionInput)="validateNumberForm($event)"></ion-input>
                 </ion-item>
-                <ion-item>
+                <ion-item class="ion-hide-md-down ion-no-margin">
                   <ion-input label="{{textAccount.notLoginUser.passwordLabel}}" label-placement="floating"
                     type="password" formControlName="passwordCustomer" minlength="7" required autocomplete="new-password"
                     autocorrect="off" spellcheck="false">
                   </ion-input>
                 </ion-item>
-                <ion-checkbox class="ion-margin-top" labelPlacement="end" (ionChange)="onKeepMeLoggedInChanged($event)">
+                <ion-item class="ion-hide-md-up ion-no-padding ion-no-margin">
+                  <ion-input label="{{textAccount.notLoginUser.usernameLabel}}" label-placement="floating" type="tel" inputmode="numeric"
+                  pattern="[0-9]*" formControlName="usernameCustomer" minlength="7" maxlength="10" required autocomplete="off" autocorrect="off" spellcheck="false"
+                  (ionInput)="validateNumberForm($event)"></ion-input>
+                </ion-item>
+                <ion-item class="ion-hide-md-up ion-no-padding ion-no-margin">
+                  <ion-input label="{{textAccount.notLoginUser.passwordLabel}}" label-placement="floating"
+                    type="password" formControlName="passwordCustomer" minlength="7" required autocomplete="new-password"
+                    autocorrect="off" spellcheck="false">
+                  </ion-input>
+                </ion-item>
+                <ion-checkbox color="warning" class="ion-margin-top ion-no-padding ion-no-margin" labelPlacement="end" (ionChange)="onKeepMeLoggedInChanged($event)">
                   KEEP ME LOGGED IN
                 </ion-checkbox>
-                <ion-button  class="ion-margin-top" color="warning" (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
+                <ion-button class="ion-margin-top" color="warning" (click)="onSubmitLogin()" [disabled]="loginForm.invalid"
                   expand="full">{{ !flagRegister ? textAccount.notLoginUser.buttonCard : textAccount.notLoginUser.buttonCard2}}</ion-button>
               </form>
             </ion-card-content>
