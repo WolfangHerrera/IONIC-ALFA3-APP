@@ -11,16 +11,22 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./order-wholesale.component.scss'],
   standalone: false,
 })
-export class OrderWholesaleComponent  implements OnInit {
-@Input() tabChanged: boolean = false;
+export class OrderWholesaleComponent implements OnInit {
+  @Input() tabChanged: boolean = false;
   flagIsLogged: boolean = false;
   listOrders: any[] = [];
-  userData : any;
-  
-  constructor(private toastController: ToastController, private readonly requestService: RequestService, private userService: UserService, private router: Router) {
-    this.userService.getIsLoggedObservable()
+  userData: any;
+
+  constructor(
+    private toastController: ToastController,
+    private readonly requestService: RequestService,
+    private userService: UserService,
+    private router: Router
+  ) {
+    this.userService
+      .getIsLoggedObservable()
       .pipe(
-        filter(isLogged => isLogged === true),
+        filter((isLogged) => isLogged === true),
         take(1)
       )
       .subscribe(() => {
@@ -28,15 +34,16 @@ export class OrderWholesaleComponent  implements OnInit {
         this.getOrders();
       });
   }
-  
+
   async ngOnInit() {
     this.getOrdersInit();
   }
 
-  async getOrdersInit(){
-    this.userService.getIsLoggedObservable()
+  async getOrdersInit() {
+    this.userService
+      .getIsLoggedObservable()
       .pipe(
-        filter(isLogged => isLogged === true),
+        filter((isLogged) => isLogged === true),
         take(1)
       )
       .subscribe(() => {
@@ -45,19 +52,12 @@ export class OrderWholesaleComponent  implements OnInit {
       });
   }
 
-  // async ngOnChanges() {
-  //   if (this.tabChanged) {
-  //     await this.ngOnInit();
-  //   }
-  // }
-
-  onNavigateToAccount(){
+  onNavigateToAccount() {
     this.router.navigate(['']);
-
   }
 
-  async getOrders(){
-    this.requestService.getOrderByCustomerId(this.userData.username).subscribe({
+  async getOrders() {
+    this.requestService.getOrdersBySubStatus('NOT_PAID').subscribe({
       next: (response) => {
         if (response) {
           this.listOrders = response;
@@ -74,28 +74,38 @@ export class OrderWholesaleComponent  implements OnInit {
     if (parts.length < 2) {
       return 'Fecha inválida';
     }
-  
+
     const rawDate = parts[1];
     if (rawDate.length !== 8) {
       return 'Fecha inválida';
     }
-  
+
     const year = rawDate.substring(0, 4);
     const month = rawDate.substring(4, 6);
     const day = rawDate.substring(6, 8);
-  
+
     const months = [
-      '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'
+      '01',
+      '02',
+      '03',
+      '04',
+      '05',
+      '06',
+      '07',
+      '08',
+      '09',
+      '10',
+      '11',
+      '12',
     ];
-  
+
     const monthName = months[parseInt(month, 10) - 1];
     if (!monthName) {
       return 'Mes inválido';
     }
-  
+
     return `${day}/${monthName}/${year}`;
   }
-  
 
   setDotOnPrice(price: string) {
     return parseFloat(price).toLocaleString('en-US', {
@@ -123,5 +133,4 @@ export class OrderWholesaleComponent  implements OnInit {
 
     await toast.present();
   }
-
 }

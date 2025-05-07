@@ -18,7 +18,7 @@
                     <ion-checkbox class="ion-margin" color="warning"></ion-checkbox>
                   </div>
                   <ion-badge slot="end" color="warning">{{
-                    setSpaceOnStatus(item.status)
+                    setSpaceOnStatus(item.sub_status)
                     }}</ion-badge>
                   <div class="ion-no-margin">
                     <h2 class="ion-hide-md-down">{{ item.order_id }}</h2>
@@ -28,7 +28,7 @@
                     <h5>
                       {{ item.item_count }} ITEM<span *ngIf="item.item_count > 1">S</span>
                     </h5>
-                    <p>$ {{ setDotOnPrice(item.total_price) }} COP</p>
+                    <p>$ {{ setDotOnPrice(item.total_price_min) }} COP</p>
                   </div>
                   <ion-button (click)="onNavigateToAccount()" slot="end" color="warning" shape="round" fill="clear">
                     <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"

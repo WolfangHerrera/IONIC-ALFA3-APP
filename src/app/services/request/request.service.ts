@@ -46,4 +46,8 @@ export class RequestService {
   getOrderByCustomerId(customerId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/getOrdersByCustomerId/${customerId}`);
   }
+
+  getOrdersBySubStatus(subStatus: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getOrdersBySubStatus/${subStatus}`);
+  }
 }
