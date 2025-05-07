@@ -7,6 +7,7 @@ export class ProductService {
   listCart: any[] = [];
   dataProducts: any[] = [];
   totalPriceCart = '0';
+  totalPriceCartMin = '0';
 
   constructor() {
     this.loadCartFromLocalStorage();
@@ -15,16 +16,21 @@ export class ProductService {
   private saveCartToLocalStorage() {
     localStorage.setItem('listCart', JSON.stringify(this.listCart));
     localStorage.setItem('totalPriceCart', this.totalPriceCart);
+    localStorage.setItem('totalPriceCartMin',this.totalPriceCartMin);
   }
 
   private loadCartFromLocalStorage() {
     const listCart = localStorage.getItem('listCart');
     const totalPriceCart = localStorage.getItem('totalPriceCart');
+    const totalPriceCartMin = localStorage.getItem('totalPriceCartMin');
     if (listCart) {
       this.listCart = JSON.parse(listCart);
     }
     if (totalPriceCart) {
       this.totalPriceCart = totalPriceCart;
+    }
+    if (totalPriceCartMin) {
+      this.totalPriceCartMin = totalPriceCartMin;
     }
   }
 
@@ -44,11 +50,11 @@ export class ProductService {
       );
       if (cartItem) {
         cartItem.count += 1;
-        await this.setTotalPrice();
       } else {
         this.listCart.push({ ...item, count: 1 });
-        await this.setTotalPrice();
       }
+      await this.setTotalPrice();
+      await this.setTotalPriceMin();
       this.saveCartToLocalStorage();
     }
   }
@@ -63,6 +69,15 @@ export class ProductService {
       0
     );
     this.totalPriceCart = value.toString();
+    this.saveCartToLocalStorage();
+  }
+
+  async setTotalPriceMin() {
+    const value = this.listCart.reduce(
+      (total, item) => total + item.min_price * (item.count || 1),
+      0
+    );
+    this.totalPriceCartMin = value.toString();
     this.saveCartToLocalStorage();
   }
 
@@ -108,5 +123,9 @@ export class ProductService {
 
   async getTotalPrice() {
     return this.totalPriceCart;
+  }
+
+  async getTotalPriceMin() {
+    return this.totalPriceCartMin;
   }
 }

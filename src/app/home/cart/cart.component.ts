@@ -4,6 +4,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { typeCartText } from 'src/app/utils/language/home/cart/text';
 
 @Component({
@@ -16,6 +17,7 @@ export class CartComponent implements OnInit {
   @Input() tabChanged: boolean = false;
   listProducts: any[] = [];
   totalPrice: string = '0';
+  totalPriceMin: string = '0';
   itemsCount: number = 0;
   flagClearCart: boolean = false;
   formCheckOut!: FormGroup;
@@ -29,13 +31,15 @@ export class CartComponent implements OnInit {
     DAVIPLATA: 'DAVIPLATA',
   };
   textCart!: typeCartText;
+  isAdmin: boolean = false;
 
   constructor(
     private productService: ProductService,
     private requestService: RequestService,
     private alertController: AlertController,
     private toastController: ToastController,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userService: UserService
   ) {
     this.textCart = this.languageService.getTextHomeCart();
     this.generateFormGroup();
@@ -101,6 +105,25 @@ export class CartComponent implements OnInit {
     this.flagCustomerDetails = true;
   }
 
+  async onCheckOutCartAdmin(){
+    this.formCheckOut.patchValue({
+      fullNameCustomer: 'John Doe',
+      emailCustomer: 'johndoe@alfa3electricos.com',
+      phoneNumberCustomer: '3229873311',
+      streetAddressCustomer: 'ALFA3',
+      cityCustomer: 'BOGOTÁ',
+      documentTypeCustomer: 'CC',
+      documentNumberCustomer: '1000101010',
+      paymentMethodCustomer: 'MELI',
+      fullNameShipping: 'John Doe',
+      phoneNumberShipping: '3229873311',
+      streetAddressShipping: 'ALFA3',
+      cityShipping: 'BOGOTÁ',
+      useSameInfo: true,
+    });
+    await this.alertCheckoutCart()
+  }
+
   async onClearCart() {
     this.listProducts = [];
     await this.productService.setListCart(this.listProducts);
@@ -112,6 +135,7 @@ export class CartComponent implements OnInit {
       CUSTOMER_DETAILS: this.formCheckOut.value,
       PRODUCTS_CART: this.listProducts,
       TOTAL_PRICE: this.totalPrice,
+      TOTAL_PRICE_MIN: this.totalPriceMin,
       ITEM_COUNT: this.itemsCount,
     };
     localStorage.setItem(
@@ -145,7 +169,9 @@ export class CartComponent implements OnInit {
     this.listProducts = await this.productService.getListCart();
     this.flagClearCart = false;
     this.flagCustomerDetails = false;
+    this.isAdmin = this.userService.getUserRole() === 'ADMIN';
     this.totalPrice = await this.productService.getTotalPrice();
+    this.totalPriceMin = await this.productService.getTotalPriceMin();
     this.itemsCount = await this.productService.getTotalItemCount();
   }
 

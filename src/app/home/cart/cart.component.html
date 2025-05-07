@@ -5,6 +5,7 @@
         <ion-col size="12" size-md="6" class="ion-no-margin ion-no-padding">
           <h1 class="ion-text-start">{{textCart.mainText}}</h1>
           <h3 class="ion-text-start">{{textCart.subtitleText}}</h3>
+          <!-- <ion-checkbox labelPlacement="end" (ionChange)="onUseSameInfoChanged($event)"></ion-checkbox> -->
           <ion-card class="ion-no-margin ion-no-padding">
             <ion-card-content class="ion-no-margin ion-no-padding">
               <ion-list class="ion-no-margin ion-no-padding">
@@ -55,6 +56,11 @@
                 <ion-button (click)="onCheckOutCart()" color="warning"
                 class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block"
                 fill="outline">{{textCart.buttonCart}}</ion-button>
+              </div>
+              <div *ngIf="isAdmin" style="margin-top: 10px; display: flex; justify-content: end;">
+                <ion-button (click)="onCheckOutCartAdmin()" color="warning"
+                class="ion-button ion-text-end ion-no-margin ion-no-padding" expand="block"
+                ><ion-icon name="logo-mastodon" size="large"></ion-icon>{{textCart.buttonCart}}</ion-button>
               </div>
             </div>
           </div>

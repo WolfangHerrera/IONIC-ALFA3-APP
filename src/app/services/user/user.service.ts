@@ -27,4 +27,12 @@ export class UserService {
   setIsLogged(isLogged: boolean) {
     this.isLoggedIn$.next(isLogged);
   }
+
+  getUserRole() {
+    const userData = this.getUserData();
+    if (userData && userData.role) {
+      return userData.role;
+    }
+    return null;
+  }
 }
