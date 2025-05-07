@@ -20,7 +20,7 @@
                     <h5>{{ item.item_count }} ITEM<span *ngIf="item.item_count > 1">S</span></h5>
                     <p>$ {{ setDotOnPrice(item.total_price) }} COP</p>
                   </div>
-                  <ion-button (click)="onNavigateToAccount()" slot="end" color="warning" shape="round"
+                  <ion-button slot="end" color="warning" shape="round"
                     fill="clear"><ion-icon  size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
                       md="ellipsis-horizontal-outline"></ion-icon></ion-button>
                 </ion-item>
