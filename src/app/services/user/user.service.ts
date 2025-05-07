@@ -11,12 +11,10 @@ export class UserService {
   constructor() {}
 
   setUserData(data: any) {
-    console.log('Setting user data:', data);
     this.userData = data;
   }
 
   getUserData() {
-    console.log('Getting user data:', this.userData);
     return this.userData;
   }
 

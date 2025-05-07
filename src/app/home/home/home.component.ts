@@ -59,8 +59,6 @@ export class HomeComponent {
     this.requestService.getItemProducts().subscribe((response) => {
       if (response) {
         this.products = response;
-        console.log('Products:', this.products);
-        
         this.productService.setDataProducts(this.products);
         this.voltageRegulator = this.products.filter(
           (item: { item_id: string }) => this.ignoreItem(item)
