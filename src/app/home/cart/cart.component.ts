@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
+import { HeaderService } from 'src/app/services/header/header.service';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -39,7 +40,8 @@ export class CartComponent implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private languageService: LanguageService,
-    private userService: UserService
+    private userService: UserService,
+    private readonly headerService: HeaderService
   ) {
     this.textCart = this.languageService.getTextHomeCart();
     this.generateFormGroup();
@@ -47,8 +49,16 @@ export class CartComponent implements OnInit {
 
   async ngOnChanges() {
     if (this.tabChanged) {
+      await this.buildHeader()
       await this.ngOnInit();
     }
+  }
+
+  async buildHeader() {
+    this.headerService.setActivatedLeftButton(true);
+    this.headerService.setLeftButton('Home');
+    this.headerService.setActivatedRightButton(false);
+    this.headerService.setRightButton('Account');
   }
 
   async ngOnInit() {

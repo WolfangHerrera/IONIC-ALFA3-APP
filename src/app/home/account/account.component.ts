@@ -50,7 +50,6 @@ export class AccountComponent implements OnInit {
 
   async ngOnChanges() {
     if (this.tabChanged) {
-      console.log('Account component changed');
       await this.buildHeader()
     }
   }

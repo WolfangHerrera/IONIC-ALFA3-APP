@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular';
+import { HeaderService } from 'src/app/services/header/header.service';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ProductService } from 'src/app/services/products/request.service';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -34,10 +35,24 @@ export class HomeComponent {
     private toastController: ToastController,
     private alertController: AlertController,
     private languageService: LanguageService,
+    private readonly headerService: HeaderService
   ) {
     this.textHome = this.languageService.getTextHomeHome();
     this.textToast = this.languageService.getTextToast();
     this.getDataItemProduct();
+  }
+
+  async ngOnChanges() {
+    if (this.tabChanged) {
+      await this.buildHeader()
+    }
+  }
+
+  async buildHeader() {
+    this.headerService.setActivatedLeftButton(false);
+    this.headerService.setLeftButton('Account');
+    this.headerService.setActivatedRightButton(false);
+    this.headerService.setRightButton('Cart');
   }
 
   getDataItemProduct() {

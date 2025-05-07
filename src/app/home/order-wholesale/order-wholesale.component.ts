@@ -35,7 +35,7 @@ export class OrderWholesaleComponent implements OnInit {
         this.userData = this.userService.getUserData();
         this.getOrders();
       });
-      this.buildHeader();
+    this.buildHeader();
   }
 
   async ngOnInit() {
@@ -44,18 +44,16 @@ export class OrderWholesaleComponent implements OnInit {
 
   async ngOnChanges() {
     if (this.tabChanged) {
-      await this.buildHeader()
+      await this.buildHeader();
     }
   }
 
   async buildHeader() {
     this.headerService.setActivatedLeftButton(true);
     this.headerService.setLeftButton('Account');
-    this.headerService.setActivatedRightButton(true);
+    this.headerService.setActivatedRightButton(false);
     this.headerService.setRightButton('Cart');
-    
   }
-
 
   async getOrdersInit() {
     this.userService
@@ -73,7 +71,6 @@ export class OrderWholesaleComponent implements OnInit {
   onNavigateToAccount() {
     this.router.navigate(['']);
   }
-
 
   async getOrders() {
     this.requestService.getOrdersBySubStatus('NOT_PAID').subscribe({
