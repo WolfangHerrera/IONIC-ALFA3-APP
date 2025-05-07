@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { HeaderService } from 'src/app/services/header/header.service';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { RequestService } from 'src/app/services/request/request.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -34,7 +35,7 @@ export class AccountComponent implements OnInit {
     private alertController: AlertController,
     private languageService: LanguageService,
     private userService: UserService,
-    private router: Router
+    private readonly headerService: HeaderService
   ) {
     this.textAccount = this.languageService.getTextHomeAccount();
     this.generateFormGroup();
@@ -46,6 +47,20 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  async ngOnChanges() {
+    if (this.tabChanged) {
+      console.log('Account component changed');
+      await this.buildHeader()
+    }
+  }
+
+  async buildHeader() {
+    this.headerService.setActivatedLeftButton(false);
+    this.headerService.setLeftButton('Account');
+    this.headerService.setActivatedRightButton(false);
+    this.headerService.setRightButton('Cart');
+  }
 
   generateFormGroup() {
     this.loginForm = new FormGroup({

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { filter, take } from 'rxjs';
+import { HeaderService } from 'src/app/services/header/header.service';
 import { RequestService } from 'src/app/services/request/request.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -21,7 +22,8 @@ export class OrderWholesaleComponent implements OnInit {
     private toastController: ToastController,
     private readonly requestService: RequestService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private readonly headerService: HeaderService
   ) {
     this.userService
       .getIsLoggedObservable()
@@ -33,11 +35,27 @@ export class OrderWholesaleComponent implements OnInit {
         this.userData = this.userService.getUserData();
         this.getOrders();
       });
+      this.buildHeader();
   }
 
   async ngOnInit() {
     this.getOrdersInit();
   }
+
+  async ngOnChanges() {
+    if (this.tabChanged) {
+      await this.buildHeader()
+    }
+  }
+
+  async buildHeader() {
+    this.headerService.setActivatedLeftButton(true);
+    this.headerService.setLeftButton('Account');
+    this.headerService.setActivatedRightButton(true);
+    this.headerService.setRightButton('Cart');
+    
+  }
+
 
   async getOrdersInit() {
     this.userService
@@ -55,6 +73,7 @@ export class OrderWholesaleComponent implements OnInit {
   onNavigateToAccount() {
     this.router.navigate(['']);
   }
+
 
   async getOrders() {
     this.requestService.getOrdersBySubStatus('NOT_PAID').subscribe({

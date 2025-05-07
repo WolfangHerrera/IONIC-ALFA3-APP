@@ -1,5 +1,5 @@
 <ion-content class="ion-no-margin ion-no-padding ion-content-ios" scrollY="false" [ngClass]="{'fade-in': !isLoading}">
-  <app-header *ngIf="!isLoading"></app-header>
+  <app-header (leftButtonOutput)="navigateTab($event)" (rightButtonOutput)="navigateTab($event)"  *ngIf="!isLoading"></app-header>
   <ion-tabs class="ion-no-margin ion-no-padding" [ngClass]="{'fade-in': !isLoading}" (ionTabsDidChange)="onTabChange($event)"> 
     <ion-tab tab="Loading">
       <div id="Loading">
