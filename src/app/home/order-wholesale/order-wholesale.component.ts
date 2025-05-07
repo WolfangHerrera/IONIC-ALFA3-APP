@@ -25,25 +25,16 @@ export class OrderWholesaleComponent implements OnInit {
     private router: Router,
     private readonly headerService: HeaderService
   ) {
-    this.userService
-      .getIsLoggedObservable()
-      .pipe(
-        filter((isLogged) => isLogged === true),
-        take(1)
-      )
-      .subscribe(() => {
-        this.userData = this.userService.getUserData();
-        this.getOrders();
-      });
     this.buildHeader();
   }
 
   async ngOnInit() {
-    this.getOrdersInit();
+    await this.getOrdersInit();
   }
-
+  
   async ngOnChanges() {
     if (this.tabChanged) {
+      await this.ngOnInit()
       await this.buildHeader();
     }
   }

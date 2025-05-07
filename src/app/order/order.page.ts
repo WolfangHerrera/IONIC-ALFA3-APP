@@ -33,6 +33,10 @@ export class OrderPage {
     await this.getOrderById();
   }
 
+  navigateTab(tab: string) {
+    this.router.navigate([tab]);
+  }
+
   async getOrderById(){
     this.requestService.getOrderById(this.order_id).subscribe(
       async (response) => {
