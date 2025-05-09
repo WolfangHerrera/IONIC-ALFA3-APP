@@ -28,6 +28,8 @@ export class AccountComponent implements OnInit {
   };
   loginForm!: FormGroup;
   textAccount!: typeAccountText;
+  pdfBase64: string[] = [];
+  flagPdfBase64: boolean = false;
 
   constructor(
     private requestService: RequestService,
@@ -50,9 +52,59 @@ export class AccountComponent implements OnInit {
 
   async ngOnChanges() {
     if (this.tabChanged) {
-      await this.buildHeader()
+      await this.buildHeader();
     }
   }
+
+  onFileSelected(event: any) {
+    const files: FileList = event.target.files;
+    this.pdfBase64 = [];
+    this.flagPdfBase64 = false;
+    if (files.length > 0) {
+      Array.from(files).forEach((file: File) => {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          const base64 = e.target.result as string;
+          this.pdfBase64.push(base64.split(',')[1]);
+          this.flagPdfBase64 = true;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
+
+  downloadMercadoLibrePDF() {    
+    this.requestService
+      .getMercadoLibrePDF({ LIST_PDFS: [this.pdfBase64] })
+      .subscribe({
+        next: async (response) => {
+          if (response) {
+            this.downloadPDF(response.BASE64PDF, 'MELI-ORDER.pdf');
+          }
+        },
+      });
+  }
+
+  downloadPDF(base64: string, fileName: string) {
+  const byteCharacters = atob(base64);
+  const byteNumbers = new Array(byteCharacters.length);
+
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = fileName;
+
+  link.click();
+
+  window.URL.revokeObjectURL(link.href);
+}
+
 
   async buildHeader() {
     this.headerService.setActivatedLeftButton(false);
@@ -158,7 +210,10 @@ export class AccountComponent implements OnInit {
           this.userService.setUserData(this.responseLogin);
           this.userService.setIsLogged(true);
           localStorage.setItem('userData', JSON.stringify(this.dataRequest));
-          localStorage.setItem('flagKeepLoggedIn', JSON.stringify(this.flagKeepLoggedIn));
+          localStorage.setItem(
+            'flagKeepLoggedIn',
+            JSON.stringify(this.flagKeepLoggedIn)
+          );
           this.flagIsLogged = true;
           this.flagFade = false;
         }

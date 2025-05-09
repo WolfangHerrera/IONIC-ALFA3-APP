@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RequestService {
-  private apiUrl = 'https://backend.alfa3electricos.com';
-  private apiUrls = 'http://192.168.1.22:8081';
+  private apiUrls = 'https://backend.alfa3electricos.com';
+  private apiUrl = 'http://192.168.1.22:8081';
   constructor(private http: HttpClient) { }
 
   getItemProducts(): Observable<any> {
@@ -49,5 +49,10 @@ export class RequestService {
 
   getOrdersBySubStatus(subStatus: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/getOrdersBySubStatus/${subStatus}`);
+  }
+
+  getMercadoLibrePDF(listPdf: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/generateMercadoLibrePDF`, listPdf);
+
   }
 }

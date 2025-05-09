@@ -35,12 +35,30 @@
                   <ion-card-header>
                     <ion-card-title class="ion-text-center"><ion-icon name="logo-mastodon" size="large"></ion-icon></ion-card-title>
                     <ion-card-subtitle class="ion-text-center">MELI ORDERS</ion-card-subtitle>
+                    <div style="display: flex; justify-content: center;">
+                      <div class="file-upload">
+                        <ion-button fill="clear" color="warning">
+                          <ion-icon name="options-outline"></ion-icon>
+                        </ion-button>
+                      </div>
+                    </div>
                   </ion-card-header>
                 </ion-card>
                 <ion-card class="ion-no-margin ion-no-padding" style="border: 1px solid #ffce30;">
                   <ion-card-header>
-                    <ion-card-title class="ion-text-center"><ion-icon name="man" size="large"></ion-icon></ion-card-title>
-                    <ion-card-subtitle class="ion-text-center ion-text-nowrap">ADMIN PANEL</ion-card-subtitle>
+                    <ion-card-title class="ion-text-center"><ion-icon name="document-outline" size="large"></ion-icon></ion-card-title>
+                    <ion-card-subtitle class="ion-text-center">PDF ORDERS</ion-card-subtitle>
+                    <div style="display: flex; justify-content: center;">
+                      <div class="file-upload">
+                        <input type="file" #fileInput (change)="onFileSelected($event)" accept="application/pdf" multiple hidden />
+                        <ion-button fill="clear" (click)="fileInput.click()" color="warning">
+                          <ion-icon name="cloud-upload-outline"></ion-icon>
+                        </ion-button>
+                        <ion-button (click)="downloadMercadoLibrePDF()" [disabled]="!flagPdfBase64" fill="clear" color="warning">
+                          <ion-icon name="download-outline"></ion-icon>
+                        </ion-button>
+                      </div>
+                    </div>
                   </ion-card-header>
                 </ion-card>
               </div>
