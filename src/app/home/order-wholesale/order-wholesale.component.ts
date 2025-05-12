@@ -46,7 +46,7 @@ export class OrderWholesaleComponent implements OnInit {
     this.headerService.setRightButton('Cart');
   }
 
-  async getOrdersInit() {
+  async getOrdersInit() {    
     this.userService
       .getIsLoggedObservable()
       .pipe(

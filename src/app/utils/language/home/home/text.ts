@@ -37,7 +37,7 @@ export const EN_homeText : typeHomeText = {
     firstSubtextCardBenefits: "ADD THE PRODUCTS YOU WANT TO YOUR CART. WE'LL DELIVER THEM TO YOU ARE.",
     secondMainCardBenefits: 'CHOOSE PAYMENT METHOD',
     secondSubtextCardBenefits: 'PAY WITH CARD OR CASH. YOUR MONEY IS PROTECTED WITH MERCADO PAGO.',
-    thirdMainCardBenefits: 'YOUR PRODUCTS IN 48 HOURS',
+    thirdMainCardBenefits: '48-HOURS DELIVERY',
     thirdSubtextCardBenefits: 'YOUR PACKAGES ARE SAFE. YOU HAVE THE SUPPORT OF A NATIONAL SHIPPING COMPANY.',
 };
 
