@@ -1,8 +1,8 @@
-import { Component, ElementRef, Input, AfterViewInit, ViewChild } from '@angular/core';
-import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AlertController, IonModal, ToastController } from '@ionic/angular';
 import { HeaderService } from 'src/app/services/header/header.service';
 import { LanguageService } from 'src/app/services/language/language.service';
-import { ProductService } from 'src/app/services/products/request.service';
+import { ProductService } from 'src/app/services/products/products.service';
 import { RequestService } from 'src/app/services/request/request.service';
 import { typeHomeText, typeToastText } from 'src/app/utils/language/home/home/text';
 

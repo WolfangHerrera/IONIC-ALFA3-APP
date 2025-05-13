@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { HeaderService } from 'src/app/services/header/header.service';
 import { LanguageService } from 'src/app/services/language/language.service';
-import { ProductService } from 'src/app/services/products/request.service';
+import { ProductService } from 'src/app/services/products/products.service';
 import { RequestService } from 'src/app/services/request/request.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { typeCartText } from 'src/app/utils/language/home/cart/text';

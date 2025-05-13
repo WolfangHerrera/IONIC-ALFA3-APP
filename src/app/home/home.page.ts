@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StatusService } from '../services/status/status.service';
 import { AlertController, IonTabs, ToastController } from '@ionic/angular';
-import { ProductService } from '../services/products/request.service';
+import { ProductService } from '../services/products/products.service';
 import { RequestService } from '../services/request/request.service';
 import { LanguageService } from '../services/language/language.service';
 import { typeTabHomeText, typeToastText } from 'src/app/utils/language/tab/text';

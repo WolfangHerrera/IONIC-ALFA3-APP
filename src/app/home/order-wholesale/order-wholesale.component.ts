@@ -18,6 +18,7 @@ export class OrderWholesaleComponent implements OnInit {
   flagIsLogged: boolean = false;
   listOrders: any[] = [];
   listOrdersWholesaleSelected: any[] = [];
+  filterSelected: string = 'NOT_PAID';
 
   constructor(
     private toastController: ToastController,
@@ -57,13 +58,41 @@ export class OrderWholesaleComponent implements OnInit {
     this.listOrders = this.userService.getOrdersWholesale()
   }
 
+  async alertOptionsItems() {
+    const alert = await this.alertController.create({
+      header: 'WHAT DO YOU WANT TO DO?',
+      message: 'SELECT AN OPTION',
+      inputs: [
+        { name: 'PAY', type: 'radio', label: 'PAY', value: 'PAY', checked: this.filterSelected == 'PAY' },
+        { name: 'RETURN', type: 'radio', label: 'RETURN', value: 'RETURN', checked: this.filterSelected == 'RETURN' },
+      ],
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'CONFIRM',
+          handler: (selectedValue) => {
+            console.log('Selected filter:', selectedValue);
+          },
+        },
+        {
+          text: 'CANCEL',
+          handler: () => {
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async alertFilterInfo() {
     const alert = await this.alertController.create({
-      header: 'CHOOSE A FILTER TO ITEMS',
+      header: 'FILTER TO VIEW ITEMS',
+      message: 'SELECT AN OPTION',
       inputs: [
-        { name: 'NOT_PAID', type: 'radio', label: 'NOT PAID', value: 'NOT_PAID' },
-        { name: 'CLOSED', type: 'radio', label: 'CLOSED', value: 'CLOSED' },
-        { name: 'RETURNED', type: 'radio', label: 'RETURNED', value: 'RETURNED' }
+        { name: 'NOT_PAID', type: 'radio', label: 'NOT PAID', value: 'NOT_PAID', checked: this.filterSelected === 'NOT_PAID' },
+        { name: 'CLOSED', type: 'radio', label: 'CLOSED', value: 'CLOSED', checked: this.filterSelected === 'CLOSED'},
+        { name: 'RETURNED', type: 'radio', label: 'RETURNED', value: 'RETURNED', checked: this.filterSelected === 'RETURNED'}
       ],
       backdropDismiss: false,
       buttons: [
@@ -71,6 +100,7 @@ export class OrderWholesaleComponent implements OnInit {
           text: 'APPLY',
           handler: (selectedValue) => {
             console.log('Selected filter:', selectedValue);
+            this.filterSelected = selectedValue;
             this.getOrdersWholesaleSelected(selectedValue);
           },
         },
