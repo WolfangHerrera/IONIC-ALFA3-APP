@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 import { AlertController, ToastController } from '@ionic/angular';
 import { HeaderService } from 'src/app/services/header/header.service';
 import { LanguageService } from 'src/app/services/language/language.service';
@@ -86,24 +86,18 @@ export class AccountComponent implements OnInit {
   }
 
   downloadPDF(base64: string, fileName: string) {
-  const byteCharacters = atob(base64);
-  const byteNumbers = new Array(byteCharacters.length);
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
 
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+    saveAs(blob, fileName);
   }
-
-  const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: 'application/pdf' });
-
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(blob);
-  link.download = fileName;
-
-  link.click();
-
-  window.URL.revokeObjectURL(link.href);
-}
 
 
   async buildHeader() {
