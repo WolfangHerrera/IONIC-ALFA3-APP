@@ -125,7 +125,17 @@ export class AccountComponent implements OnInit {
   }
 
   onNavigateToOrdersWholesale() {
-    this.navigateTab.emit('OrderWholesale');
+    this.requestService.getOrdersBySubStatus('NOT_PAID').subscribe({
+      next: (response) => {
+        if (response) {
+          this.userService.setOrdersWholesale(response);
+          this.navigateTab.emit('OrderWholesale');
+        }
+      },
+      error: (responseError) => {
+        console.error(responseError);
+      },
+    });
   }
 
   async activateToast(text?: string, icon?: string) {

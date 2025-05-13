@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, IonSelect, ToastController } from '@ionic/angular';
 import { filter, take } from 'rxjs';
 import { HeaderService } from 'src/app/services/header/header.service';
 import { RequestService } from 'src/app/services/request/request.service';
@@ -13,58 +13,80 @@ import { UserService } from 'src/app/services/user/user.service';
   standalone: false,
 })
 export class OrderWholesaleComponent implements OnInit {
+  @ViewChild('mySelect', { static: false }) selectRef!: IonSelect;
   @Input() tabChanged: boolean = false;
   flagIsLogged: boolean = false;
   listOrders: any[] = [];
-  userData: any;
+  listOrdersWholesaleSelected: any[] = [];
 
   constructor(
     private toastController: ToastController,
+    private alertController: AlertController,
     private readonly requestService: RequestService,
     private userService: UserService,
     private router: Router,
     private readonly headerService: HeaderService
   ) {
-    this.buildHeader();
+    this.getOrdersWholesale();
   }
 
   async ngOnInit() {
-    await this.getOrdersInit();
+    await this.buildHeader();
+    await this.getOrdersWholesale();
+
   }
   
   async ngOnChanges() {
     if (this.tabChanged) {
       await this.ngOnInit()
-      await this.buildHeader();
     }
   }
 
-  async buildHeader() {
-    this.headerService.setActivatedLeftButton(true);
-    this.headerService.setLeftButton('Account');
-    this.headerService.setActivatedRightButton(false);
-    this.headerService.setRightButton('Cart');
+  addItemToPayment(event: any,item_id: string) {
+    const flag = event.detail.checked ? true : false;
+    if (flag) {
+      this.userService.addItemToOrdersWholesaleSelected(item_id);
+    }
+    if (!flag) {
+      this.userService.deleteItemFromOrdersWholesaleSelected(item_id);
+    }
+    this.listOrdersWholesaleSelected = this.userService.getOrdersWholesaleSelected();
   }
 
-  async getOrdersInit() {    
-    this.userService
-      .getIsLoggedObservable()
-      .pipe(
-        filter((isLogged) => isLogged === true),
-        take(1)
-      )
-      .subscribe(() => {
-        this.userData = this.userService.getUserData();
-        this.getOrders();
-      });
+  async getOrdersWholesale() {
+    this.listOrders = this.userService.getOrdersWholesale()
   }
 
-  onNavigateToAccount() {
-    this.router.navigate(['']);
+  async alertFilterInfo() {
+    const alert = await this.alertController.create({
+      header: 'CHOOSE A FILTER TO ITEMS',
+      inputs: [
+        { name: 'NOT_PAID', type: 'radio', label: 'NOT PAID', value: 'NOT_PAID' },
+        { name: 'CLOSED', type: 'radio', label: 'CLOSED', value: 'CLOSED' },
+        { name: 'RETURNED', type: 'radio', label: 'RETURNED', value: 'RETURNED' }
+      ],
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'APPLY',
+          handler: (selectedValue) => {
+            console.log('Selected filter:', selectedValue);
+            this.getOrdersWholesaleSelected(selectedValue);
+          },
+        },
+        {
+          text: 'CANCEL',
+          handler: () => {
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
-  async getOrders() {
-    this.requestService.getOrdersBySubStatus('NOT_PAID').subscribe({
+  getOrdersWholesaleSelected(status: string) {
+    this.requestService.getOrdersBySubStatus(status).subscribe({
       next: (response) => {
         if (response) {
           this.listOrders = response;
@@ -74,6 +96,17 @@ export class OrderWholesaleComponent implements OnInit {
         console.error(responseError);
       },
     });
+  }
+
+  async buildHeader() {
+    this.headerService.setActivatedLeftButton(true);
+    this.headerService.setLeftButton('Account');
+    this.headerService.setActivatedRightButton(false);
+    this.headerService.setRightButton('Cart');
+  }
+
+  onNavigateToAccount() {
+    this.router.navigate(['']);
   }
 
   getFormattedDateFromString(input: string): string {

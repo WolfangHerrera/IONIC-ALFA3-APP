@@ -5,11 +5,18 @@
         <ion-col size="12" size-md="6" class="ion-no-margin ion-no-padding">
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <h1 class="ion-text-start">MELI ORDERS</h1>
-            <ion-button slot="end" color="warning" shape="round" fill="clear">
-              <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
-              md="ellipsis-horizontal-outline">
-              </ion-icon>
-            </ion-button>
+            <div style="display: flex; justify-content: space-between;">
+              <ion-button slot="end" color="warning" shape="round" fill="clear" (click)="alertFilterInfo()">
+                <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
+                md="filter-circle-outline">
+                </ion-icon>
+              </ion-button>
+              <ion-button slot="end" color="warning" shape="round" fill="clear" (click)="alertFilterInfo()" [disabled]="listOrdersWholesaleSelected.length === 0">
+                <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
+                md="ellipsis-horizontal-outline">
+                </ion-icon>
+              </ion-button>
+            </div>
           </div>
           <h3 class="ion-text-start">
             REVIEW, CHECK AND PAY YOUR MELI ORDERS.
@@ -22,7 +29,7 @@
                     <img alt="ALFA3's Product" style="border-radius: 10px" src="{{ item.products_cart[0].img_url }}" />
                   </ion-thumbnail>
                   <div>
-                    <ion-checkbox class="ion-margin" color="warning"></ion-checkbox>
+                    <ion-checkbox (ionChange)="addItemToPayment($event ,item.order_id)" class="ion-margin" color="warning"></ion-checkbox>
                   </div>
                   <ion-badge slot="end" color="warning">{{
                     setSpaceOnStatus(item.sub_status)
