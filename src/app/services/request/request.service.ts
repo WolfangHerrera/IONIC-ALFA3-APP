@@ -43,6 +43,10 @@ export class RequestService {
     return this.http.get(`${this.apiUrl}/getOrder/${orderId}`);
   }
 
+  updateOrdersWithSubStatus(status: string, body : any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateOrdersWithSubStatus/${status}`, body);
+  }
+
   getOrderByCustomerId(customerId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/getOrdersByCustomerId/${customerId}`);
   }

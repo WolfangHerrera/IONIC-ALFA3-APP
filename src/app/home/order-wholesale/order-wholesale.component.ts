@@ -58,20 +58,57 @@ export class OrderWholesaleComponent implements OnInit {
     this.listOrders = this.userService.getOrdersWholesale()
   }
 
-  async alertOptionsItems() {
+  async alerOptionItem(itemId: string) {
     const alert = await this.alertController.create({
-      header: 'WHAT DO YOU WANT TO DO?',
-      message: 'SELECT AN OPTION',
+      header: 'DO YOU WANT TO DO?',
+      message: 'YOU ARE ABOUT TO EDIT FOR THE SELECTED ITEM',
       inputs: [
-        { name: 'PAY', type: 'radio', label: 'PAY', value: 'PAY', checked: this.filterSelected == 'PAY' },
-        { name: 'RETURN', type: 'radio', label: 'RETURN', value: 'RETURN', checked: this.filterSelected == 'RETURN' },
+        { name: 'PAY', type: 'radio', label: 'PAY', value: 'PAY', checked: true },
+        { name: 'RETURN', type: 'radio', label: 'RETURN', value: 'RETURN' }
       ],
       backdropDismiss: false,
       buttons: [
         {
           text: 'CONFIRM',
-          handler: (selectedValue) => {
-            console.log('Selected filter:', selectedValue);
+          handler: () => {
+            this.updateOrdersByList([itemId]);
+          },
+        },
+        {
+          text: 'CANCEL',
+          handler: () => {
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async updateOrdersByList(listOrders: any[]) {
+    this.requestService.updateOrdersWithSubStatus('CLOSED', 
+      {
+        LIST_ORDERS: listOrders
+      }
+    ).subscribe({
+      next: (response) => {
+        if (response) {
+          this.getOrdersWholesaleSelected(this.filterSelected);
+          this.activateToast('ORDER UPDATED SUCCESSFUL!', 'checkmark-circle-outline');
+      }
+    }});
+  }
+
+  async alertPaymentItems() {
+    const alert = await this.alertController.create({
+      header: 'DO YOU WANT TO PAY?',
+      message: 'YOU ARE ABOUT TO PAY FOR THE SELECTED ITEMS',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'CONFIRM',
+          handler: () => {
+            this.updateOrdersByList(this.listOrdersWholesaleSelected);
           },
         },
         {
@@ -88,7 +125,6 @@ export class OrderWholesaleComponent implements OnInit {
   async alertFilterInfo() {
     const alert = await this.alertController.create({
       header: 'FILTER TO VIEW ITEMS',
-      message: 'SELECT AN OPTION',
       inputs: [
         { name: 'NOT_PAID', type: 'radio', label: 'NOT PAID', value: 'NOT_PAID', checked: this.filterSelected === 'NOT_PAID' },
         { name: 'CLOSED', type: 'radio', label: 'CLOSED', value: 'CLOSED', checked: this.filterSelected === 'CLOSED'},
@@ -133,10 +169,6 @@ export class OrderWholesaleComponent implements OnInit {
     this.headerService.setLeftButton('Account');
     this.headerService.setActivatedRightButton(false);
     this.headerService.setRightButton('Cart');
-  }
-
-  onNavigateToAccount() {
-    this.router.navigate(['']);
   }
 
   getFormattedDateFromString(input: string): string {

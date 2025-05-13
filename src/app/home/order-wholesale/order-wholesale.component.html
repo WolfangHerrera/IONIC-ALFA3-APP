@@ -11,7 +11,7 @@
                   md="filter-circle-outline">
                 </ion-icon>
               </ion-button>
-              <ion-button slot="end" color="warning" shape="round" fill="clear" (click)="alertOptionsItems()" [disabled]="listOrdersWholesaleSelected.length === 0">
+              <ion-button slot="end" color="warning" shape="round" fill="clear" (click)="alertPaymentItems()" [disabled]="listOrdersWholesaleSelected.length === 0">
                 <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
                 md="ellipsis-horizontal-outline">
               </ion-icon>
@@ -19,7 +19,7 @@
             </div>
           </div>
           <h3 class="ion-text-start">
-            REVIEW, CHECK AND PAY YOUR MELI ORDERS.
+            MANAGE AND PAY YOUR MELI ORDERS.
           </h3>
           <ion-card class="ion-no-margin ion-no-padding">
             <ion-card-content class="ion-no-margin ion-no-padding">
@@ -44,7 +44,7 @@
                     </h5>
                     <p>$ {{ setDotOnPrice(item.total_price_min) }} COP</p>
                   </div>
-                  <ion-button (click)="onNavigateToAccount()" slot="end" color="warning" shape="round" fill="clear">
+                  <ion-button (click)="alerOptionItem(item.order_id)" slot="end" color="warning" shape="round" fill="clear">
                     <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
                       md="ellipsis-horizontal-outline">
                     </ion-icon>
