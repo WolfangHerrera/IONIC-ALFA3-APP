@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonSelect, ToastController } from '@ionic/angular';
 import { filter, take } from 'rxjs';
@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user/user.service';
   standalone: false,
 })
 export class OrderWholesaleComponent implements OnInit {
+  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef<HTMLInputElement>;
   @ViewChild('mySelect', { static: false }) selectRef!: IonSelect;
   @Input() tabChanged: boolean = false;
   flagIsLogged: boolean = false;
@@ -25,7 +26,6 @@ export class OrderWholesaleComponent implements OnInit {
     private alertController: AlertController,
     private readonly requestService: RequestService,
     private userService: UserService,
-    private router: Router,
     private readonly headerService: HeaderService
   ) {
     this.getOrdersWholesale();
@@ -55,13 +55,56 @@ export class OrderWholesaleComponent implements OnInit {
   }
 
   async getOrdersWholesale() {
-    this.listOrders = this.userService.getOrdersWholesale()
+    this.listOrders = this.userService.getOrdersWholesale();
   }
 
-  async alerOptionItem(itemId: string) {
+  filterOrdersWithSelected() {
+    return this.listOrders.filter(order =>
+      !this.listOrdersWholesaleSelected.includes(order.id)
+    );
+  }
+
+  async updateOrdersByList(listOrders: any[], status: string, imgBase64: string) {
+    const listOrderSelected = {
+        LIST_ORDERS: listOrders,
+        IMG: imgBase64,
+    }
+    this.requestService.updateOrdersWithSubStatus(status, listOrderSelected).subscribe({
+      next: async (response) => {
+        if (response) {
+          await this.activateToast('ORDER UPDATED SUCCESSFUL!', 'checkmark-circle-outline');
+          this.getOrdersWholesaleSelected(this.filterSelected);
+      }
+    }});
+  }
+
+  async onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        console.log(this.listOrders);
+        this.listOrders = this.filterOrdersWithSelected();
+        console.log(this.listOrders);
+
+        this.updateOrdersByList(this.listOrdersWholesaleSelected, 'CLOSED', base64String);
+      };
+      reader.readAsDataURL(file);
+      const topAlert = await this.alertController.getTop();
+      if (topAlert) {
+        await topAlert.dismiss();
+      }
+    }
+  }
+
+  
+
+  async alertPaymentItems(itemId?: string) {
     const alert = await this.alertController.create({
-      header: 'DO YOU WANT TO DO?',
-      message: 'YOU ARE ABOUT TO EDIT FOR THE SELECTED ITEM',
+      header: 'DO YOU WANT TO PAY?',
+      message: 'YOU ARE ABOUT TO PAY FOR THE SELECTED ITEMS',
       inputs: [
         { name: 'PAY', type: 'radio', label: 'PAY', value: 'PAY', checked: true },
         { name: 'RETURN', type: 'radio', label: 'RETURN', value: 'RETURN' }
@@ -71,44 +114,10 @@ export class OrderWholesaleComponent implements OnInit {
         {
           text: 'CONFIRM',
           handler: () => {
-            this.updateOrdersByList([itemId]);
-          },
-        },
-        {
-          text: 'CANCEL',
-          handler: () => {
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-  async updateOrdersByList(listOrders: any[]) {
-    this.requestService.updateOrdersWithSubStatus('CLOSED', 
-      {
-        LIST_ORDERS: listOrders
-      }
-    ).subscribe({
-      next: (response) => {
-        if (response) {
-          this.getOrdersWholesaleSelected(this.filterSelected);
-          this.activateToast('ORDER UPDATED SUCCESSFUL!', 'checkmark-circle-outline');
-      }
-    }});
-  }
-
-  async alertPaymentItems() {
-    const alert = await this.alertController.create({
-      header: 'DO YOU WANT TO PAY?',
-      message: 'YOU ARE ABOUT TO PAY FOR THE SELECTED ITEMS',
-      backdropDismiss: false,
-      buttons: [
-        {
-          text: 'CONFIRM',
-          handler: () => {
-            this.updateOrdersByList(this.listOrdersWholesaleSelected);
+            if (itemId) {
+              this.listOrdersWholesaleSelected = [itemId]
+            }
+            this.fileInput.nativeElement.click();
           },
         },
         {
@@ -135,7 +144,6 @@ export class OrderWholesaleComponent implements OnInit {
         {
           text: 'APPLY',
           handler: (selectedValue) => {
-            console.log('Selected filter:', selectedValue);
             this.filterSelected = selectedValue;
             this.getOrdersWholesaleSelected(selectedValue);
           },
@@ -150,6 +158,7 @@ export class OrderWholesaleComponent implements OnInit {
 
     await alert.present();
   }
+
 
   getOrdersWholesaleSelected(status: string) {
     this.requestService.getOrdersBySubStatus(status).subscribe({

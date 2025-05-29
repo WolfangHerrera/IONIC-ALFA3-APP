@@ -8,14 +8,16 @@
             <div style="display: flex; justify-content: space-between;  align-items: center;">
               <ion-button slot="end" color="warning" shape="round" fill="clear" (click)="alertFilterInfo()">
                 <ion-icon size="small" slot="icon-only" ios="filter-circle-outline"
-                  md="filter-circle-outline">
-                </ion-icon>
+                md="filter-circle-outline">
+              </ion-icon>
               </ion-button>
+
               <ion-button slot="end" color="warning" shape="round" fill="clear" (click)="alertPaymentItems()" [disabled]="listOrdersWholesaleSelected.length === 0">
                 <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
                 md="ellipsis-horizontal-outline">
-              </ion-icon>
-            </ion-button>
+                </ion-icon>
+              </ion-button>
+              <input type="file" #fileInput (change)="onImageSelected($event)" accept="application/pdf" hidden/>
             </div>
           </div>
           <h3 class="ion-text-start">
@@ -44,7 +46,7 @@
                     </h5>
                     <p>$ {{ setDotOnPrice(item.total_price_min) }} COP</p>
                   </div>
-                  <ion-button (click)="alerOptionItem(item.order_id)" slot="end" color="warning" shape="round" fill="clear">
+                  <ion-button (click)="alertPaymentItems(item.order_id)" slot="end" color="warning" shape="round" fill="clear">
                     <ion-icon size="small" slot="icon-only" ios="ellipsis-horizontal-outline"
                       md="ellipsis-horizontal-outline">
                     </ion-icon>
