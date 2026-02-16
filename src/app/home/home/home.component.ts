@@ -25,7 +25,7 @@ export class HomeComponent {
   textToastWholesale!: typeToastText;
 
   ignoreItem(item: { item_id: string }): boolean {
-    const ignoredIds = ['EE4S1M', 'E4S1M'];
+    const ignoredIds = ['EE4S1M', 'E4S1M', 'RR6S1M'];
     return ignoredIds.includes(item.item_id);
   }
 
